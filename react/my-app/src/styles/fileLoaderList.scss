@@ -1,0 +1,30 @@
+.file-loader-list
+{
+    display: grid; 
+    grid-template-columns: 70% 30%; 
+    grid-template-rows: 1fr 1fr 1fr 1fr; 
+    width: 30%;
+    justify-content: center;
+    align-items: center;
+}
+
+.file-loader-list-without-file
+{
+    display: grid; 
+    grid-template-columns: 100%;
+    grid-template-rows: 1fr 1fr 1fr 1fr; 
+    width: 20%;
+    justify-content: center;
+    align-items: center;
+}
+
+.file-loader-select {
+    grid-column: 1/3;
+    justify-self: center;
+    padding: 0.5em;
+}
+
+.file-loader-select-without-file {
+    justify-self: center;
+    padding: 0.5em;
+}

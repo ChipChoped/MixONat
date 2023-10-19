@@ -1,0 +1,57 @@
+.molecule-card {
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+    width: 500px;
+    margin: 20px auto;
+    padding: 10px 30px;
+    box-shadow: rgb(247, 220, 220) 4px 4px 33px;
+    
+    h2 {
+      margin-bottom: 0;
+    }
+    div {
+      font-weight: 300;
+      font-size: 16px;
+      margin: 0.5em 0;
+
+      button {
+        background-color: #58b0b0; 
+        border: none;
+        color: white;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 20px;
+        margin: 4px 2px;
+        width: 10em;
+        height: 3em;
+        margin-left: 0.5em;
+        margin-right: 0.5em;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+    }
+}
+    
+.parent {
+  display: grid;
+  grid-template-columns: 3fr 3fr 3fr;
+  grid-template-rows: 1fr;
+}
+
+@media (max-width:934px){
+  .parent {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    }
+  }
+  
+  @media (min-width:935px) and (max-width:1450px)  {
+  .parent {
+    grid-template-columns: 2fr 2fr;
+    grid-template-rows: 1fr;
+    }
+  }
+  

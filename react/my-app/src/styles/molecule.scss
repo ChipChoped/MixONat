@@ -1,0 +1,73 @@
+.molecule-container {
+    display: grid;
+    grid-template-columns: 45% 55%;
+    margin-top: 2em;
+    padding-top: 2em;
+    box-shadow: rgb(247, 220, 220) 4px 4px 33px;
+}
+
+.molecule-atoms {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    grid-column: 1;
+    border-right: 2px solid black;
+    overflow-y: auto;
+    height:48em;
+}
+
+.molecule-details{
+    text-align: center;
+    box-shadow:rgb(247, 220, 220) 4px 4px 33px;
+    // background-color: red;
+}
+.molecule-graph {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    grid-column: 2;
+    border-left: 2px solid black;
+    margin-bottom: 2em;
+}
+
+.molecule-chart {
+    background-color: white;
+    width: 800px;
+    height: auto;
+    margin-top: 2em;
+}
+
+.molecule-chart-params {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 0.5em;
+
+    input {
+        margin: 0 1em 0 0.2em;
+    }
+}
+
+.molecule-buttons {
+    display: flex;
+    justify-content: center;
+    grid-column: 1/3;
+    padding: 1em 0;
+
+    button {
+        background-color: #58b0b0; /* Green */
+        border: none;
+        color: white;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 20px;
+        margin: 4px 2px;
+        width: 10em;
+        height: 3em;
+        margin-left: 0.5em;
+        margin-right: 0.5em;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+}

@@ -1,0 +1,108 @@
+#grid-sdf_input {
+    grid-row: 1;
+    grid-column: 1;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis; 
+    white-space: nowrap; 
+}
+
+#grid-sdf_Button {
+    grid-row: 1;
+    grid-column: 2;
+    display: flex;
+
+}
+
+#grid-spectrum_input {
+    grid-row: 2;
+    grid-column: 1;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis; 
+    white-space: nowrap; 
+}
+
+#grid-spectrum_Button {
+    grid-row: 2;
+    grid-column: 2;
+    display: flex;
+
+}
+
+#grid-dept135_input {
+    grid-row: 3;
+    grid-column: 1;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis; 
+    white-space: nowrap; 
+}
+
+#grid-dept135_Button {
+    grid-row: 3;
+    grid-column: 2;
+    display: flex;
+}
+
+#grid-dept90_input {
+    grid-row: 4;
+    grid-column: 1;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis; 
+    white-space: nowrap; 
+}
+
+#grid-dept90_Button {
+    grid-row: 4;
+    grid-column: 2;
+    display: flex;
+}
+
+.label-file {
+    cursor: pointer;
+    color: #00b1ca;
+    font-weight: bold;
+}
+
+.label-file:hover {
+    color: #25a5c4;
+}
+
+.fileLoader-button {
+    display: none;
+    background-color: #58b0b0; 
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+    margin: 4px 2px;
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+    border-radius: 5px;
+    padding: 0.3em;
+    cursor: pointer;
+}
+
+.fileLoader-deleteButton:hover {
+    background-color: rgb(139, 17, 17);
+}
+
+.fileLoader-checkButton:hover{
+    background-color: rgb(13, 138, 13);
+}
+
+.input-file {
+    display: none;
+}
+
+.custom-file-upload {
+    border: 1px solid #ccc;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+    padding: 1em;
+}

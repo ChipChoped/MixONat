@@ -1,0 +1,23 @@
+.header-container {
+
+    display: flex;
+    justify-content: center;
+    background-color: #58b0b0;
+
+    ul {
+        list-style-type: none;
+        display:grid;
+        grid-template-columns: 1fr 1fr;
+        gap:5em;
+
+        span:hover {
+            text-decoration: underline;
+        }
+    }
+}
+
+.header-link {
+    text-decoration: none;
+    color:white;
+    font-weight: bold;
+}

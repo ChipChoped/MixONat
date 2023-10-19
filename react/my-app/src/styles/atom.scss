@@ -1,0 +1,30 @@
+.atom-div {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    margin:2em;
+    padding: 1em;
+    justify-items: center;
+    border-radius: 5px;
+    box-shadow: rgb(247, 220, 220) 4px 4px 10px;
+    width:25em;
+}
+
+.atom-span {
+    margin: 1em 0;
+}
+
+.atom-button {
+    width: 5em;
+    margin-right:1em;
+    background-color: black;
+    border-radius: 10%;
+    color:white;
+    border: none;
+    box-shadow: rgb(247, 220, 220) 4px 4px 10px;
+    cursor: pointer;
+}
+
+.atom-button[disabled] {
+    background-color: gray;
+    cursor: default;
+}
