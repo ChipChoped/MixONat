@@ -2,3 +2,5 @@ react/my-app/node_modules
 Flask/motor/__pycache__/
 Flask/threads/__pycache__/
 Flask/checkers/__pycache__/
+
+.idea/
