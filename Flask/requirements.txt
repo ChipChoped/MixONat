@@ -8,6 +8,7 @@ itsdangerous==2.0.1
 Jinja2==3.0.0
 MarkupSafe==2.0.0rc2
 Werkzeug==2.0.0
+flask-cors==4.0.0
 
 # Flask Packages
 Flask-Login==0.4.0
@@ -20,3 +21,7 @@ Flask-User==1.0.1.5
 # Automated tests
 pytest==3.0.5
 pytest-cov==2.4.0
+
+# Calculations
+numpy==1.26.1
+rdkit==2023.3.3
