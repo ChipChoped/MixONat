@@ -20,6 +20,8 @@ cd ./Conductor/
 ./mvnw.cmd compile spring-boot:run
 ```
 
+### Launching the website client
+
 ```bash
 npm install react-scripts --save --prefix ./react/my-app/
 npm start --prefix ./react/my-app/
