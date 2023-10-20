@@ -4,6 +4,8 @@
 
 ### Launching the MixONat server
 
+A version of Python 3.9 or higher is required.
+
 ```bash
 pip install -r ./Flask/requirements.txt
 python ./Flask/main.py
