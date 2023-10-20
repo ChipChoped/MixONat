@@ -24,4 +24,4 @@ pytest-cov==2.4.0
 
 # Calculations
 numpy==1.26.1
-rdkit==2023.3.3
+rdkit==2022.9.5
