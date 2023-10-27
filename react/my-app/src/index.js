@@ -11,6 +11,7 @@ import ErrorPage from './components/errorPage';
 import RmnMotor from './components/rmnMotor';
 import Sdf from './components/sdf';
 import { getSdfFilesNames } from './components/sdf';
+import SignIn from "./components/signIn";
 
 const router = createBrowserRouter([
   {
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
         path:"/sdf",
         element:<Sdf/>,
         loader: getSdfFilesNames
+      },
+      {
+        path:"/sign-in",
+        element:<SignIn/>
       }
     ]
   },
