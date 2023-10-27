@@ -10,7 +10,9 @@ import reportWebVitals from './reportWebVitals';
 import ErrorPage from './components/errorPage';
 import RmnMotor from './components/rmnMotor';
 import Sdf from './components/sdf';
+import Rmn from './components/rmn';
 import { getSdfFilesNames } from './components/sdf';
+import { getRmnFilesNames } from './components/rmn';
 
 const router = createBrowserRouter([
   {
@@ -21,12 +23,21 @@ const router = createBrowserRouter([
       {
         path:"/",
         element:<RmnMotor/>,
-        loader: getSdfFilesNames
+        loader: async () => {
+          const sdfData = await getSdfFilesNames();
+          const rmnData = await getRmnFilesNames();
+          return { sdfData, rmnData };
+        }
       },
       {
         path:"/sdf",
         element:<Sdf/>,
         loader: getSdfFilesNames
+      },
+      {
+        path:"/rmnDB",
+        element:<Rmn/>,
+        loader: getRmnFilesNames
       }
     ]
   },

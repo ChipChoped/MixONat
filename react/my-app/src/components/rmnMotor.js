@@ -11,7 +11,6 @@ import { useLoaderData } from "react-router-dom";
 import 'alertifyjs/build/css/alertify.css';
 import '../styles/rmnMotor.scss';
 
-
 function RmnMotor()
 {
   /*****************/
@@ -20,7 +19,7 @@ function RmnMotor()
 
   // Parameters for files (SDF, Spectrum, DEPT135 and DEPT90)
 
-  const [sdf,setSDF] = useState()
+  const [sdf ,setSDF] = useState()
   const [sdfIsLoading, setSdfIsLoading] = useState(false)
   const [spectrum,setSpectrum] = useState()
   const [spectrumIsLoading, setSpectrumIsLoading] = useState(false)
@@ -46,9 +45,12 @@ function RmnMotor()
     }
     );
 
-  const { sdfList } = useLoaderData()
-  const [useSdfList,setUseSdfList] = useState(false)
+  const { sdfData, rmnData } = useLoaderData();
+  const {sdfList} = sdfData;
+  const {rmnList} = rmnData;
 
+  const [useSdfList,setUseSdfList] = useState(false)
+  const [useRmnList,setUseRmnList] = useState(false)
   // Parameter to display the loader while data are fetched
 
   const [loading,setLoading] = useState(false)
@@ -97,7 +99,7 @@ function RmnMotor()
                 const requestOptions = {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ sdf: sdf, spectrum: spectrum, dept135: dept135, dept90: dept90 , params : params, useDatabase: useSdfList})
+                    body: JSON.stringify({ sdf: sdf, spectrum: spectrum, dept135: dept135, dept90: dept90 , params : params, useSdfDatabase: useSdfList, useRmnDatabase: useRmnList})
                 };
 
                 // Send it to Spring server
@@ -118,6 +120,7 @@ function RmnMotor()
                       c13IsSetPointer(false);
                       dept135IsSetPointer(false);
                       setUseSdfList(false);
+                      setUseRmnList(false);
                     })
                 }).catch((err) => {
                   console.log(err);
@@ -131,6 +134,7 @@ function RmnMotor()
                     c13IsSetPointer(false);
                     dept135IsSetPointer(false);
                     setUseSdfList(false);
+                    setUseRmnList(false);
                   })
 
                 // At the end, pass the loading parameter to false
@@ -277,6 +281,15 @@ function RmnMotor()
     setUseSdfList(!useSdfList)
   }
 
+  function switchRmnMode()
+  {
+    setSpectrum(undefined)
+    c13IsSetPointer(false)
+    setDEPT135(undefined)
+    setDEPT90(undefined)
+    setUseRmnList(!useRmnList)
+  }
+
   return(
     
     <>
@@ -289,6 +302,7 @@ function RmnMotor()
               ? <>
                   <div className='rmn-fileLoaderList'>
                     <button className={useSdfList ? 'rmn-activeSdfButton': 'rmn-sdfButton'} onClick={() => {switchSdfMode()}}>Use SDF file in the database</button>
+                    <button className={useRmnList ? 'rmn-activeSdfButton': 'rmn-sdfButton'} onClick={() => {switchRmnMode()}}>Use RMN file in the database</button>
                     <FileLoaderList
                       sdfList={sdfList}
                       useSdfList={useSdfList}
@@ -309,6 +323,8 @@ function RmnMotor()
                       sendcheckRequest ={sendcheckRequest}
                       setTitle = {setTitle}
                       titles = {titles}
+                      useRmnList={useRmnList}
+                      rmnList={rmnList}
                       hasFile={sdf !== undefined || spectrum !== undefined || dept135 !== undefined || dept90 !== undefined}
                     />
                   </div>
@@ -323,7 +339,7 @@ function RmnMotor()
               ? <Loading/>
               : <div>
                   <button className='rmn-runButton' onClick={() => {check()}}>
-                  {sdfIsLoading || spectrumIsLoading || dept135IsLoading || dept90IsLoading
+                  {sdfIsLoading && spectrumIsLoading || dept135IsLoading || dept90IsLoading
                     ? <ClipLoader color={"#297085"}/>
                     : "Run"}
                   </button>
