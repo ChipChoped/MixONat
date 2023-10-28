@@ -2,7 +2,7 @@ package com.backend.mixonat.service;
 
 import java.util.List;
 
-import com.backend.mixonat.model.Logins;
+import com.backend.mixonat.dto.Logins;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
