@@ -1,0 +1,42 @@
+version: '3'
+services:
+  conductor-mixonat:
+    container_name: conductor-mixonat
+    build:
+      context: ./Conductor
+      dockerfile: Dockerfile
+    ports:
+      - "9000:9000"
+    depends_on:
+      - postgres
+    # stdin_open: true
+    volumes:
+       - ./Conductor:/usr/src/app/conductor-mixonat
+  react-mixonat:
+    container_name: react-mixonat
+    build:
+      context: ./react/my-app
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    depends_on:
+      - conductor-mixonat
+    # stdin_open: true
+    volumes:
+       - ./react/my-app:/usr/src/app/react-mixonat
+       - /usr/src/app/react-mixonat/node_modules
+  postgres:
+    container_name: postgres
+    build:
+      context: ./database
+      dockerfile: Dockerfile
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+       - postgres-db:/var/lib/postgresql/data
+volumes:
+  postgres-db:
+    driver: local
