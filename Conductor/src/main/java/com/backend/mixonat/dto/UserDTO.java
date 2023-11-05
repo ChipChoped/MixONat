@@ -2,10 +2,7 @@ package com.backend.mixonat.dto;
 
 import com.backend.mixonat.validator.UniqueEmail;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jakarta.validation.constraints.AssertTrue;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -19,35 +16,35 @@ import java.util.Objects;
 @AllArgsConstructor
 public class UserDTO {
     @JsonProperty("first-name")
-    @NotNull
     @Pattern(regexp = "[A-ZÉÈÀÎÏÂË][a-zéèàêîïäë]{1,29}",
             message = "The first name must start with an uppercase letter and with no special characters")
+    @NotBlank(message = "First name cannot be blank")
     String firstName;
 
     @JsonProperty("last-name")
-    @NotNull
     @Pattern(regexp = "[A-ZÉÈÀÎÏÂË][a-zéèàêîïäë]{1,29}",
             message = "The first name must start with an uppercase letter and with no special characters")
+    @NotBlank(message = "Last name cannot be blank")
     String lastName;
 
-    @NotNull
     @Email (message = "Email is malformed")
+    @NotBlank(message = "Email cannot be blank")
     @UniqueEmail
     String email;
 
     @JsonProperty("email-confirmation")
-    @NotNull
+    @NotBlank(message = "Email confirmation cannot be blank")
     String emailConfirmation;
 
-    @NotNull
     @Pattern(regexp = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^*-]).{8,16}$",
             message = "The password must be between 8 and 16 characters long and " +
                     "contain at least one uppercase letter, one lowercase letter, " +
                     "one number and one special character")
+    @NotBlank(message = "Password cannot be blank")
     String password;
 
     @JsonProperty("password-confirmation")
-    @NotNull
+    @NotBlank(message = "Password confirmation cannot be blank")
     String passwordConfirmation;
 
     @AssertTrue(message = "Emails don't match")
