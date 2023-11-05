@@ -12,6 +12,7 @@ import RmnMotor from './components/rmnMotor';
 import Sdf from './components/sdf';
 import { getSdfFilesNames } from './components/sdf';
 import SignIn from "./components/signIn";
+import SignUp from "./components/signUp";
 
 const router = createBrowserRouter([
   {
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
       {
         path:"/sign-in",
         element:<SignIn/>
+      },
+      {
+        path:"/sign-up",
+        element:<SignUp/>
       }
     ]
   },
