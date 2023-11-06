@@ -4,7 +4,7 @@ WORKDIR /app/mixonat-conductor
 
 COPY .mvn/ .mvn
 COPY mvnw pom.xml ./
-RUN ./mvnw dependency:go-offline
+RUN bash mvnw dependency:go-offline
 
 COPY src ./src
 
