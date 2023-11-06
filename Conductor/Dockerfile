@@ -8,5 +8,5 @@ RUN bash mvnw dependency:go-offline
 
 COPY src ./src
 
-CMD ["./mvnw", "spring-boot:run"]
+CMD ["bash", "mvnw", "spring-boot:run"]
 
