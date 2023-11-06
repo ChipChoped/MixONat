@@ -35,8 +35,8 @@ services:
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
-    volumes:
-       - postgres-db:/var/lib/postgresql/data
+    # volumes:
+       # - postgres-db:/var/lib/postgresql/data
 volumes:
   postgres-db:
     driver: local
