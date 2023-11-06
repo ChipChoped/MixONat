@@ -2,6 +2,14 @@
 
 ## Docker
 
+
+### 3 services existants :
+```
+Front : react-mixonat
+Back : conductor-mixonat
+BDD : postgres
+```
+
 ### Pour exécuter l'app :
 > docker-compose build \
 > docker-compose up
@@ -10,10 +18,30 @@
 > docker-compose build [service] \
 > docker-compose up [service]
 
-### 3 services existants :
-***- postgres*** \
-***- conductor-mixonat*** \
-***- react-mixonat***
+### /!\ Pour exécuter en local, mettre localhost dans le fichier properties :
+> Conductor/src/main/resources/application.properties
 
-## /!\ Pour exécuter en local, mettre localhost dans le fichier properties :
-### Conductor/src/main/resources/application.properties
+## Structure
+
+### Front
+
+./react
+
+Exécution :
+> npm install \
+> npm start
+
+
+### Back
+
+./Conductor 
+
+Exécution :
+> ./mvnw dependency:go-offline \
+> ./mvnw spring-boot:run
+
+### Base de donnée
+
+./database
+
+Base de donnée Postgresql, voir DATABASE.md
