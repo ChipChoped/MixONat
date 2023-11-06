@@ -1,5 +1,5 @@
 FROM postgres:15.1-alpine
 
-COPY init.sql /docker-entrypoint-initdb.d/
+COPY initDocker/*.sql /docker-entrypoint-initdb.d/
 
 EXPOSE 5432
