@@ -19,7 +19,7 @@ BDD : postgres
 > docker-compose up [service]
 
 ### /!\ Pour exécuter en local, mettre localhost dans le fichier properties :
-> Conductor/src/main/resources/application.properties
+> ./Conductor/src/main/resources/application.properties
 
 ## Structure
 
@@ -30,7 +30,6 @@ BDD : postgres
 Exécution :
 > npm install \
 > npm start
-
 
 ### Back
 
@@ -44,4 +43,6 @@ Exécution :
 
 ./database
 
-Base de donnée Postgresql, voir DATABASE.md
+Base de donnée Postgresql, voir DATABASE.md \
+Afin de lancer un script sql au lancement de l'image Docker, placer le fichier sql dans :
+> ./database/initDocker/
