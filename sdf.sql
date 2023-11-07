@@ -2,3 +2,8 @@ CREATE TABLE IF NOT EXISTS sdf (
 	id SERIAL PRIMARY KEY,
 	name TEXT,
 	sdf_file TEXT); 
+
+CREATE TABLE IF NOT EXISTS rmn (
+	id SERIAL PRIMARY KEY,
+	name TEXT,
+	rmn_file TEXT); 

@@ -3,13 +3,13 @@ import { useLoaderData, useNavigate } from "react-router-dom";
 import alertify from 'alertifyjs';
 import ClipLoader from "react-spinners/ClipLoader";
 import 'alertifyjs/build/css/alertify.css';
-import "../styles/sdf.scss";
+import "../styles/rmn.scss";
 import red_cross from "../assets/img/red-cross.png";
 
 
-function Sdf()
+function Rmn()
 {
-    const [sdfName,setSdfName] = useState('')
+    const [rmnName,setRMNName] = useState('')
     const [file,setFile] = useState(undefined)
     const [fileIsLoading,setFileIsLoading] = useState(false)
     const [upload,setUpload] = useState(false)
@@ -17,7 +17,7 @@ function Sdf()
     const [deleteFile,setDeleteFile] = useState(false)
     const navigate = useNavigate();
 
-    const { sdfList } = useLoaderData()
+    const { rmnList } = useLoaderData()
 
     const readFile = (file) => {
         if (file===undefined)
@@ -44,11 +44,11 @@ function Sdf()
     }
 
     const checkFile = () => {
-        if(file !== undefined && sdfName !== '')
+        if(file !== undefined && rmnName !== '')
         {
-            if(sdfList.includes(sdfName))
+            if(rmnList.includes(rmnName))
             {
-                alertify.confirm("Confirm","Are you sure to continue ? You will overwrite a SDF file.",
+                alertify.confirm("Confirm","Are you sure to continue ? You will overwrite a RMN file.",
       
                 function()
                 {
@@ -72,7 +72,7 @@ function Sdf()
     }
 
     const deleteFileButton = (deleteFileName) => {
-        alertify.confirm("Confirm","Are you sure to continue ? You will delete this SDF file.",
+        alertify.confirm("Confirm","Are you sure to continue ? You will delete this RMN file.",
       
                 function()
                 {
@@ -94,14 +94,14 @@ function Sdf()
                 const requestOptions = {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ name: sdfName, sdf_file: file})
+                    body: JSON.stringify({ name: rmnName, rmn_file: file})
                 };
 
                 // Send it to Spring server
-                fetch("http://localhost:9000/rmn/sdf",requestOptions).then((response) => {
+                fetch("http://localhost:9000/rmn/rmnDB",requestOptions).then((response) => {
                     if(response.status === 200)
                     {
-                        navigate("/sdf")
+                        navigate("/rmnDB")
                     }
                     else
                     {
@@ -132,10 +132,10 @@ function Sdf()
                 };
 
                 // Send it to Spring server
-                fetch("http://localhost:9000/rmn/sdf",requestOptions).then((response) => {
+                fetch("http://localhost:9000/rmn/rmnDB",requestOptions).then((response) => {
                     if(response.status === 200)
                     {
-                        navigate("/sdf")
+                        navigate("/rmnDB")
                     }
                     else
                     {
@@ -151,39 +151,39 @@ function Sdf()
     },[deleteFile])
 
     return(
-        <div className='sdf-container'>
-            <div className='sdf-upload'>
-                <span>ADD SDF FILE IN THE DATABASE</span>
+        <div className='rmn-container'>
+            <div className='rmn-upload'>
+                <span>ADD RMN FILE IN THE DATABASE</span>
                 <div>
-                    <label htmlFor='sdfFile'>SDF FILE</label>
-                    <input type="file" id="sdfFile" onChange={(e) => {setFileIsLoading(true); readFile(e.target.files[0])}}></input>
+                    <label htmlFor='rmnFile'>RMN FILE</label>
+                    <input type="file" id="rmnFile" onChange={(e) => {setFileIsLoading(true); readFile(e.target.files[0])}}></input>
                 </div>
                 <div>
-                    <label htmlFor='sdfName'>FILE'S NAME</label>
-                    <input type="text" id="sdfName" value={sdfName} placeholder="Enter the name of the SDF's file" onChange={(e) => {setSdfName(e.target.value)}}></input>
+                    <label htmlFor='rmnName'>FILE'S NAME</label>
+                    <input type="text" id="rmnName" value={rmnName} placeholder="Enter the name of the RMN's file" onChange={(e) => {setRMNName(e.target.value)}}></input>
                 </div>
-                <div className='sdf-button'>
+                <div className='rmn-button'>
                     {fileIsLoading 
                     ? <button>
-                        <ClipLoader className="sdf-loader" color={"#ffffff"}/>
+                        <ClipLoader className="rmn-loader" color={"#ffffff"}/>
                       </button>
                     : <button onClick={() => {checkFile()}}>Add to the database</button>}
                 </div>
             </div>
 
-            <div className='sdf-files'>
-                <span>All SDF FILES IN THE DATABASE</span>
-                {sdfList.map((file) => (
+            <div className='rmn-files'>
+                <span>All RMN FILES IN THE DATABASE</span>
+                {rmnList.map((file) => (
                     <div key={file}>
                         <span>{file}</span>
-                        <input className="sdf-input-image" type="image" src={red_cross} onClick={() => {deleteFileButton(file)}}/>
+                        <input className="rmn-input-image" type="image" src={red_cross} onClick={() => {deleteFileButton(file)}}/>
                     </div>))}
             </div>
         </div>
     )
 }
 
-export async function getSdfFilesNames()
+export async function getRmnFilesNames()
 {
     const requestOptions = {
         method: 'GET'
@@ -191,11 +191,11 @@ export async function getSdfFilesNames()
 
     // Send request to Spring server
 
-    const response = await fetch("http://localhost:9000/rmn/sdf/names",requestOptions);
+    const response = await fetch("http://localhost:9000/rmn/rmnDB/names",requestOptions);
 
     const json = await response.json();
 
-    return {sdfList: json};
+    return {rmnList: json};
 }
 
-export default Sdf;
+export default Rmn;
