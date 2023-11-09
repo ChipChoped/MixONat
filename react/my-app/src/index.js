@@ -11,6 +11,7 @@ import ErrorPage from './components/errorPage';
 import RmnMotor from './components/rmnMotor';
 import Sdf from './components/sdf';
 import Rmn from './components/rmn';
+import SdfLotus from './components/sdfLotus';
 import { getSdfFilesNames } from './components/sdf';
 import { getRmnFilesNames } from './components/rmn';
 
@@ -38,6 +39,10 @@ const router = createBrowserRouter([
         path:"/rmnDB",
         element:<Rmn/>,
         loader: getRmnFilesNames
+      },
+      {
+        path:"/sdfLotus",
+        element:<SdfLotus/>
       }
     ]
   },

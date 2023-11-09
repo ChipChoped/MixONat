@@ -8,6 +8,7 @@ import io
 from motor.data_structures import Spectrum, SDF
 from checkers.filechecker import FileChecker
 import json
+import motor.lotus_ressources as lr
 
 app = Flask(__name__)
 CORS(app)
@@ -64,6 +65,20 @@ def checkFile():
         resp.headers['Content-Type'] = 'application/json'
         return resp
         
+@app.route("/getFamily", methods=['GET'])
+def getFamily():
+    taxonomy_family_sorted_list = lr.get_family()
+    return json.dumps(taxonomy_family_sorted_list)
+
+@app.route("/getGenus/<genus>", methods=['GET'])
+def getGenus(genus):
+    taxonomy_genus_sorted_list = lr.get_genus(genus)
+    return json.dumps(taxonomy_genus_sorted_list)
+
+@app.route("/getSpecies/<species>", methods=['GET'])
+def getSpecies(species):
+    taxonomy_species_sorted_list = lr.get_species(species)
+    return json.dumps(taxonomy_species_sorted_list)
 
 """
     Function to adjust molcular_weight Parameter 
