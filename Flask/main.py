@@ -80,6 +80,21 @@ def getSpecies(species):
     taxonomy_species_sorted_list = lr.get_species(species)
     return json.dumps(taxonomy_species_sorted_list)
 
+@app.route("/getPathway", methods=['GET'])
+def getPathway():
+    ontology_pathway_sorted_list = lr.get_NPclassifierPathway()
+    return json.dumps(ontology_pathway_sorted_list)
+
+@app.route("/getSuperclass/<pathway>", methods=['GET'])
+def getSuperclass(pathway):
+    ontology_superclass_sorted_list = lr.get_NPclassifierSuperclass(pathway)
+    return json.dumps(ontology_superclass_sorted_list)
+
+@app.route("/getClass/<superclass>", methods=['GET'])
+def getClass(superclass):
+    ontology_class_sorted_list = lr.get_NPclassifierClass(superclass)
+    return json.dumps(ontology_class_sorted_list)
+
 """
     Function to adjust molcular_weight Parameter 
 """

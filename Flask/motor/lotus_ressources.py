@@ -89,7 +89,7 @@ def get_NPclassifierSuperclass(chemicalTaxonomyNPclassifierPathway=None):
     chemontology_NPclassifieSuperclass_list = []
     global chemontology_dataframe_1
     if chemicalTaxonomyNPclassifierPathway == None:
-        chemontology_dataframe_1 = motor.ginfo.get_chemontology_file()
+        return chemontology_NPclassifieSuperclass_list
     else:
         chemontology_dataframe_1 = motor.ginfo.get_chemontology_file().loc[motor.ginfo.get_chemontology_file()['chemicalTaxonomyNPclassifierPathway'] == chemicalTaxonomyNPclassifierPathway]
     #chemontology_dataframe_1 = motor.ginfo.get_chemontology_file().loc[motor.ginfo.get_chemontology_file()['chemicalTaxonomyNPclassifierPathway'] == chemicalTaxonomyNPclassifierPathway]
@@ -103,7 +103,7 @@ def get_NPclassifierSuperclass(chemicalTaxonomyNPclassifierPathway=None):
 def get_NPclassifierClass(chemicalTaxonomyNPSuperclass=None):
     chemontology_NPclassifierClass_list = []
     if chemicalTaxonomyNPSuperclass == None:
-        chemontology_dataframe_2 = motor.ginfo.get_chemontology_file()
+        return chemontology_NPclassifierClass_list
     else:
         chemontology_dataframe_2 = chemontology_dataframe_1.loc[chemontology_dataframe_1['chemicalTaxonomyNPclassifierSuperclass'] == chemicalTaxonomyNPSuperclass]
     #chemontology_dataframe_2 = chemontology_dataframe_1.loc[chemontology_dataframe_1['chemicalTaxonomyNPclassifierSuperclass'] == chemicalTaxonomyNPSuperclass]
