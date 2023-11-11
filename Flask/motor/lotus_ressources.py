@@ -1,9 +1,10 @@
+import datetime
 import motor.ginfo
 #from tool_path import *
 
 def get_family():
     #selected_taxonomy_db  = gui.get_taxonomy_db_var()
-    #print(str(datetime.now()) +" The Taxonomy you have chosen is: " + selected_taxonomy_db +".")
+    #print( " The Taxonomy you have chosen is: " + selected_taxonomy_db +".")
     #global taxonomy_family_list
     taxonomy_family_list = []
     #global taxonomy_dataframe_1
@@ -112,3 +113,47 @@ def get_NPclassifierClass(chemicalTaxonomyNPSuperclass=None):
         if NPclassifierClass not in chemontology_NPclassifierClass_list:
             chemontology_NPclassifierClass_list.append(str(NPclassifierClass))
     return sorted(chemontology_NPclassifierClass_list)
+
+
+
+
+def put_taxonomy_criteria_to_search_criteria(type,criteria):
+    lotus_search_criteria_listbox = []
+    selected_taxonomy_db = "all_taxonomy_DB"
+    if type == "family":
+        taxonomy_selected_family = criteria
+        code = 'T : ' + selected_taxonomy_db +' : family'
+        lotus_search_criteria_listbox.append(str(code + ' : ' + taxonomy_selected_family))
+        print(  " You have added " + str(code + ' : ' + taxonomy_selected_family) + " to the selection.") 
+    elif type == "genus":
+        taxonomy_selected_genus = criteria
+        code = 'T : ' + selected_taxonomy_db +' : genus'
+        lotus_search_criteria_listbox.append(str(code + ' : ' + taxonomy_selected_genus))
+        print(  " You have added " + str(code + ' : ' + taxonomy_selected_genus) + " to the selection.")
+    elif type == "species":
+        taxonomy_selected_species = criteria
+        code = 'T : ' + selected_taxonomy_db +' : species'
+        lotus_search_criteria_listbox.append(str(code + ' : ' + taxonomy_selected_species))
+        print(  " You have added " + str(code + ' : ' + taxonomy_selected_species) + " to the selection.")
+    return lotus_search_criteria_listbox
+        
+# Function to add Chemontology criteria to selected criteria to search in LOTUS_DB
+def put_chemontology_criteria_to_search_criteria(type, criteria):
+    lotus_search_criteria_listbox = []
+    selected_taxonomy_db = "all_taxonomy_DB"
+    if type == "pathway":
+        chemontology_selected_NPclassifierPathway = criteria
+        code = 'C : ' + selected_taxonomy_db +' : NP : chemicalTaxonomyNPclassifierPathway'  
+        lotus_search_criteria_listbox.append(str(code + ' : ' + chemontology_selected_NPclassifierPathway))
+        print(  " You have added " + str(code +  ' : ' + chemontology_selected_NPclassifierPathway) + " to the selection.")
+    elif type == "superclass":
+        chemontology_selected_NPclassifierSuperclass = criteria
+        code = 'C : '+ selected_taxonomy_db + ' : NP : chemicalTaxonomyNPclassifierSuperclass'
+        lotus_search_criteria_listbox.append(str(code + ' : ' + chemontology_selected_NPclassifierSuperclass))
+        print(  " You have added " + str(code + ' : ' + chemontology_selected_NPclassifierSuperclass) + " to the selection.")
+    elif type == "class":
+        chemontology_selected_NPclassifierClass = criteria
+        code = 'C : ' + selected_taxonomy_db + ' : NP : chemicalTaxonomyNPclassifierClass'
+        lotus_search_criteria_listbox.append(str(code + ' : ' + chemontology_selected_NPclassifierClass))
+        print(  " You have added " + str(code + ' : ' + chemontology_selected_NPclassifierClass) + " to the selection.")
+    return lotus_search_criteria_listbox

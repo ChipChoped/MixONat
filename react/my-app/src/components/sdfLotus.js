@@ -25,65 +25,93 @@ function SdfLotus() {
   const [selectedClass, setSelectedClass] = useState(undefined);
 
   const [selectedItem, setSelectedItem] = useState(null);
-
-  const listItems = [];
+  
+  const [filtreList, setFiltreList] = useState([]);
+  const addElementToFiltreList = (newElement) => {
+    if (!filtreList.includes(newElement)) {
+      setFiltreList((prevList) => [...prevList, newElement]);
+    }
+  };
 
   const handleFamilyClick = (family) => {
-    setSelectedItem(family);
-    setSelectedFamily(family);
     setSelectedGenus(undefined);
     setSelectedSpecies(undefined);
     setSelectedPathway(undefined);
     setSelectedSuperclass(undefined);
     setSelectedClass(undefined);
+    setSelectedItem(family);
+    setSelectedFamily(family);
   };
 
   const handleGenusClick = (genus) => {
-    setSelectedItem(genus);
-    setSelectedGenus(genus);
     setSelectedSpecies(undefined);
     setSelectedPathway(undefined);
     setSelectedSuperclass(undefined);
     setSelectedClass(undefined);
+    setSelectedItem(genus);
+    setSelectedGenus(genus);
   };
 
   const handleSpeciesClick = (species) => {
-    setSelectedItem(species);
-    setSelectedSpecies(species);
     setSelectedPathway(undefined);
     setSelectedSuperclass(undefined);
     setSelectedClass(undefined);
+    setSelectedItem(species);
+    setSelectedSpecies(species);
   };
 
   const handlePathwayClick = (pathway) => {
-    setSelectedItem(pathway);
-    setSelectedPathway(pathway);
-    setSelectedSuperclass(undefined);
-    setSelectedClass(undefined);
     setSelectedFamily(undefined);
     setSelectedGenus(undefined);
     setSelectedSpecies(undefined);
+    setSelectedSuperclass(undefined);
+    setSelectedClass(undefined);
+    setSelectedItem(pathway);
+    setSelectedPathway(pathway);
   };
 
   const handleSuperclassClick = (superclass) => {
-    setSelectedItem(superclass);
-    setSelectedSuperclass(superclass);
     setSelectedClass(undefined);
     setSelectedFamily(undefined);
     setSelectedGenus(undefined);
     setSelectedSpecies(undefined);
+    setSelectedItem(superclass);
+    setSelectedSuperclass(superclass);
   };
 
   const handleClassClick = (class_) => {
-    setSelectedItem(class_);
-    setSelectedClass(class_);
     setSelectedFamily(undefined);
     setSelectedGenus(undefined);
     setSelectedSpecies(undefined);
+    setSelectedItem(class_);
+    setSelectedClass(class_);
   };
-  
-  const handleItemClick = (item) => {
-    setSelectedItem(item);
+
+  const handleClearOntologyClick = () => {
+    setSelectedPathway(undefined);
+    setSelectedSuperclass(undefined);
+    setSelectedClass(undefined);
+    setSelectedItem();
+  };
+
+  const handleClearTaxonomyClick = () => {
+    setSelectedFamily(undefined);
+    setSelectedGenus(undefined);
+    setSelectedSpecies(undefined);
+    setSelectedItem();
+  };
+
+  const handleFiltreClick = (filtre) => {
+    setSelectedItem(filtre);
+  };
+
+  const handleDeleteAllFiltreClick = () => {
+    setFiltreList([]);
+  };
+
+  const handleDeleteFiltreClick = () => {
+    const updatedList = filtreList.filter((item) => item !== selectedItem);
+    setFiltreList(updatedList);
   };
 
   useEffect(() => {
@@ -101,26 +129,38 @@ function SdfLotus() {
 
   useEffect(() => {
     const fetchTaxonomyGenusList = async () => {
-      try {
-        const response = await axios.get(`http://localhost:5000/getGenus/${selectedFamily}`);
-        setTaxonomyGenusList(response.data);
-      } catch (error) {
-        console.error('Erreur lors de la récupération de la liste genus :', error);
+      // Vérifiez si selectedFamily est différent de undefined
+      if (selectedFamily !== undefined) {
+        try {
+          const response = await axios.get(`http://localhost:5000/getGenus/${selectedFamily}`);
+          setTaxonomyGenusList(response.data);
+        } catch (error) {
+          console.error('Erreur lors de la récupération de la liste genus :', error);
+        }
+      }else{
+        setTaxonomyGenusList([]);
       }
     };
+
     fetchTaxonomyGenusList();
   }, [selectedFamily]);
 
   useEffect(() => {
-    const fetchTaxonomySpeciesList = async () => {
-      try {
-        const response = await axios.get(`http://localhost:5000/getSpecies/${selectedGenus}`);
-        setTaxonomySpeciesList(response.data);
-      } catch (error) {
-        console.error('Erreur lors de la récupération de la liste species :', error);
-      }
-    };
-    fetchTaxonomySpeciesList();
+    //if(selectedGenus!=undefined) {
+      const fetchTaxonomySpeciesList = async () => {
+        if (selectedGenus !== undefined) {
+          try {
+            const response = await axios.get(`http://localhost:5000/getSpecies/${selectedGenus}`);
+            setTaxonomySpeciesList(response.data);
+          } catch (error) {
+            console.error('Erreur lors de la récupération de la liste species :', error);
+          }
+        }else{
+          setTaxonomySpeciesList([]);
+        }
+      };
+      fetchTaxonomySpeciesList();
+    //}
   }, [selectedGenus]);
 
 
@@ -141,32 +181,99 @@ function SdfLotus() {
 
   useEffect(() => {
     const fetchOntologySuperclassList = async () => {
-      try {
-        const response = await axios.get(`http://localhost:5000/getSuperclass/${selectedPathway}`);
-        setOntologySuperclassList(response.data);
-      } catch (error) {
-        console.error('Erreur lors de la récupération de la liste superclass :', error);
+      //if(selectedPathway!=undefined) {
+      if (selectedPathway !== undefined) {
+        try {
+          const response = await axios.get(`http://localhost:5000/getSuperclass/${selectedPathway}`);
+          setOntologySuperclassList(response.data);
+        } catch (error) {
+          console.error('Erreur lors de la récupération de la liste superclass :', error);
+        }
+      }else{
+        setOntologySuperclassList([]);
       }
     };
     fetchOntologySuperclassList();
+    //}
   }, [selectedPathway]);
 
   useEffect(() => {
     const fetchOntologyClassList = async () => {
-      try {
-        const response = await axios.get(`http://localhost:5000/getClass/${selectedSuperclass}`);
-        setOntologyClassList(response.data);
-      } catch (error) {
-        console.error('Erreur lors de la récupération de la liste class :', error);
+      //if(selectedSuperclass!=undefined) {
+      if (selectedSuperclass !== undefined) {
+        try {
+          const response = await axios.get(`http://localhost:5000/getClass/${selectedSuperclass}`);
+          setOntologyClassList(response.data);
+        } catch (error) {
+          console.error('Erreur lors de la récupération de la liste class :', error);
+        }
+      }else{
+        setOntologyClassList([]);
       }
     };
     fetchOntologyClassList();
+    //}
   }, [selectedSuperclass]);
+
+  ////////////////////////////////////////////////////////////////////////////
+
+  const handleAddTaxonomyClick = () => {
+      const fetchTaxonomyFiltre = async () => {
+        var taxonomyCriteria = undefined;
+        var taxonomyType = undefined;
+        if(selectedSpecies!==undefined){
+          taxonomyCriteria=selectedSpecies;
+          taxonomyType = "species";
+        }else if(selectedGenus!==undefined){
+          taxonomyCriteria=selectedGenus;
+          taxonomyType = "genus";
+        }else if(selectedFamily!==undefined){
+          taxonomyCriteria=selectedFamily;
+          taxonomyType = "family";
+        }
+        if(taxonomyCriteria!==undefined){
+          try {
+            const response = await axios.get(`http://localhost:5000/getTaxonomyFiltre/${taxonomyType}/${taxonomyCriteria}`);
+            addElementToFiltreList(response.data);
+          } catch (error) {
+            console.error('Erreur lors de la récupération du filtre :', error);
+          }
+        }
+      };
+      fetchTaxonomyFiltre();
+  };
+
+  const handleAddOntologyClick = () => {
+    const fetchOntologyFiltre = async () => {
+      var ontologyCriteria = undefined;
+      var ontologyType = undefined;
+      if(selectedPathway!==undefined){
+        ontologyCriteria=selectedPathway;
+        ontologyType = "pathway";
+      }else if(selectedSuperclass!==undefined){
+        ontologyCriteria=selectedSuperclass;
+        ontologyType = "superclass";
+      }else if(selectedClass!==undefined){
+        ontologyCriteria=selectedClass;
+        ontologyType = "class";
+      }
+      if(ontologyCriteria!==undefined){
+        try {
+          const response = await axios.get(`http://localhost:5000/getOntologyFiltre/${ontologyType}/${ontologyCriteria}`);
+          addElementToFiltreList(response.data);
+          
+        } catch (error) {
+          console.error('Erreur lors de la récupération du filtre :', error);
+        }
+      }
+    };
+    fetchOntologyFiltre();
+};
 
   return (
     <div>
-        <div class="allColumn">
-            <div class="column">
+        <div className="allColumn">
+            <div className="column">
                 {/* Colonne 1 */}
                 <h2>Taxonomy</h2>
                 <div>
@@ -214,10 +321,10 @@ function SdfLotus() {
                       </ul>
                   </div>
                 </div>
-                <button onClick={() => null}>Ajouter</button>
-                <button onClick={() => null}>Supprimer</button>
+                <button onClick={() => handleAddTaxonomyClick()}>Add</button>
+                <button onClick={() => handleClearTaxonomyClick()}>Clear</button>
             </div>
-            <div class="column">
+            <div className="column">
                 {/* Colonne 2 */}
                 <h2>Ontology</h2>
                 <div>
@@ -265,26 +372,27 @@ function SdfLotus() {
                       </ul>
                   </div>
                 </div>
-                <button onClick={() => null}>Ajouter</button>
-                <button onClick={() => null}>Supprimer</button>
+                <button onClick={() => handleAddOntologyClick()}>Add</button>
+                <button onClick={() => handleClearOntologyClick()}>Clear</button>
             </div>
-            <div class="column">
+            <div className="column">
               <div>
                 <h2>Filtres</h2>
                   <div className="list-container">
                     <ul>
-                      {listItems.map((item, index) => (
-                        <li
-                          key={index}
-                          className={`list-item ${selectedItem === item ? 'selected' : ''}`}
-                          onClick={() => handleItemClick(item)}
-                        >
-                          {item}
-                        </li>
-                      ))}
-                    </ul>
+                        {filtreList.map((filtre, index) => (
+                          <li 
+                            key={index}
+                            className={`list-item ${selectedItem === filtre ? 'selected' : ''}`}
+                            onClick={() => handleFiltreClick(filtre)}>
+                              {filtre} 
+                          </li>
+                        ))}
+                      </ul>
                   </div>
                   <button>Create SDF</button>
+                  <button onClick={() => handleDeleteFiltreClick()}>Delete</button>
+                  <button onClick={() => handleDeleteAllFiltreClick()}>Delete all</button>
               </div>            
             </div>
         </div>

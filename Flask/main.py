@@ -95,6 +95,16 @@ def getClass(superclass):
     ontology_class_sorted_list = lr.get_NPclassifierClass(superclass)
     return json.dumps(ontology_class_sorted_list)
 
+@app.route("/getTaxonomyFiltre/<type>/<criteria>", methods=['GET'])
+def getTaxonomyFiltre(type,criteria):
+    filtre = lr.put_taxonomy_criteria_to_search_criteria(type,criteria)
+    return json.dumps(filtre)
+
+@app.route("/getOntologyFiltre/<type>/<criteria>", methods=['GET'])
+def getOntologyFiltre(type,criteria):
+    filtre = lr.put_chemontology_criteria_to_search_criteria(type,criteria)
+    return json.dumps(filtre)
+
 """
     Function to adjust molcular_weight Parameter 
 """
