@@ -1,5 +1,12 @@
 version: '3'
 services:
+  flask:
+    container_name: flask
+    build:
+      context: ./Flask
+      dockerfile: Dockerfile
+    volumes:
+      - ./Flask:/usr/src/app/flask
   conductor-mixonat:
     container_name: conductor-mixonat
     build:
@@ -9,7 +16,6 @@ services:
       - "9000:9000"
     depends_on:
       - postgres
-    # stdin_open: true
     volumes:
        - ./Conductor:/usr/src/app/conductor-mixonat
   react-mixonat:
@@ -21,7 +27,6 @@ services:
       - "3000:3000"
     depends_on:
       - conductor-mixonat
-    # stdin_open: true
     volumes:
        - ./react/my-app:/usr/src/app/react-mixonat
        - /usr/src/app/react-mixonat/node_modules
