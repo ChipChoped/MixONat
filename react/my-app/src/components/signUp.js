@@ -11,6 +11,7 @@ function SignUp() {
     const [emailConfirmation, setEmailConfirmation] = useState('')
     const [password, setPassword] = useState('')
     const [passwordConfirmation, setPasswordConfirmation] = useState('')
+    const [consent, setConsent] = useState(false)
 
     const [firstNameError, setFirstNameError] = useState('')
     const [lastNameError, setLastNameError] = useState('')
@@ -18,6 +19,7 @@ function SignUp() {
     const [emailConfirmationError, setEmailConfirmationError] = useState('')
     const [passwordError, setPasswordError] = useState('')
     const [passwordConfirmationError, setPasswordConfirmationError] = useState('')
+    const [consentError, setConsentError] = useState('')
 
     const [token, setToken] = useState('')
     const [errorMessage, setErrorMessage] = useState('')
@@ -37,7 +39,8 @@ function SignUp() {
                             "email": email,
                             "email-confirmation": emailConfirmation,
                             "password": password,
-                            "password-confirmation": passwordConfirmation
+                            "password-confirmation": passwordConfirmation,
+                            "consent": consent
                         }
                     )
                 };
@@ -58,12 +61,22 @@ function SignUp() {
                             setEmailConfirmationError(json.sameEmail)
                             setPasswordError(json.password)
                             setPasswordConfirmationError(json.samePassword)
+                            setConsentError(json.consent)
+
+                            document.getElementById("consent").checked = false
+                            setConsent(false)
                         }
                         else if (response.status === 500) {
                             setErrorMessage("A server internal error occurred")
+
+                            document.getElementById("checkbox").checked = false;
+                            setConsent(false)
                         }
                         else {
                             setErrorMessage("An unknown error occurred. Please try again later.")
+
+                            document.getElementById("checkbox").checked = false;
+                            setConsent(false)
                         }
                     }).catch((err) => {
                         console.log(err);
@@ -140,6 +153,19 @@ function SignUp() {
                             : null}
                     </div>
                 </div>
+                <div className='consent'>
+                    <input type='checkbox' id='consent' value={consent} onChange={(e) => {
+                        if (consent === false)
+                            setConsent(true)
+                        else
+                            setConsent(false)
+                    }}/>
+                    <label for='consent'>I agree to let MixONat store my personnel informations for the sole purpose
+                        of the creation of my user account and to cite my name for the works that I might share.</label>
+                </div>
+                {passwordConfirmationError !== ''
+                    ? <div className='consent'><p className='error-message'>{consentError}</p></div>
+                    : null}
                 <div className='sign-up-button'>
                     <button type="submit" onClick={() => {setSigningUp(true)}}> Sign Up </button>
                 </div>

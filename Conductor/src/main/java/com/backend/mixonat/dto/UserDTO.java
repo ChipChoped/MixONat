@@ -47,6 +47,9 @@ public class UserDTO {
     @NotBlank(message = "Password confirmation cannot be blank")
     String passwordConfirmation;
 
+    @AssertTrue(message = "You must accept the terms and conditions to sign up")
+    Boolean consent;
+
     @AssertTrue(message = "Emails don't match")
     private boolean isSameEmail() {
         return Objects.equals(email, emailConfirmation);
