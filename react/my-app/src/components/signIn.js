@@ -88,7 +88,7 @@ function SignIn()
                 <div className='sign-in-button'>
                     <button type="submit" onClick={() => {setSigningIn(true)}}> Sign In </button>
                 </div>
-                <p className='sign-up'> No account yet? Sign up <button onClick={() => {setSignUp(true)}}>here</button>!</p>
+                <p className='sign-up'> No account yet? Sign up <button onClick={() => {setSignUp(true)}}><b><em>here</em></b></button>!</p>
             </div>
         </div>
     )
