@@ -8,6 +8,7 @@
 Front : react-mixonat
 Back : conductor-mixonat
 BDD : postgres
+Flask : flask
 ```
 
 ### Pour exécuter l'app :
@@ -47,3 +48,10 @@ Exécution :
 Base de donnée Postgresql, voir DATABASE.md \
 Afin de lancer un script sql au lancement de l'image Docker, placer le fichier sql dans :
 > ./database/initDocker/
+
+### Flask
+
+./Flask
+
+> pip install -r requirements.txt \
+> py main.py
