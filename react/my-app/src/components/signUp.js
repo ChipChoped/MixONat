@@ -30,7 +30,7 @@ function SignUp() {
         if(signingUp) {
             async function signUp() {
                 const requestOptions = {
-                    method: 'POST',
+                    method: 'PUT',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(
                         {

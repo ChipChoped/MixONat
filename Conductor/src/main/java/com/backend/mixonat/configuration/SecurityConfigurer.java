@@ -68,7 +68,7 @@ public class SecurityConfigurer {
                 )
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(
-                                antMatcher(HttpMethod.POST, "/sign-up"),
+                                antMatcher(HttpMethod.PUT, "/sign-up"),
                                 antMatcher(HttpMethod.POST, "/sign-in"),
                                 antMatcher(HttpMethod.OPTIONS, "/sign-up"),
                                 antMatcher(HttpMethod.OPTIONS, "/sign-in")).permitAll()
@@ -94,7 +94,7 @@ public class SecurityConfigurer {
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(List.of("http://localhost:3000"));
-        configuration.setAllowedMethods(List.of("GET", "POST", "DELETE", "OPTIONS"));
+        configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("*"));
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);

@@ -28,7 +28,7 @@ public class AuthenticationController {
     private final AuthenticationService authenticationService;
 
     @CrossOrigin(origins="http://localhost:3000")
-    @PostMapping("/sign-up")
+    @PutMapping("/sign-up")
     public ResponseEntity<JsonResponse> signUp(@RequestBody @Valid UserDTO request) {
         return authenticationService.signUp(request);
     }
