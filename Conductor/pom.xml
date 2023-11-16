@@ -14,7 +14,7 @@
 	<name>Mixonat</name>
 	<description>Backend&apos;s conductor</description>
 	<properties>
-		<java.version>17.0.8</java.version>
+		<java.version>21</java.version>
 		<spring-security.version>6.1.5</spring-security.version>
 		<spring.version>6.0.13</spring.version>
 	</properties>
@@ -40,7 +40,14 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
+			<version>3.1.5</version>
 			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-logging</artifactId>
+			<version>3.1.5</version>
 		</dependency>
 
 		<dependency>
@@ -93,6 +100,11 @@
 		</dependency>
 
 		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+
+		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-core</artifactId>
 			<version>6.1.5</version>
@@ -109,12 +121,6 @@
 			<artifactId>spring-boot-starter-security</artifactId>
 			<version>3.1.5</version>
 		</dependency>
-
-<!--		<dependency>-->
-<!--			<groupId>org.springframework.security</groupId>-->
-<!--			<artifactId>spring-security-ldap</artifactId>-->
-<!--			<version>6.1.5</version>-->
-<!--		</dependency>-->
 
 		<dependency>
 			<groupId>org.springframework.security</groupId>
@@ -159,29 +165,13 @@
 		</dependency>
 
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-actuator</artifactId>
-		</dependency>
-
-		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
 		</dependency>
-
-<!--		<dependency>-->
-<!--			<groupId>org.springframework.ldap</groupId>-->
-<!--			<artifactId>spring-ldap-core</artifactId>-->
-<!--			<version>3.1.2</version>-->
-<!--		</dependency>-->
-
-<!--		<dependency>-->
-<!--			<groupId>org.springframework.boot</groupId>-->
-<!--			<artifactId>spring-boot-starter-data-ldap</artifactId>-->
-<!--			<version>3.1.5</version>-->
-<!--		</dependency>-->
 	</dependencies>
 
 	<build>
+		<testSourceDirectory>src/test/java</testSourceDirectory>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
