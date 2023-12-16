@@ -33,7 +33,7 @@ function SignIn()
                 };
 
                 // Send request to Spring server
-                fetch("http://localhost:9000/sign-in", requestOptions).then((response) => {
+                fetch("http://localhost:9000/user/sign-in", requestOptions).then((response) => {
                     response.json().then((json) => {
                         if (response.status === 200) {
                             console.log("User signed in: " + json)

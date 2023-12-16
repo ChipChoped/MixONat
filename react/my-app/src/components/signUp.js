@@ -46,7 +46,7 @@ function SignUp() {
                 };
 
                 // Send request to Spring server
-                fetch("http://localhost:9000/sign-up", requestOptions).then((response) => {
+                fetch("http://localhost:9000/user/sign-up", requestOptions).then((response) => {
                     response.json().then((json) => {
                         if (response.status === 201) {
                             console.log("User signed up: " + json)
@@ -160,7 +160,7 @@ function SignUp() {
                         else
                             setConsent(false)
                     }}/>
-                    <label for='consent'>I agree to let MixONat store my personnel informations for the sole purpose
+                    <label for='consent'>I agree to let MixONat store my personnel information for the sole purpose
                         of the creation of my user account and to cite my name for the works that I might share.</label>
                 </div>
                 {passwordConfirmationError !== ''
