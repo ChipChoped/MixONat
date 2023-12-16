@@ -68,10 +68,12 @@ public class SecurityConfigurer {
                 )
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(
-                                antMatcher(HttpMethod.PUT, "/sign-up"),
-                                antMatcher(HttpMethod.POST, "/sign-in"),
-                                antMatcher(HttpMethod.OPTIONS, "/sign-up"),
-                                antMatcher(HttpMethod.OPTIONS, "/sign-in")).permitAll()
+                                antMatcher(HttpMethod.PUT, "/user/sign-up"),
+                                antMatcher(HttpMethod.POST, "/user/sign-in"),
+                                antMatcher(HttpMethod.DELETE, "/user/delete-account"),
+                                antMatcher(HttpMethod.OPTIONS, "/user/sign-up"),
+                                antMatcher(HttpMethod.OPTIONS, "/user/sign-in"),
+                                antMatcher(HttpMethod.OPTIONS, "/user/delete-account")).permitAll()
                         .requestMatchers(
                                 antMatcher(HttpMethod.GET, "/api/v1/test/**")).permitAll()
                         .requestMatchers(

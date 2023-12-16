@@ -71,4 +71,24 @@ public class AuthenticationService {
             return ResponseEntity.status(401).headers(responseHeaders).body(new ExceptionDTO("Incorrect email or password"));
         }
     }
+
+    public ResponseEntity<JsonResponse> deleteAccount(LoginsDTO request) {
+        HttpHeaders responseHeaders = new HttpHeaders();
+        responseHeaders.set("Content-Type","application/json");
+
+        try {
+            var user = userRepository.findUserByEmail(request.getEmail())
+                    .orElseThrow(IllegalArgumentException::new);
+
+            if (passwordEncoder.matches(request.getPassword(), user.getPassword())) {
+                userRepository.delete(user);
+                return ResponseEntity.status(204).headers(responseHeaders).build();
+            }
+            else
+                return ResponseEntity.status(403).headers(responseHeaders).body(new ExceptionDTO("Incorrect password"));
+        }
+        catch (IllegalArgumentException e) {
+            return ResponseEntity.status(403).headers(responseHeaders).body(new ExceptionDTO("The email doesn't match the current account"));
+        }
+    }
 }

@@ -28,14 +28,20 @@ public class AuthenticationController {
     private final AuthenticationService authenticationService;
 
     @CrossOrigin(origins="http://localhost:3000")
-    @PutMapping("/sign-up")
+    @PutMapping("/user/sign-up")
     public ResponseEntity<JsonResponse> signUp(@RequestBody @Valid UserDTO request) {
         return authenticationService.signUp(request);
     }
 
     @CrossOrigin(origins="http://localhost:3000")
-    @PostMapping("/sign-in")
+    @PostMapping("/user/sign-in")
     public ResponseEntity<JsonResponse> signIn(@RequestBody LoginsDTO request) {
         return authenticationService.signIn(request);
+    }
+
+    @CrossOrigin(origins="http://localhost:3000")
+    @DeleteMapping("/user/delete-account")
+    public ResponseEntity<JsonResponse> deleteAccount(@RequestBody LoginsDTO request) {
+        return authenticationService.deleteAccount(request);
     }
 }
