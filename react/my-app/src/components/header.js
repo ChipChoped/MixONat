@@ -19,6 +19,11 @@ export function Header()
                             <span>SDF Database</span>
                         </Link>
                     </li>
+                    <li>
+                        <Link to={"/sign-in"} className="header-link">
+                            <span>Sign In</span>
+                        </Link>
+                    </li>
                 </ul>
             </div>
         </>

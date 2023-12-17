@@ -55,3 +55,31 @@ Afin de lancer un script sql au lancement de l'image Docker, placer le fichier s
 
 > pip install -r requirements.txt \
 > py main.py
+
+## Getting started
+
+### Launching the MixONat server
+
+A version of Python 3.9 is required.
+
+```bash
+pip install -r ./Flask/requirements.txt
+python ./Flask/main.py
+```
+
+### Launching the website server
+
+You must first define the environment variable JAVA_HOME to the path of your JDK installation.
+
+```bash
+cd ./Conductor/
+./mvnw.cmd compile spring-boot:run
+```
+
+### Launching the website client
+
+```bash
+npm install react-scripts --save --prefix ./react/my-app/
+npm start --prefix ./react/my-app/
+```
+
