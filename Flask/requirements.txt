@@ -23,5 +23,6 @@ pytest==3.0.5
 pytest-cov==2.4.0
 
 # Calculations
-numpy==1.26.1
-rdkit==2022.9.5
+Pillow==10.1.0
+numpy==1.26.2
+rdkit-pypi==2021.09.2
