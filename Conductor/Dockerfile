@@ -1,11 +1,11 @@
-FROM eclipse-temurin:11
+FROM maven:3.9.6-eclipse-temurin-21 AS build
 
-WORKDIR /app/mixonat-conductor
+COPY pom.xml /build/
+COPY src /build/src/
 
-COPY .mvn/ .mvn
-COPY mvnw pom.xml ./
-RUN bash mvnw dependency:go-offline
-COPY src ./src
+WORKDIR /build/
+RUN mvn clean install -DskipTests
 
-CMD ["bash", "mvnw", "spring-boot:run"]
-
+FROM openjdk:21-slim
+COPY --from=build /build/target/mixonat-0.0.1-SNAPSHOT.jar /usr/local/lib/mixonat.jar
+ENTRYPOINT ["java", "-jar", "/usr/local/lib/mixonat.jar"]
