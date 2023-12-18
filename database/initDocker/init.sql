@@ -1,7 +1,13 @@
+DROP DATABASE IF EXISTS mixonat;
 CREATE DATABASE mixonat;
 
-CREATE USER mixo WITH PASSWORD 'mixo';
-GRANT ALL PRIVILEGES ON DATABASE Mixonat TO mixo;
+DO $$
+    BEGIN
+        CREATE USER mixo WITH PASSWORD 'mixo';
+        GRANT ALL PRIVILEGES ON DATABASE Mixonat TO mixo;
+        EXCEPTION WHEN duplicate_object THEN RAISE NOTICE '%, skipping', SQLERRM USING ERRCODE = SQLSTATE;
+    END
+$$;
 
 \connect mixonat
 

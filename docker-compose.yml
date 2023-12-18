@@ -38,10 +38,11 @@ services:
     ports:
       - "5432:5432"
     environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-    # volumes:
-       # - postgres-db:/var/lib/postgresql/data
+      - POSTGRES_USER=mixo
+      - POSTGRES_PASSWORD=mixo
+      - PGDATA=/tmp
+    volumes:
+      - ./database:/var/lib/postgres/data
 volumes:
   postgres-db:
     driver: local
