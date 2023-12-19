@@ -16,9 +16,11 @@ import com.backend.mixonat.model.Molecules;
 import com.backend.mixonat.model.checkRequest;
 import com.backend.mixonat.model.checkResponse;
 import com.backend.mixonat.model.Sdf;
+import com.backend.mixonat.model.Rmn;
 import com.backend.mixonat.model.FrontRequest;
 import com.backend.mixonat.service.RMNMotorService;
 import com.backend.mixonat.service.SdfService;
+import com.backend.mixonat.service.RmnService;
 
 @RestController
 public class RMNMotorController
@@ -28,6 +30,9 @@ public class RMNMotorController
 
 	@Autowired
 	private SdfService sdfService;
+
+	@Autowired
+	private RmnService rmnService;
 
 	@CrossOrigin(origins="http://localhost:3000")
 	@GetMapping("/rmn/sdf/names")
@@ -92,14 +97,18 @@ public class RMNMotorController
 	{
 		HttpHeaders responseHeaders = new HttpHeaders();
 		responseHeaders.set("Content-Type","application/json");
-
-		if(request.getUseDatabase())
-		{
-			request.setSdf(sdfService.findOneByName(request.getSdf()).getSdf_file());
-			return ResponseEntity.ok().headers(responseHeaders).body(rmnMotorService.getMolecules(request));
-		}
-		else
-		{
+		if(request.getUseSdfDatabase() || request.getUseRmnDatabase()){
+			if(request.getUseSdfDatabase())
+			{
+				request.setSdf(sdfService.findOneByName(request.getSdf()).getSdf_file());
+				//return ResponseEntity.ok().headers(responseHeaders).body(rmnMotorService.getMolecules(request));
+			}
+			if(request.getUseRmnDatabase())
+			{
+				request.setSpectrum(rmnService.findOneByName(request.getSpectrum()).getRmn_file());
+			}
+				return ResponseEntity.ok().headers(responseHeaders).body(rmnMotorService.getMolecules(request));
+		}else{
 			return ResponseEntity.ok().headers(responseHeaders).body(rmnMotorService.getMolecules(request));
 		}
 	}
@@ -113,6 +122,62 @@ public class RMNMotorController
 		HttpHeaders responseHeaders = new HttpHeaders();
 		responseHeaders.set("Content-Type","application/json");
 		return ResponseEntity.ok().headers(responseHeaders).body(rmnMotorService.getCheck(request));
+	}
+
+
+	@GetMapping("/rmn/rmnDB/names")
+	public ResponseEntity<List<String>> getRmn()
+	{
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.set("Content-Type","application/json");
+		responseHeaders.set("Access-Control-Allow-Origin","*");
+
+		return ResponseEntity.ok().headers(responseHeaders).body(rmnService.getRmnWithoutFile());
+	}
+
+	@CrossOrigin(origins="http://localhost:3000")
+	@PostMapping("/rmn/rmnDB")
+	public ResponseEntity<Rmn> saveRmn(@RequestBody Rmn newRmn)
+	{
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.set("Content-Type","application/json");
+
+		if(newRmn.getName().equals(""))
+		{
+			return ResponseEntity.badRequest().body(null);
+		}
+		else
+		{
+			List<Integer> rmnId = rmnService.findRmnIdByName(newRmn.getName());
+
+			if(rmnId.size() > 0)
+			{
+				newRmn.setId(rmnId.get(0));
+			}
+
+			return ResponseEntity.ok().headers(responseHeaders).body(rmnService.saveRmn(newRmn));
+		}
+	}
+
+	@CrossOrigin(origins="http://localhost:3000")
+	@DeleteMapping("/rmn/rmnDB")
+	public ResponseEntity<Boolean> deleteRmn(@RequestBody Rmn deleteRmn)
+	{
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.set("Content-Type","application/json");
+
+			List<Integer> rmnId = rmnService.findRmnIdByName(deleteRmn.getName());
+
+			if(rmnId.size() > 0)
+			{
+				deleteRmn.setId(rmnId.get(0));
+
+				return ResponseEntity.ok().headers(responseHeaders).body(rmnService.deleteRmn(deleteRmn));
+			}
+			else
+			{
+				return ResponseEntity.badRequest().body(false);
+			}
 	}
 
 }

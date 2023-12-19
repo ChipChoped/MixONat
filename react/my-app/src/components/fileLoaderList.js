@@ -1,7 +1,7 @@
 import { FileLoader } from "./fileLoader";
 import "../styles/fileLoaderList.scss"
 
-export function FileLoaderList({sdfList,useSdfList,setSDF,setSdfIsLoading,setSpectrum,setSpectrumIsLoading,setDEPT135,setDept135IsLoading,setDEPT90,setDept90IsLoading,sdfIsSetPointer,sdfIsSet,c13IsSetPointer,c13IsSet , dept135IsSet,dept135IsSetPointer ,sendcheckRequest,hasFile,setTitle,titles})
+export function FileLoaderList({sdfList,useSdfList,setSDF,setSdfIsLoading,setSpectrum,setSpectrumIsLoading,setDEPT135,setDept135IsLoading,setDEPT90,setDept90IsLoading,sdfIsSetPointer,sdfIsSet,c13IsSetPointer,c13IsSet , dept135IsSet,dept135IsSetPointer ,sendcheckRequest,setTitle,titles,useRmnList,rmnList,hasFile})
 {
     //  A function called when user removes files where we change the useState of files
     function deleteFile(filetype)
@@ -46,6 +46,24 @@ export function FileLoaderList({sdfList,useSdfList,setSDF,setSdfIsLoading,setSpe
       }
     }
 
+    function chooseRmnFile(name)
+    {
+      if(name === "")
+      {
+        setSpectrum(undefined)
+        c13IsSetPointer(false)
+        //sdfIsSetPointer(false)
+        setDEPT135(undefined)
+        setDEPT90(undefined)
+      }
+      else
+      {
+        setSpectrum(name)
+        c13IsSetPointer(true)
+        //sIsSetPointer(true)
+      }
+    }
+
     return (
     <div className={hasFile ? "file-loader-list" : "file-loader-list-without-file"}>
         {useSdfList 
@@ -54,7 +72,14 @@ export function FileLoaderList({sdfList,useSdfList,setSDF,setSdfIsLoading,setSpe
               {sdfList.map((fileName) => (<option value={fileName} key={fileName}>{fileName}</option>))}
             </select>
           : <FileLoader filetype ="sdf" setFile={setSDF} setFileIsLoading={setSdfIsLoading} sdfIsSetPointer ={sdfIsSetPointer}dept135IsSetPointer = {dept135IsSetPointer} deleteFile={deleteFile} sendcheckRequest={sendcheckRequest} setTitle={setTitle} titles={titles}/>}
-        <FileLoader filetype ="spectrum" setFile={setSpectrum} setFileIsLoading={setSpectrumIsLoading} c13IsSetPointer = {c13IsSetPointer} dept135IsSetPointer ={dept135IsSetPointer} deleteFile ={deleteFile} sendcheckRequest={sendcheckRequest} setTitle={setTitle} titles={titles}/>
+        
+        
+        {useRmnList 
+          ? <select className={hasFile ? "file-loader-select" : "file-loader-select-without-file"} onChange={(e) => {chooseRmnFile(e.target.value)}}>
+              <option value="">-- Please choose a rmn file --</option>
+              {rmnList.map((fileName) => (<option value={fileName} key={fileName}>{fileName}</option>))}
+            </select>
+          :<FileLoader filetype ="spectrum" setFile={setSpectrum} setFileIsLoading={setSpectrumIsLoading} c13IsSetPointer = {c13IsSetPointer} dept135IsSetPointer ={dept135IsSetPointer} deleteFile ={deleteFile} sendcheckRequest={sendcheckRequest} setTitle={setTitle} titles={titles}/>}
        
         { sdfIsSet && c13IsSet ? 
         <>

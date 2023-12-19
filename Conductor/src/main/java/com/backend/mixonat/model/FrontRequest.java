@@ -13,5 +13,6 @@ public class FrontRequest implements Serializable
     String dept135;
     String dept90;
     Parametres params;
-    Boolean useDatabase;
+    Boolean useSdfDatabase;
+    Boolean useRmnDatabase;
 }

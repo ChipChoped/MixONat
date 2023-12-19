@@ -24,6 +24,11 @@ export function Header()
                             <span>Sign In</span>
                         </Link>
                     </li>
+                    <li>
+                        <Link to={"/rmnDB"} className="header-link">
+                            <span>RMN Database</span>
+                        </Link>
+                    </li>
                 </ul>
             </div>
         </>
