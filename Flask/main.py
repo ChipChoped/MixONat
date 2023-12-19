@@ -11,6 +11,9 @@ import json
 import motor.lotus_ressources as lr
 import motor.ginfo 
 import motor.tool_path
+import NMRshift.process as nmrShift
+import subprocess
+import os
 
 app = Flask(__name__)
 CORS(app)
@@ -116,7 +119,25 @@ def createSdf():
     motor.ginfo.get_lotus_add(flat_list)
     if fileName == "":
         fileName = "newSDF"
-    #motor.l2sdf.lotus2sdf(fileName)
+    # Chemin complet vers process.py
+    original_working_directory = motor.tool_path.get_current_path()[0]
+    process_script_path = 'NMRshift/process.py'
+    
+
+    # Répertoire du script process.py
+    script_directory = os.path.dirname(process_script_path)
+
+    # Change le répertoire de travail
+    os.chdir(script_directory)
+
+    # Commande à exécuter
+    command = 'python process.py'
+
+    # Exécute la commande
+    subprocess.run(command, shell=True)
+
+    # Reviens au répertoire initial (si nécessaire)
+    os.chdir(original_working_directory)
     return '',200
         
 
