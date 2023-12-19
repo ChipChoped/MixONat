@@ -5,6 +5,8 @@ services:
     build:
       context: ./Flask
       dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
     volumes:
       - ./Flask:/usr/src/app/flask
   conductor-mixonat:
