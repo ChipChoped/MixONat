@@ -78,6 +78,7 @@ public class SecurityConfigurer {
                                 antMatcher(HttpMethod.GET, "/api/v1/test/**")).permitAll()
                         .requestMatchers(
                                 antMatcher(HttpMethod.GET, "/rmn/sdf/names"),
+                                antMatcher(HttpMethod.GET, "/rmn/rmnDB/names"),
                                 antMatcher(HttpMethod.POST, "/rmn"),
                                 antMatcher(HttpMethod.POST, "/rmn/sdf"),
                                 antMatcher(HttpMethod.POST, "/checkFile"),
