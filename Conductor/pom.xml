@@ -15,7 +15,7 @@
 	<description>Backend&apos;s conductor</description>
 	<properties>
 		<java.version>21</java.version>
-		<spring-security.version>6.1.5</spring-security.version>
+		<spring-security.version>6.2.0</spring-security.version>
 		<spring.version>6.0.13</spring.version>
 	</properties>
 	<dependencies>
