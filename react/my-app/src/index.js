@@ -12,6 +12,8 @@ import RmnMotor from './components/rmnMotor';
 import Sdf from './components/sdf';
 import Rmn from './components/rmn';
 import { getSdfFilesNames } from './components/sdf';
+import SignIn from "./components/signIn";
+import SignUp from "./components/signUp";
 import { getRmnFilesNames } from './components/rmn';
 
 const router = createBrowserRouter([
@@ -38,6 +40,14 @@ const router = createBrowserRouter([
         path:"/rmnDB",
         element:<Rmn/>,
         loader: getRmnFilesNames
+      },
+      {
+        path:"/sign-in",
+        element:<SignIn/>
+      },
+      {
+        path:"/sign-up",
+        element:<SignUp/>
       }
     ]
   },

@@ -1,5 +1,6 @@
 react/my-app/node_modules
 
+Flask/__pycache__/
 Flask/motor/__pycache__/
 Flask/threads/__pycache__/
 Flask/checkers/__pycache__/
@@ -7,3 +8,6 @@ Flask/checkers/__pycache__/
 Conductor/target/
 
 .idea/
+
+*.iml
+web.xml

@@ -34,6 +34,7 @@ public class RMNMotorController
 	@Autowired
 	private RmnService rmnService;
 
+	@CrossOrigin(origins="http://localhost:3000")
 	@GetMapping("/rmn/sdf/names")
 	public ResponseEntity<List<String>> getSdf()
 	{
