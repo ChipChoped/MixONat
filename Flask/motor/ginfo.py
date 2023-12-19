@@ -61,15 +61,15 @@ def get_lotus(IDD):
         name = IDD.split(' : ')[2]
         
     
-    print(TorC, TaxoDB, NPClassifier, level, name)
+     #print(TorC, TaxoDB, NPClassifier, level, name)
     
-    url = str('https://lotus.naturalproducts.net/api/search/simple?query=' + str(name)+'&maxHits=20')
-    print(url)
+    url = str('https://lotus.naturalproducts.net/api/search/simple?query=' + str(name))
+     #print(url)
     response = requests.get(url)
     storage = [response.json()]  #get the seaerch result in a json format
 
     nb = len(str(storage)[1:-1].split("{'id'")) - 1   #get the number of molecule for the search
-    print(str(nb) + ' results' )
+     #print(str(nb) + ' results' )
     
     ###################################Get all the keys for the research
     
@@ -83,9 +83,9 @@ def get_lotus(IDD):
                     for go in range(len(storage[0]['naturalProducts'][mol]['taxonomyReferenceObjects'][key][TaxoDB])):
                         if storage[0]['naturalProducts'][mol]['taxonomyReferenceObjects'][key][TaxoDB][go][level] != None and name in str(storage[0]['naturalProducts'][mol]['taxonomyReferenceObjects'][key][TaxoDB][go][level]):
                             key_value = [mol,key, TaxoDB, go]
-    #                     print(key_value)
+    #                      #print(key_value)
                             list_key_value.append(key_value)
-    #                     print(storage[0]['naturalProducts'][key_value[0]]['taxonomyReferenceObjects'][key_value[1]][TaxoDB][0])
+    #                      #print(storage[0]['naturalProducts'][key_value[0]]['taxonomyReferenceObjects'][key_value[1]][TaxoDB][0])
 
 
 
@@ -94,9 +94,9 @@ def get_lotus(IDD):
                     for go in range(len(storage[0]['naturalProducts'][mol]['taxonomyReferenceObjects'][key][taxo])):
                         if storage[0]['naturalProducts'][mol]['taxonomyReferenceObjects'][key][taxo][go][level] != None and name in str(storage[0]['naturalProducts'][mol]['taxonomyReferenceObjects'][key][taxo][go][level]):
                             key_value = [mol,key, taxo, go]
-    #                     print(key_value)
+    #                      #print(key_value)
                             list_key_value.append(key_value)
-    #                     print(storage[0]['naturalProducts'][key_value[0]]['taxonomyReferenceObjects'][key_value[1]][key_value[2]][0])
+    #                      #print(storage[0]['naturalProducts'][key_value[0]]['taxonomyReferenceObjects'][key_value[1]][key_value[2]][0])
 
 
             elif TaxoDB != 'All_Taxonomy_DB' and TorC == 'C':
@@ -104,7 +104,7 @@ def get_lotus(IDD):
                     for go in range(len(storage[0]['naturalProducts'][mol]['taxonomyReferenceObjects'][key][TaxoDB])):
                         if storage[0]['naturalProducts'][mol][level] != None and name in str(storage[0]['naturalProducts'][mol][level]):
                             key_value = [mol,key,TaxoDB, go]
-    #                     print(key_value)
+    #                      #print(key_value)
                             list_key_value.append(key_value)
 
 
@@ -113,7 +113,7 @@ def get_lotus(IDD):
                     for go in range(len(storage[0]['naturalProducts'][mol]['taxonomyReferenceObjects'][key][taxo])):
                         if storage[0]['naturalProducts'][mol][level] != None and name in str(storage[0]['naturalProducts'][mol][level]):
                             key_value = [mol,key, taxo, go]
-    #                     print(key_value)
+    #                      #print(key_value)
                             list_key_value.append(key_value)
 
             elif TaxoDB != 'All_Taxonomy_DB' and TorC == 'LTS':
@@ -219,9 +219,9 @@ def get_lotus(IDD):
 
 
 
-        print(molindex[0])
+         #print(molindex[0])
         for key in list_new_key_value[zz][1]: ####################decalage de 1 !!!!!!!! a reparer
-            print(key)
+             #print(key)
             spk={}
             ki={}
             ph={}
@@ -233,7 +233,7 @@ def get_lotus(IDD):
 
 
             for taxo in list_new_key_value[zz][1][key]:
-                print(taxo)
+                 #print(taxo)
                 superkingdom=[]
                 kingdom=[]
                 phylum=[]
@@ -274,7 +274,7 @@ def get_lotus(IDD):
 
                     if storage[0]['naturalProducts'][molindex[0]]['taxonomyReferenceObjects'][key][taxo][list_new_key_value[zz][1][key][taxo][go]]['species'] not in species:
                         species.append(storage[0]['naturalProducts'][molindex[0]]['taxonomyReferenceObjects'][key][taxo][list_new_key_value[zz][1][key][taxo][go]]['species'])
-    #                 print(species)
+    #                  #print(species)
 
 
                 spk[taxo] = ' - '.join([str(e) for e in superkingdom]) 
@@ -308,7 +308,7 @@ def get_lotus(IDD):
         for taxo in spk1:
             spk1[taxo] = set(spk1[taxo].split(' - '))
             ki1[taxo] = set(ki1[taxo].split(' - '))
-    #         print(ki[taxo])
+    #          #print(ki[taxo])
             ph1[taxo] = set(ph1[taxo].split(' - '))
             cl1[taxo] = set(cl1[taxo].split(' - '))
             or11[taxo] = set(or11[taxo].split(' - '))
@@ -320,7 +320,7 @@ def get_lotus(IDD):
 
 
 
-        print(spe1)
+         #print(spe1)
 
         Dict['superkingdom'][xx] = spk1
         Dict['kingdom'][xx] =ki1
@@ -371,7 +371,7 @@ def get_lotus_add(list_IDD=['']):
         
         for IDD in list_IDD:
             #get_lotus(IDD.split(' : ')[1])
-            print(IDD)
+             #print(IDD)
             get_lotus(IDD)
             
             df_general = pd.concat([df_general, df_lotus], ignore_index = True)
@@ -379,7 +379,7 @@ def get_lotus_add(list_IDD=['']):
         df_general.to_csv(motor.tool_path.get_current_path()[0]+ '/LOTUS_DB_input/cfmid_input.tsv', sep = '\t', index = False)  
         fileout = open(motor.tool_path.get_current_path()[0] + '/LOTUS_DB_input/cfmid_input.txt', "w")
         fileout_sirius_db = open(motor.tool_path.get_current_path()[0] + '/LOTUS_DB_input/structural_db.txt', "w") #####230228
-        print(str(datetime.now()) + " There are " + str(len(df_general['Lotus_ID'])) +" molecules for " + str(list_IDD))
+         #print(str(datetime.now()) + " There are " + str(len(df_general['Lotus_ID'])) +" molecules for " + str(list_IDD))
         
         #messagebox.showinfo("Info", "There are " + str(len(df_general['Lotus_ID'])) +" molecules for " + str(list_IDD))
         for i in df_general['Lotus_ID']:
@@ -387,13 +387,16 @@ def get_lotus_add(list_IDD=['']):
              fileout_sirius_db.write(df_general['smiles'][int(str(df_general.Lotus_ID[df_general.Lotus_ID == i ].index.to_list()[0]))] + ' ' + i + '\n' ) ######230228
         fileout.close() 
         fileout_sirius_db.close() #####230228
+    '''
     errorlog = open(motor.tool_path.get_current_path()[0] + '/log/' + str(datetime.now()).replace(' ', '_').replace(':', '_').replace('.','_') + '_input_criteria.txt', 'w')
     errorlog.write("This log contains criteria for research in the online LOTUS DataBase on the "+ str(datetime.now()) + " ." + "\n")
     errorlog.write('The research has been made with the "for all selected categories" method.' + "\n")
     errorlog.write("There are " + str(len(df_general['Lotus_ID'])) +" molecules corresponding to your criteria." + "\n") 
+    
     for IDD in list_IDD:
         errorlog.write(str(IDD) + "\n")
     errorlog.close()
+    '''
         
     
 
@@ -501,12 +504,13 @@ def get_lotus_or(list_IDD=['']):
                  fileout_sirius_db.write(df_general2['smiles'][int(str(df_general2.Lotus_ID[df_general2.Lotus_ID == i ].index.to_list()[0]))] + ' ' + i + '\n' ) ######230228
             fileout.close() 
             fileout_sirius_db.close()
-            print(str(datetime.now()) + " There is a total of " + str(len(df_general2['Lotus_ID'].to_list()))  + " molecules for requested categories.")
+             #print(str(datetime.now()) + " There is a total of " + str(len(df_general2['Lotus_ID'].to_list()))  + " molecules for requested categories.")
             #messagebox.showinfo("Info", "There is a total of " + str(len(df_general2['Lotus_ID'].to_list()))  + " molecules for requested categories.")
         else:
             #messagebox.showinfo("Info", "There is no molecules for requested categories.")
             print(str(datetime.now()) + " Info", "There is no molecules for requested categories.")
         
+    '''
     errorlog = open(motor.tool_path.get_current_path()[0] + '/log/' + str(datetime.now()).replace(' ', '_').replace(':', '_').replace('.','_') + '_input_criteria.txt', 'w')
     errorlog.write("This log contains criteria for research in the online LOTUS DataBase on the "+ str(datetime.now()) + " ." + "\n")
     errorlog.write('The research has been made with the "for selected chemical class.es in selected family.ies" method.' + "\n")
@@ -514,5 +518,6 @@ def get_lotus_or(list_IDD=['']):
     for IDD in list_IDD:
         errorlog.write(str(IDD) + "\n")
     errorlog.close()
+    '''
 
     

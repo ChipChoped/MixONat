@@ -1,5 +1,5 @@
 import flask
-from flask import Flask
+from flask import Flask, request
 from flask_cors import CORS
 from markupsafe import escape
 from checkers.matchinginputschecker import MatchingInputsChecker
@@ -9,6 +9,9 @@ from motor.data_structures import Spectrum, SDF
 from checkers.filechecker import FileChecker
 import json
 import motor.lotus_ressources as lr
+import motor.ginfo 
+import motor.tool_path
+import motor.l2sdf
 
 app = Flask(__name__)
 CORS(app)
@@ -104,6 +107,20 @@ def getTaxonomyFiltre(type,criteria):
 def getOntologyFiltre(type,criteria):
     filtre = lr.put_chemontology_criteria_to_search_criteria(type,criteria)
     return json.dumps(filtre)
+
+@app.route('/createSdf', methods=['POST'])
+def createSdf():
+    data = request.json.get('array')
+    fileName = request.json.get('fileName')
+    flat_list = [item for sublist in data for item in sublist]
+    motor.tool_path.vider_repertoires()
+    motor.ginfo.get_lotus_add(flat_list)
+    if fileName == "":
+        fileName = "newSDF"
+    #motor.l2sdf.lotus2sdf(fileName)
+    return '',200
+        
+
 
 """
     Function to adjust molcular_weight Parameter 

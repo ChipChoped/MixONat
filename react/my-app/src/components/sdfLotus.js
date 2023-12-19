@@ -33,6 +33,8 @@ function SdfLotus() {
     }
   };
 
+  const [fileName, setFileName] = useState("");
+
   const handleFamilyClick = (family) => {
     setSelectedGenus(undefined);
     setSelectedSpecies(undefined);
@@ -112,6 +114,18 @@ function SdfLotus() {
   const handleDeleteFiltreClick = () => {
     const updatedList = filtreList.filter((item) => item !== selectedItem);
     setFiltreList(updatedList);
+  };
+
+  const handleCreateSdfClick = async () => {
+    try {
+      const response = await axios.post('http://localhost:5000/createSdf', {
+        array: filtreList,
+        fileName: fileName,
+      });  
+      // Faites quelque chose avec la réponse ici, si nécessaire
+    } catch (error) {
+      console.error('Erreur lors de l appel de la route createSdf :', error);
+    }
   };
 
   useEffect(() => {
@@ -247,15 +261,15 @@ function SdfLotus() {
     const fetchOntologyFiltre = async () => {
       var ontologyCriteria = undefined;
       var ontologyType = undefined;
-      if(selectedPathway!==undefined){
-        ontologyCriteria=selectedPathway;
-        ontologyType = "pathway";
+      if(selectedClass!==undefined){
+        ontologyCriteria=selectedClass;
+        ontologyType = "class";
       }else if(selectedSuperclass!==undefined){
         ontologyCriteria=selectedSuperclass;
         ontologyType = "superclass";
-      }else if(selectedClass!==undefined){
-        ontologyCriteria=selectedClass;
-        ontologyType = "class";
+      }else if(selectedPathway!==undefined){
+        ontologyCriteria=selectedPathway;
+        ontologyType = "pathway";
       }
       if(ontologyCriteria!==undefined){
         try {
@@ -390,7 +404,12 @@ function SdfLotus() {
                         ))}
                       </ul>
                   </div>
-                  <button>Create SDF</button>
+                  <input
+                    type="text"
+                    onChange={(e) => setFileName(e.target.value)}
+                    placeholder="sdf name"
+                  />
+                  <button onClick={() => handleCreateSdfClick()}>Create SDF</button>
                   <button onClick={() => handleDeleteFiltreClick()}>Delete</button>
                   <button onClick={() => handleDeleteAllFiltreClick()}>Delete all</button>
               </div>            

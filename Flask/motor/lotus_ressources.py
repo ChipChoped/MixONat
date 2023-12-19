@@ -119,7 +119,7 @@ def get_NPclassifierClass(chemicalTaxonomyNPSuperclass=None):
 
 def put_taxonomy_criteria_to_search_criteria(type,criteria):
     lotus_search_criteria_listbox = []
-    selected_taxonomy_db = "all_taxonomy_DB"
+    selected_taxonomy_db = "All_Taxonomy_DB"
     if type == "family":
         taxonomy_selected_family = criteria
         code = 'T : ' + selected_taxonomy_db +' : family'
@@ -140,7 +140,7 @@ def put_taxonomy_criteria_to_search_criteria(type,criteria):
 # Function to add Chemontology criteria to selected criteria to search in LOTUS_DB
 def put_chemontology_criteria_to_search_criteria(type, criteria):
     lotus_search_criteria_listbox = []
-    selected_taxonomy_db = "all_taxonomy_DB"
+    selected_taxonomy_db = "All_Taxonomy_DB"
     if type == "pathway":
         chemontology_selected_NPclassifierPathway = criteria
         code = 'C : ' + selected_taxonomy_db +' : NP : chemicalTaxonomyNPclassifierPathway'  
