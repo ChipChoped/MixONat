@@ -11,7 +11,6 @@ import json
 import motor.lotus_ressources as lr
 import motor.ginfo 
 import motor.tool_path
-import motor.l2sdf
 
 app = Flask(__name__)
 CORS(app)
