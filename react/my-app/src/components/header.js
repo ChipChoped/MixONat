@@ -20,13 +20,13 @@ export function Header()
                         </Link>
                     </li>
                     <li>
-                        <Link to={"/sign-in"} className="header-link">
-                            <span>Sign In</span>
+                        <Link to={"/rmnDB"} className="header-link">
+                            <span>RMN Database</span>
                         </Link>
                     </li>
                     <li>
-                        <Link to={"/rmnDB"} className="header-link">
-                            <span>RMN Database</span>
+                        <Link to={"/sign-in"} className="header-link">
+                            <span>Sign In</span>
                         </Link>
                     </li>
                 </ul>
