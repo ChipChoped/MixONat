@@ -31,7 +31,7 @@ public class UserService {
     }
 
     public User save(User user) {
-        if (user.getId() == null)
+        if (user.getUuid() == null)
             user.setCreatedAt(LocalDateTime.now());
 
         user.setUpdatedAt(LocalDateTime.now());
