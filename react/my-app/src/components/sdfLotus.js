@@ -26,6 +26,8 @@ function SdfLotus() {
 
   const [selectedItem, setSelectedItem] = useState(null);
   
+  const [statusMessage, setStatusMessage] = useState('');
+
   const [filtreList, setFiltreList] = useState([]);
   const addElementToFiltreList = (newElement) => {
     if (!filtreList.includes(newElement)) {
@@ -118,11 +120,13 @@ function SdfLotus() {
 
   const handleCreateSdfClick = async () => {
     try {
+      setStatusMessage('is running...'); 
       const response = await axios.post('http://localhost:5000/createSdf', {
         array: filtreList,
         fileName: fileName,
       });  
       // Faites quelque chose avec la réponse ici, si nécessaire
+      setStatusMessage('SDF created');
     } catch (error) {
       console.error('Erreur lors de l appel de la route createSdf :', error);
     }
@@ -410,6 +414,7 @@ function SdfLotus() {
                     placeholder="sdf name"
                   />
                   <button onClick={() => handleCreateSdfClick()}>Create SDF</button>
+                  <p>{statusMessage}</p>
                   <button onClick={() => handleDeleteFiltreClick()}>Delete</button>
                   <button onClick={() => handleDeleteAllFiltreClick()}>Delete all</button>
               </div>            

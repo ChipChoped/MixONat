@@ -119,7 +119,7 @@ def createSdf():
     motor.tool_path.vider_repertoires()
     motor.ginfo.get_lotus_add(flat_list)
     if fileName == "":
-        fileName = "newSDF"
+        fileName = "13C_NMR_Database"
     # Chemin complet vers process.py
     
     original_working_directory = motor.tool_path.get_current_path()[0]
@@ -140,6 +140,8 @@ def createSdf():
 
     # Reviens au répertoire initial (si nécessaire)
     os.chdir(original_working_directory)
+    os.rename(original_working_directory+'/Your_NMR_DataBase/13C_NMR_Database.sdf',original_working_directory+'/Your_NMR_DataBase/'+fileName+'.sdf')
+
     return '',200
         
 
