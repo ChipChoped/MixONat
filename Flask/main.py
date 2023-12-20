@@ -112,6 +112,7 @@ def getOntologyFiltre(type,criteria):
 
 @app.route('/createSdf', methods=['POST'])
 def createSdf():
+    motor.tool_path.vider_repertoires()
     data = request.json.get('array')
     fileName = request.json.get('fileName')
     flat_list = [item for sublist in data for item in sublist]
@@ -120,6 +121,7 @@ def createSdf():
     if fileName == "":
         fileName = "newSDF"
     # Chemin complet vers process.py
+    
     original_working_directory = motor.tool_path.get_current_path()[0]
     process_script_path = 'NMRshift/process.py'
     

@@ -36,10 +36,8 @@ def get_current_path():
 def vider_repertoires():
     # Définir les chemins des répertoires LOTUS_DB_input et LOTUS_DB_output
     lotus_db_input = 'LOTUS_DB_input'
-    lotus_db_output = 'LOTUS_DB_output'
-    #lotus_db_log = 'log'
+    lotus_db_output = 'Your_NMR_DataBase'
     try:
-        # Vider le répertoire LOTUS_DB_input
         for root, dirs, files in os.walk(lotus_db_input):
             for file in files:
                 file_path = os.path.join(root, file)
@@ -47,27 +45,8 @@ def vider_repertoires():
             for dir in dirs:
                 dir_path = os.path.join(root, dir)
                 shutil.rmtree(dir_path)
+        if not os.path.exists(lotus_db_output):
+            return
 
-        # Vider le répertoire LOTUS_DB_output
-        for root, dirs, files in os.walk(lotus_db_output):
-            for file in files:
-                file_path = os.path.join(root, file)
-                os.remove(file_path)
-            for dir in dirs:
-                dir_path = os.path.join(root, dir)
-                shutil.rmtree(dir_path)
-                
-        '''
-        # Vider le répertoire log
-        for root, dirs, files in os.walk(lotus_db_log):
-            for file in files:
-                file_path = os.path.join(root, file)
-                os.remove(file_path)
-            for dir in dirs:
-                dir_path = os.path.join(root, dir)
-                shutil.rmtree(dir_path)
-                
-        print("Répertoires log, LOTUS_DB_input et LOTUS_DB_output vidés avec succès.")
-        '''
     except Exception as e:
         print("Une erreur s'est produite :", str(e))
