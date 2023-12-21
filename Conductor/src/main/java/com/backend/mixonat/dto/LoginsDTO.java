@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class LoginsDTO {
+public class LoginsDTO implements JsonResponse {
     @Email(message = "Email is malformed")
     @NotBlank(message = "Email cannot be blank")
     String email;
