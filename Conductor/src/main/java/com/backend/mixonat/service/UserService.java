@@ -2,6 +2,7 @@ package com.backend.mixonat.service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
 import com.backend.mixonat.dto.LoginsDTO;
 import lombok.RequiredArgsConstructor;
@@ -21,13 +22,8 @@ public class UserService {
     private final UserRepository userRepository;
 
     public UserDetailsService userDetailsService() {
-        return new UserDetailsService() {
-            @Override
-            public UserDetails loadUserByUsername(String username) {
-                return userRepository.findUserByEmail(username)
-                        .orElseThrow(() -> new UsernameNotFoundException("User not found"));
-            }
-        };
+        return uuid -> userRepository.findUserByUuid(UUID.fromString(uuid))
+                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
     }
 
     public User save(User user) {
