@@ -68,6 +68,7 @@ public class SecurityConfigurer {
                 )
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(
+                                antMatcher(HttpMethod.GET, "/user/{uuid}"),
                                 antMatcher(HttpMethod.PUT, "/user/sign-up"),
                                 antMatcher(HttpMethod.POST, "/user/sign-in"),
                                 antMatcher(HttpMethod.DELETE, "/user/delete-account"),
@@ -80,13 +81,13 @@ public class SecurityConfigurer {
                                 antMatcher(HttpMethod.GET, "/rmn/sdf/names"),
                                 antMatcher(HttpMethod.GET, "/rmn/rmnDB/names"),
                                 antMatcher(HttpMethod.POST, "/rmn"),
-                                antMatcher(HttpMethod.POST, "/rmn/sdf"),
                                 antMatcher(HttpMethod.POST, "/checkFile"),
-                                antMatcher(HttpMethod.DELETE, "/rmn/sdf"),
                                 antMatcher(HttpMethod.OPTIONS, "/rmn"),
                                 antMatcher(HttpMethod.OPTIONS, "/rmn/sdf"),
+                                antMatcher(HttpMethod.OPTIONS, "/rmn/rmnDB"),
                                 antMatcher(HttpMethod.OPTIONS, "/checkFile")).permitAll()
-                        .anyRequest().authenticated()
+                        .anyRequest()
+                        .authenticated()
                 )
                 .authenticationProvider(authenticationProvider()).addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
