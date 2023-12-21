@@ -39,6 +39,6 @@ CREATE TABLE users (
     updated_at TIMESTAMPTZ DEFAULT NOW());
 
 INSERT INTO users (first_name, last_name, email, password, role)
-VALUES ('admin', 'admin', 'admin@mixonat.fr',
+VALUES ('Admin', 'Admin', 'admin@mixonat.fr',
         '$2a$06$hxJgB9phgXE1N0PzFJGcHeFrMjHzcYouIAgifa/AKlHemKgr9cr1q', -- 1pwdAdmin
         'ROLE_ADMIN');
