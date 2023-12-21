@@ -1,14 +1,30 @@
-.header-container {
-
+.header-container-signed-in {
     display: flex;
     justify-content: center;
     background-color: #58b0b0;
 
     ul {
         list-style-type: none;
-        display:grid;
+        display: grid;
         grid-template-columns: 1fr 1fr 1fr 1fr;
-        gap:5em;
+        gap: 5em;
+
+        span:hover {
+            text-decoration: underline;
+        }
+    }
+}
+
+.header-container-signed-out {
+    display: flex;
+    justify-content: center;
+    background-color: #58b0b0;
+
+    ul {
+        list-style-type: none;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 5em;
 
         span:hover {
             text-decoration: underline;
@@ -18,6 +34,6 @@
 
 .header-link {
     text-decoration: none;
-    color:white;
+    color: white;
     font-weight: bold;
 }

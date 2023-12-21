@@ -86,6 +86,11 @@ public class SecurityConfigurer {
                                 antMatcher(HttpMethod.OPTIONS, "/rmn/sdf"),
                                 antMatcher(HttpMethod.OPTIONS, "/rmn/rmnDB"),
                                 antMatcher(HttpMethod.OPTIONS, "/checkFile")).permitAll()
+                        .requestMatchers(
+                                antMatcher(HttpMethod.POST, "/rmn/sdf"),
+                                antMatcher(HttpMethod.POST, "/rmn/rmnDB"),
+                                antMatcher(HttpMethod.DELETE, "/rmn/sdf"),
+                                antMatcher(HttpMethod.DELETE, "/rmn/rmnDB")).hasAnyRole("ADMIN", "USER")
                         .anyRequest()
                         .authenticated()
                 )

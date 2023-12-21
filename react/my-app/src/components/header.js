@@ -10,23 +10,30 @@ export function Header()
     return (
         <>
             <Logo/>
-            <div className="header-container">
+            <div className={cookies.get("authentication_token")
+                ? "header-container-signed-in"
+                : "header-container-signed-out"}
+            >
                 <ul>
                     <li>
                         <a href={"/"} className="header-link">
                             <span>RMN Motor</span>
                         </a>
                     </li>
-                    <li>
-                    <a href={"/sdf"} className="header-link">
-                            <span>SDF Database</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href={"/rmnDB"} className="header-link">
-                            <span>RMN Database</span>
-                        </a>
-                    </li>
+                    {cookies.get("authentication_token")
+                        ? <li>
+                            <a href={"/sdf"} className="header-link">
+                                <span>SDF Database</span>
+                            </a>
+                        </li>
+                        : null}
+                    {cookies.get("authentication_token")
+                        ? <li>
+                            <a href={"/rmnDB"} className="header-link">
+                                <span>RMN Database</span>
+                            </a>
+                        </li>
+                        : null}
                     <li>
                         {cookies.get("authentication_token") ? (
                             <a href={"/"} className="header-link">

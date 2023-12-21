@@ -5,6 +5,7 @@ import ClipLoader from "react-spinners/ClipLoader";
 import 'alertifyjs/build/css/alertify.css';
 import "../styles/sdf.scss";
 import red_cross from "../assets/img/red-cross.png";
+import Cookies from "universal-cookie";
 
 
 function Sdf()
@@ -18,6 +19,8 @@ function Sdf()
     const navigate = useNavigate();
 
     const { sdfList } = useLoaderData()
+
+    const cookies = new Cookies();
 
     const readFile = (file) => {
         if (file===undefined)
@@ -93,7 +96,8 @@ function Sdf()
 
                 const requestOptions = {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
+                    headers: { 'Content-Type': 'application/json',
+                               'Authorization': 'Bearer ' + cookies.get("authentication_token") },
                     body: JSON.stringify({ name: sdfName, sdf_file: file})
                 };
 
@@ -127,7 +131,8 @@ function Sdf()
 
                 const requestOptions = {
                     method: 'DELETE',
-                    headers: { 'Content-Type': 'application/json' },
+                    headers: { 'Content-Type': 'application/json',
+                               'Authorization': 'Bearer ' + cookies.get("authentication_token") },
                     body: JSON.stringify({ name: deleteFileName })
                 };
 

@@ -2,19 +2,22 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import 'alertifyjs/build/css/alertify.css';
 import "../styles/signIn.scss";
+import Cookies from 'universal-cookie';
+import { jwtDecode } from 'jwt-decode';
 
 
 function SignIn()
 {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const [token, setToken] = useState('')
     const [errorMessage, setErrorMessage] = useState('')
 
     const [signingIn, setSigningIn] = useState(false)
     const [signUp, setSignUp] = useState(false)
 
     const navigate = useNavigate();
+
+    const cookies = new Cookies();
 
     useEffect(() => {
         if(signingIn)
@@ -36,9 +39,13 @@ function SignIn()
                 fetch("http://localhost:9000/user/sign-in", requestOptions).then((response) => {
                     response.json().then((json) => {
                         if (response.status === 200) {
-                            console.log("User signed in: " + json)
-                            setToken(json.token)
-                            console.log("Token: " + token)
+                            // Save token in a cookie
+                            const decodedToken = jwtDecode(json.token)
+                            cookies.set("authentication_token", json.token, {
+                                expires: new Date(decodedToken.exp * 1000)
+                            });
+
+                            window.location.href = "/"
                         }
                         else if (response.status === 401) {
                             setErrorMessage(json.message)
@@ -86,7 +93,10 @@ function SignIn()
                     <input type="password" id="password" value={password} onChange={(e) => {setPassword(e.target.value)}}/>
                 </div>
                 <div className='sign-in-button'>
-                    <button type="submit" onClick={() => {setSigningIn(true)}}> Sign In </button>
+                    <button type="submit" onClick={() => {
+                        setSigningIn(true)
+                        }}
+                    > Sign In </button>
                 </div>
                 <p className='sign-up'> No account yet? Sign up <button onClick={() => {setSignUp(true)}}><b><em>here</em></b></button>!</p>
             </div>
