@@ -1,33 +1,44 @@
 import { Logo } from "./logo"
 import { Link } from "react-router-dom"
 import "../styles/header.scss"
+import Cookies from 'universal-cookie';
 
 export function Header()
 {
+    const cookies = new Cookies();
+
     return (
         <>
             <Logo/>
             <div className="header-container">
                 <ul>
                     <li>
-                        <Link to={"/"} className="header-link">
+                        <a href={"/"} className="header-link">
                             <span>RMN Motor</span>
-                        </Link>
+                        </a>
                     </li>
                     <li>
-                    <Link to={"/sdf"} className="header-link">
+                    <a href={"/sdf"} className="header-link">
                             <span>SDF Database</span>
-                        </Link>
+                        </a>
                     </li>
                     <li>
-                        <Link to={"/rmnDB"} className="header-link">
+                        <a href={"/rmnDB"} className="header-link">
                             <span>RMN Database</span>
-                        </Link>
+                        </a>
                     </li>
                     <li>
-                        <Link to={"/sign-in"} className="header-link">
-                            <span>Sign In</span>
-                        </Link>
+                        {cookies.get("authentication_token") ? (
+                            <a href={"/"} className="header-link">
+                                <span onClick={() =>
+                                    cookies.remove("authentication_token")}
+                                >Sign Out</span>
+                            </a>
+                        ) : (
+                            <a href={"/sign-in"} className="header-link">
+                                <span>Sign In</span>
+                            </a>
+                        )}
                     </li>
                 </ul>
             </div>
