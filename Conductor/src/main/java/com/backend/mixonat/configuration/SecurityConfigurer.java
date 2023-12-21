@@ -72,11 +72,14 @@ public class SecurityConfigurer {
                                 antMatcher(HttpMethod.PUT, "/user/sign-up"),
                                 antMatcher(HttpMethod.POST, "/user/sign-in"),
                                 antMatcher(HttpMethod.DELETE, "/user/delete-account"),
+                                antMatcher(HttpMethod.OPTIONS, "/user"),
+                                antMatcher(HttpMethod.OPTIONS, "/user/uuid"),
                                 antMatcher(HttpMethod.OPTIONS, "/user/sign-up"),
                                 antMatcher(HttpMethod.OPTIONS, "/user/sign-in"),
                                 antMatcher(HttpMethod.OPTIONS, "/user/delete-account")).permitAll()
                         .requestMatchers(
-                                antMatcher(HttpMethod.GET, "/api/v1/test/**")).permitAll()
+                                antMatcher(HttpMethod.GET, "/user"),
+                                antMatcher(HttpMethod.GET, "/user/uuid")).hasAnyRole("ADMIN", "USER")
                         .requestMatchers(
                                 antMatcher(HttpMethod.GET, "/rmn/sdf/names"),
                                 antMatcher(HttpMethod.GET, "/rmn/rmnDB/names"),

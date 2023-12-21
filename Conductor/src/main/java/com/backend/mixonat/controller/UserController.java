@@ -1,10 +1,8 @@
 package com.backend.mixonat.controller;
 
-import com.backend.mixonat.dto.ExceptionDTO;
-import com.backend.mixonat.dto.JsonResponse;
-import com.backend.mixonat.dto.LoginsDTO;
-import com.backend.mixonat.dto.UserDTO;
+import com.backend.mixonat.dto.*;
 import com.backend.mixonat.repository.UserRepository;
+import com.backend.mixonat.service.JwtService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -20,12 +18,29 @@ public class UserController {
     @Autowired
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final JwtService jwtService;
+
+    @CrossOrigin(origins="http://localhost:3000")
+    @GetMapping("/user/uuid")
+    public ResponseEntity<JsonResponse> getUser(@RequestHeader("Authorization") String token) {
+        HttpHeaders responseHeaders = new HttpHeaders();
+        responseHeaders.set("Content-Type", "application/json");
+
+        try {
+            UUID uuid = UUID.fromString(jwtService.extractUserName(token.split(" ")[1]));
+
+            return ResponseEntity.status(200).headers(responseHeaders).body(UuidDTO.builder().uuid(uuid).build());
+        }
+        catch (IllegalArgumentException e) {
+            return ResponseEntity.status(404).headers(responseHeaders).body(new ExceptionDTO("The user doesn't exist"));
+        }
+    }
 
     @CrossOrigin(origins="http://localhost:3000")
     @GetMapping("/user/{uuid}")
     public ResponseEntity<JsonResponse> getUser(@PathVariable UUID uuid) {
         HttpHeaders responseHeaders = new HttpHeaders();
-        responseHeaders.set("Content-Type","application/json");
+        responseHeaders.set("Content-Type", "application/json");
 
         try {
             var user = userRepository.findUserByUuid(uuid)
@@ -51,7 +66,7 @@ public class UserController {
     @DeleteMapping("/user/delete-account")
     public ResponseEntity<JsonResponse> deleteAccount(@RequestBody LoginsDTO request) {
         HttpHeaders responseHeaders = new HttpHeaders();
-        responseHeaders.set("Content-Type","application/json");
+        responseHeaders.set("Content-Type", "application/json");
 
         try {
             var user = userRepository.findUserByEmail(request.getEmail())
