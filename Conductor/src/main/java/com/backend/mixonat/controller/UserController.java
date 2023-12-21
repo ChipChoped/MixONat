@@ -1,12 +1,12 @@
 package com.backend.mixonat.controller;
 
-import com.backend.mixonat.dto.*;
+import com.backend.mixonat.dto.ExceptionDTO;
+import com.backend.mixonat.dto.JsonResponse;
+import com.backend.mixonat.dto.LoginsDTO;
+import com.backend.mixonat.dto.UserDTO;
 import com.backend.mixonat.repository.UserRepository;
-import com.backend.mixonat.service.AuthenticationService;
-import com.backend.mixonat.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Role;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
