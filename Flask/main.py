@@ -112,11 +112,11 @@ def getOntologyFiltre(type,criteria):
 
 @app.route('/createSdf', methods=['POST'])
 def createSdf():
+    
     motor.tool_path.vider_repertoires()
     data = request.json.get('array')
     fileName = request.json.get('fileName')
     flat_list = [item for sublist in data for item in sublist]
-    motor.tool_path.vider_repertoires()
     motor.ginfo.get_lotus_add(flat_list)
     if fileName == "":
         fileName = "13C_NMR_Database"
@@ -128,7 +128,7 @@ def createSdf():
 
     # Répertoire du script process.py
     script_directory = os.path.dirname(process_script_path)
-
+    print("okokokok",script_directory)
     # Change le répertoire de travail
     os.chdir(script_directory)
 
@@ -163,4 +163,4 @@ def molecularWeightProcessing(params) :  # in the motor, molecular_weight takes 
 
 # http://127.0.0.1:5000/
 if __name__ == '__main__':
-     app.run()
+    app.run()
