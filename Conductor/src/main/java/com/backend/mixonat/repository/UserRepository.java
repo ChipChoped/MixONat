@@ -19,8 +19,9 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     @Query(value="SELECT id, first_name, last_name, email, role FROM users WHERE id = ?1", nativeQuery = true)
     List<User> findUserByID(int id);
 
-//    @Query(value="SELECT email, password, role FROM users WHERE email = ?1", nativeQuery = true)
-    Optional<User> findUserByEmail(String email);
+    @Query(value="SELECT uuid FROM users WHERE email = ?1", nativeQuery = true)
+    UUID findUuidByEmail(String email);
 
     Optional<User> findUserByUuid(UUID uuid);
+    Optional<User> findUserByEmail(String email);
 }
