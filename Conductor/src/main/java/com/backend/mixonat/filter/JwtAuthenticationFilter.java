@@ -31,7 +31,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     protected void doFilterInternal(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response, @NonNull FilterChain filterChain) throws ServletException, IOException {
         final String authHeader = request.getHeader("Authorization");
         final String jwtToken;
-        final String email;
+        final String uuid;
 
         if (!StringUtils.hasLength(authHeader) || !StringUtils.startsWithIgnoreCase(authHeader, "Bearer ")) {
             filterChain.doFilter(request, response);
@@ -40,10 +40,10 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         jwtToken = authHeader.substring(7);
         log.debug("JWT - {}", jwtToken);
-        email = jwtService.extractUserName(jwtToken);
+        uuid = jwtService.extractUserName(jwtToken);
 
-        if (StringUtils.hasLength(email) && SecurityContextHolder.getContext().getAuthentication() == null) {
-            UserDetails userDetails = userService.userDetailsService().loadUserByUsername(email);
+        if (StringUtils.hasLength(uuid) && SecurityContextHolder.getContext().getAuthentication() == null) {
+            UserDetails userDetails = userService.userDetailsService().loadUserByUsername(uuid);
 
             if (jwtService.isTokenValid(jwtToken, userDetails)) {
                 log.debug("User - {}", userDetails);

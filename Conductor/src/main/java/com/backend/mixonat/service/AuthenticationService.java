@@ -18,6 +18,8 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 @Service
 @RequiredArgsConstructor
 public class AuthenticationService {
@@ -56,8 +58,10 @@ public class AuthenticationService {
         responseHeaders.set("Content-Type","application/json");
 
         try {
+            UUID uuid = userRepository.findUuidByEmail(request.getEmail());
+
             authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));
+                    new UsernamePasswordAuthenticationToken(uuid, request.getPassword()));
 
             var user = userRepository.findUserByEmail(request.getEmail())
                     .orElseThrow(IllegalArgumentException::new);
