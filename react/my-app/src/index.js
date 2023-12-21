@@ -15,6 +15,7 @@ import { getSdfFilesNames } from './components/sdf';
 import SignIn from "./components/signIn";
 import SignUp from "./components/signUp";
 import { getRmnFilesNames } from './components/rmn';
+import Profile, {getUser} from "./components/profile";
 
 const router = createBrowserRouter([
   {
@@ -48,6 +49,11 @@ const router = createBrowserRouter([
       {
         path:"/sign-up",
         element:<SignUp/>
+      },
+      {
+        path:"/profile",
+        element:<Profile/>,
+        loader: getUser
       }
     ]
   },
