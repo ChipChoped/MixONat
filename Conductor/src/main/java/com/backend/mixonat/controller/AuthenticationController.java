@@ -2,7 +2,7 @@ package com.backend.mixonat.controller;
 
 import com.backend.mixonat.dto.JsonResponse;
 import com.backend.mixonat.dto.LoginsDTO;
-import com.backend.mixonat.dto.UserDTO;
+import com.backend.mixonat.dto.NewUserDTO;
 import com.backend.mixonat.service.AuthenticationService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -18,7 +18,7 @@ public class AuthenticationController {
 
     @CrossOrigin(origins="http://localhost:3000")
     @PutMapping("/user/sign-up")
-    public ResponseEntity<JsonResponse> signUp(@RequestBody @Valid UserDTO request) {
+    public ResponseEntity<JsonResponse> signUp(@RequestBody @Valid NewUserDTO request) {
         return authenticationService.signUp(request);
     }
 

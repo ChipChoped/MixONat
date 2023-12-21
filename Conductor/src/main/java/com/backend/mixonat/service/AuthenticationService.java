@@ -2,13 +2,12 @@ package com.backend.mixonat.service;
 
 import com.backend.mixonat.dto.JsonResponse;
 import com.backend.mixonat.dto.TokenDTO;
-import com.backend.mixonat.dto.UserDTO;
+import com.backend.mixonat.dto.NewUserDTO;
 import com.backend.mixonat.dto.LoginsDTO;
 import com.backend.mixonat.dto.ExceptionDTO;
 import com.backend.mixonat.model.Role;
 import com.backend.mixonat.model.User;
 import com.backend.mixonat.repository.UserRepository;
-import jakarta.validation.ConstraintViolationException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -28,7 +27,7 @@ public class AuthenticationService {
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
 
-    public ResponseEntity<JsonResponse> signUp(UserDTO request) {
+    public ResponseEntity<JsonResponse> signUp(NewUserDTO request) {
         HttpHeaders responseHeaders = new HttpHeaders();
         responseHeaders.set("Content-Type","application/json");
 
