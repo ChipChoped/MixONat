@@ -126,9 +126,17 @@ function SdfLotus() {
         fileName: fileName,
       });  
       // Faites quelque chose avec la réponse ici, si nécessaire
-      setStatusMessage('SDF created');
+      console.log(response);
+      if(response.status === 200) {
+          setStatusMessage('SDF created');
+      }else{
+          setStatusMessage('Erreur');
+      }
     } catch (error) {
       console.error('Erreur lors de l appel de la route createSdf :', error);
+      if (error.response) {
+        setStatusMessage('Erreurlors de la creation du SDF');
+      }
     }
   };
 

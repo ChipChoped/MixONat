@@ -47,7 +47,7 @@ for molindex, m in enumerate(reader, start=1):
         m.SetProp('Formula' , str(tag_file['molecular_formula'][int(tag_file.Lotus_ID[tag_file.Lotus_ID == NOM].index.to_list()[0])]))
         m.SetProp('FW' , str(tag_file['molecular_weight'][int(tag_file.Lotus_ID[tag_file.Lotus_ID == NOM].index.to_list()[0])]))
         m.SetProp('CAS' , str(tag_file['cas'][int(tag_file.Lotus_ID[tag_file.Lotus_ID == NOM].index.to_list()[0])]))
-        m.SetProp('Name' , str(tag_file['traditional_name'][int(tag_file.Lotus_ID[tag_file.Lotus_ID == NOM].index.to_list()[0])]))        
+        m.SetProp('Name' , str(tag_file['traditional_name'][int(tag_file.Lotus_ID[tag_file.Lotus_ID == NOM].index.to_list()[0])][2:-1]).replace('\\', '|'))        
       
         old_13Cpredicted = m.GetProp('NMRSHIFTDB2_ASSIGNMENT')
         m.SetProp('Predicted 13C shifts', old_13Cpredicted)

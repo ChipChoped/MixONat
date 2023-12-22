@@ -15,7 +15,6 @@ else:
     path_idg = path_id
 
 
-print('Process path is : ' + path_idg)
 def run_command(command):
 	"""
 	run_command() forwards a command to the OS through a call to os.system()
@@ -82,3 +81,16 @@ if "NMRshift" in path_idg:
 	"""
 	command = "python " + path_idg + "/dependencies/create_folder.py "
 	run_command(command)
+ 
+
+	command = "python " + path_idg + "/dependencies/refactor.py "
+	run_command(command)
+ 
+	command = "python " + path_idg + "/dependencies/no_stereo.py "
+	run_command(command)
+ 
+	command = "python " + path_idg + "/dependencies/c_type.py "
+	run_command(command)
+ 
+ 
+ 

@@ -118,8 +118,7 @@ def createSdf():
     fileName = request.json.get('fileName')
     flat_list = [item for sublist in data for item in sublist]
     motor.ginfo.get_lotus_add(flat_list)
-    if fileName == "":
-        fileName = "13C_NMR_Database"
+    
     # Chemin complet vers process.py
     
     original_working_directory = motor.tool_path.get_current_path()[0]
@@ -128,7 +127,6 @@ def createSdf():
 
     # Répertoire du script process.py
     script_directory = os.path.dirname(process_script_path)
-    print("okokokok",script_directory)
     # Change le répertoire de travail
     os.chdir(script_directory)
 
@@ -137,12 +135,13 @@ def createSdf():
 
     # Exécute la commande
     subprocess.run(command, shell=True)
-
     # Reviens au répertoire initial (si nécessaire)
     os.chdir(original_working_directory)
-    os.rename(original_working_directory+'/Your_NMR_DataBase/13C_NMR_Database.sdf',original_working_directory+'/Your_NMR_DataBase/'+fileName+'.sdf')
+    if fileName != "":
+        os.rename(original_working_directory+'/Your_NMR_DataBase/c_type_13C_NMR_Database.sdf',original_working_directory+'/Your_NMR_DataBase/'+fileName+'.sdf')
 
     return '',200
+    
         
 
 

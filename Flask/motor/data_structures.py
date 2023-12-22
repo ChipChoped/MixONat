@@ -119,10 +119,12 @@ class SDF:
         if isFilePath :
             self.name = _get_filename(_get_file_path(filepathOrFileString))
             self.sdf_chem_obj = Chem.SDMolSupplier(_get_file_path(filepathOrFileString))
+            
         else:
             self.name = "SDF file"
             self.sdf_chem_obj = Chem.SDMolSupplier()
             self.sdf_chem_obj.SetData(filepathOrFileString)
+            
 
     @staticmethod
     def _write_sdf_mol(sdf_mol):
