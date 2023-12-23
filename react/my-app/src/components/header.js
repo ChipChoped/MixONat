@@ -34,6 +34,13 @@ export function Header()
                             </a>
                         </li>
                         : null}
+                    {cookies.get("authentication_token")
+                        ? <li>
+                            <a href={"/profile"} className="header-link">
+                                <span>Profile</span>
+                            </a>
+                        </li>
+                        : null}
                     <li>
                         {cookies.get("authentication_token") ? (
                             <a href={"/"} className="header-link">
