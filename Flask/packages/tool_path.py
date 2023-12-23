@@ -33,6 +33,18 @@ def get_current_path():
     else:
         path_idg = path_id
         return path_id, path_idg
+
+def is_directory_empty(directory_path):
+    # List all files and directories in the given directory
+    files_and_directories = os.listdir(directory_path)
+
+    # Check if the list is empty
+    if not files_and_directories:
+        return True
+    else:
+        return False
+    
+
 		
 #check if all packages and third part dependencies are installed 
 def check_setup():

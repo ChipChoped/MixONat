@@ -124,16 +124,18 @@ def createSdf():
         nb_mol = motor.ginfo.get_lotus_or(flat_list)
     
     print(nb_mol)
-    
+    msg = "There are "+str(nb_mol) +" molecules."
     # Chemin complet vers process.py
     if nb_mol == 0:
         print("no molecules")
+        msg += " No SDF created"
+        
     else:
         original_working_directory = motor.tool_path.get_current_path()[0]
         
         process_script_path = 'NMRshift/process.py'
         
-
+        
         # Répertoire du script process.py
         script_directory = os.path.dirname(process_script_path)
         # Change le répertoire de travail
@@ -146,10 +148,14 @@ def createSdf():
         subprocess.run(command, shell=True)
         # Reviens au répertoire initial (si nécessaire)
         os.chdir(original_working_directory)
+        if motor.tool_path.is_file_exist(original_working_directory+'/Your_NMR_DataBase','c_type_13C_NMR_Database.sdf'):
+            msg += " SDF created"
+        else:
+            msg += " Error: no SDF created"
         if fileName != "":
             os.rename(original_working_directory+'/Your_NMR_DataBase/c_type_13C_NMR_Database.sdf',original_working_directory+'/Your_NMR_DataBase/'+fileName+'.sdf')
 
-    return '',200
+    return msg,200
     
         
 

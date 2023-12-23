@@ -128,13 +128,9 @@ function SdfLotus() {
         fileName: fileName,
         type: selectedOption
       });  
-      // Faites quelque chose avec la réponse ici, si nécessaire
-      console.log(response);
-      if(response.status === 200) {
-          setStatusMessage('SDF created');
-      }else{
-          setStatusMessage('Erreur');
-      }
+      const serverMessage = response.data;
+      setStatusMessage(serverMessage);
+      
     } catch (error) {
       console.error('Erreur lors de l appel de la route createSdf :', error);
       if (error.response) {
@@ -438,12 +434,12 @@ function SdfLotus() {
                       />
                       Get chemical class in family
                     </label>
-                    <input
+                  </div>
+                  <input
                       type="text"
                       onChange={(e) => setFileName(e.target.value)}
                       placeholder="sdf name"
                     />
-                  </div>
                   <button onClick={() => handleCreateSdfClick()}>Create SDF</button>
                   <p>{statusMessage}</p>
                   <button onClick={() => handleDeleteFiltreClick()}>Delete</button>

@@ -50,3 +50,8 @@ def vider_repertoires():
 
     except Exception as e:
         print("Une erreur s'est produite :", str(e))
+        
+        
+def is_file_exist(directory, filename):
+    file_path = os.path.join(directory, filename)
+    return os.path.isfile(file_path)
