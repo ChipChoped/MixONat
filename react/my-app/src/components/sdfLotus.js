@@ -27,6 +27,7 @@ function SdfLotus() {
   const [selectedItem, setSelectedItem] = useState(null);
   
   const [statusMessage, setStatusMessage] = useState('');
+  const [selectedOption, setSelectedOption] = useState('union'); 
 
   const [filtreList, setFiltreList] = useState([]);
   const addElementToFiltreList = (newElement) => {
@@ -118,12 +119,14 @@ function SdfLotus() {
     setFiltreList(updatedList);
   };
 
+
   const handleCreateSdfClick = async () => {
     try {
       setStatusMessage('is running...'); 
       const response = await axios.post('http://localhost:5000/createSdf', {
         array: filtreList,
         fileName: fileName,
+        type: selectedOption
       });  
       // Faites quelque chose avec la réponse ici, si nécessaire
       console.log(response);
@@ -416,11 +419,31 @@ function SdfLotus() {
                         ))}
                       </ul>
                   </div>
-                  <input
-                    type="text"
-                    onChange={(e) => setFileName(e.target.value)}
-                    placeholder="sdf name"
-                  />
+                  <label>
+                    <input
+                      type="radio"
+                      value="union"
+                      checked={selectedOption === 'union'}
+                      onChange={() => setSelectedOption('union')}
+                    />
+                    Get all catagories
+                  </label>
+                  <div className="radio-btn">
+                    <label>
+                      <input
+                        type="radio"
+                        value="inter"
+                        checked={selectedOption === 'inter'}
+                        onChange={() => setSelectedOption('inter')}
+                      />
+                      Get chemical class in family
+                    </label>
+                    <input
+                      type="text"
+                      onChange={(e) => setFileName(e.target.value)}
+                      placeholder="sdf name"
+                    />
+                  </div>
                   <button onClick={() => handleCreateSdfClick()}>Create SDF</button>
                   <p>{statusMessage}</p>
                   <button onClick={() => handleDeleteFiltreClick()}>Delete</button>

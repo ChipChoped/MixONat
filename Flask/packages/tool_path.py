@@ -33,8 +33,6 @@ def get_current_path():
     else:
         path_idg = path_id
         return path_id, path_idg
-
-
 		
 #check if all packages and third part dependencies are installed 
 def check_setup():

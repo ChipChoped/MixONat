@@ -355,6 +355,7 @@ def get_lotus_add(list_IDD=['']):
     if list_IDD[0] == '':
         
         print(str(datetime.now()) + " Come on, make a choice ! ")
+        return 0
         #messagebox.showinfo("Info", "Come on, make a chocie !")
     else : 
         
@@ -387,6 +388,7 @@ def get_lotus_add(list_IDD=['']):
              fileout_sirius_db.write(df_general['smiles'][int(str(df_general.Lotus_ID[df_general.Lotus_ID == i ].index.to_list()[0]))] + ' ' + i + '\n' ) ######230228
         fileout.close() 
         fileout_sirius_db.close() #####230228
+        return len(df_general['Lotus_ID'])
     '''
     errorlog = open(motor.tool_path.get_current_path()[0] + '/log/' + str(datetime.now()).replace(' ', '_').replace(':', '_').replace('.','_') + '_input_criteria.txt', 'w')
     errorlog.write("This log contains criteria for research in the online LOTUS DataBase on the "+ str(datetime.now()) + " ." + "\n")
@@ -409,6 +411,7 @@ def get_lotus_or(list_IDD=['']):
     #list_IDD = []
     if list_IDD[0] == '':
         print(str(datetime.now()) + " Come on, make a choice ! ")
+        return 0
         #messagebox.showinfo("Info", "Come on, make a chocie !")
     else : 
         
@@ -509,6 +512,8 @@ def get_lotus_or(list_IDD=['']):
         else:
             #messagebox.showinfo("Info", "There is no molecules for requested categories.")
             print(str(datetime.now()) + " Info", "There is no molecules for requested categories.")
+            
+        return len(df_general2['Lotus_ID'])
         
     '''
     errorlog = open(motor.tool_path.get_current_path()[0] + '/log/' + str(datetime.now()).replace(' ', '_').replace(':', '_').replace('.','_') + '_input_criteria.txt', 'w')

@@ -116,29 +116,38 @@ def createSdf():
     motor.tool_path.vider_repertoires()
     data = request.json.get('array')
     fileName = request.json.get('fileName')
+    type = request.json.get('type')
     flat_list = [item for sublist in data for item in sublist]
-    motor.ginfo.get_lotus_add(flat_list)
+    if type == 'union':
+        nb_mol = motor.ginfo.get_lotus_add(flat_list)
+    elif type == 'inter':
+        nb_mol = motor.ginfo.get_lotus_or(flat_list)
+    
+    print(nb_mol)
     
     # Chemin complet vers process.py
-    
-    original_working_directory = motor.tool_path.get_current_path()[0]
-    process_script_path = 'NMRshift/process.py'
-    
+    if nb_mol == 0:
+        print("no molecules")
+    else:
+        original_working_directory = motor.tool_path.get_current_path()[0]
+        
+        process_script_path = 'NMRshift/process.py'
+        
 
-    # Répertoire du script process.py
-    script_directory = os.path.dirname(process_script_path)
-    # Change le répertoire de travail
-    os.chdir(script_directory)
+        # Répertoire du script process.py
+        script_directory = os.path.dirname(process_script_path)
+        # Change le répertoire de travail
+        os.chdir(script_directory)
 
-    # Commande à exécuter
-    command = 'python process.py'
+        # Commande à exécuter
+        command = 'python process.py'
 
-    # Exécute la commande
-    subprocess.run(command, shell=True)
-    # Reviens au répertoire initial (si nécessaire)
-    os.chdir(original_working_directory)
-    if fileName != "":
-        os.rename(original_working_directory+'/Your_NMR_DataBase/c_type_13C_NMR_Database.sdf',original_working_directory+'/Your_NMR_DataBase/'+fileName+'.sdf')
+        # Exécute la commande
+        subprocess.run(command, shell=True)
+        # Reviens au répertoire initial (si nécessaire)
+        os.chdir(original_working_directory)
+        if fileName != "":
+            os.rename(original_working_directory+'/Your_NMR_DataBase/c_type_13C_NMR_Database.sdf',original_working_directory+'/Your_NMR_DataBase/'+fileName+'.sdf')
 
     return '',200
     
