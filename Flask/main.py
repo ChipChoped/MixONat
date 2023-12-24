@@ -1,21 +1,16 @@
 import flask
 from flask import Flask, request
 from flask_cors import CORS
-from markupsafe import escape
 from checkers.matchinginputschecker import MatchingInputsChecker
 from threads.matchingprocessthread import MatchingProcessThread
-import io
 from motor.data_structures import Spectrum, SDF
-from checkers.filechecker import FileChecker
 import json
 import motor.lotus_ressources as lr
 import motor.ginfo 
 import motor.tool_path
-import NMRshift.process as nmrShift
 import subprocess
 import os
 import json
-import base64
 import requests
 
 app = Flask(__name__)
@@ -127,11 +122,9 @@ def createSdf():
     elif type == 'inter':
         nb_mol = motor.ginfo.get_lotus_or(flat_list)
     
-    print(nb_mol)
     msg = "There are "+str(nb_mol) +" molecules."
     # Chemin complet vers process.py
     if nb_mol == 0:
-        print("no molecules")
         msg += " No SDF created"
         
     else:
@@ -163,6 +156,10 @@ def createSdf():
             if fileName != "":
                 sdfName = fileName
                 os.rename(original_working_directory+'/Your_NMR_DataBase/c_type_13C_NMR_Database.sdf',original_working_directory+'/Your_NMR_DataBase/'+fileName+'.sdf')
+            
+            #default_directory = motor.tool_path.get_default_directory()
+            #print(f"Le répertoire par défaut est : {default_directory}")
+            motor.tool_path.copy_file_to_default_directory(original_working_directory+'/Your_NMR_DataBase/'+sdfName+'.sdf')
             if isSave:
                 sdfDirectory = original_working_directory+'/Your_NMR_DataBase/'+sdfName+".sdf"           
                 url = 'http://localhost:9000/rmn/sdf'
@@ -172,12 +169,12 @@ def createSdf():
                 json_data = json.dumps(data)
                 response = requests.post(url, data=json_data, headers={'Content-Type': 'application/json'})
                 if response.status_code == 200:
-                    print(" SDF save ")
+                    msg += " Save in database."
                 else:
-                    print(" Error to save SDF ")
+                    msg += " Error to save SDF in database"
                 
         else:
-            msg += " Error: no SDF created"
+            msg += " Error: No SDF created"
         
 
     return msg,200

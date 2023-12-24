@@ -51,7 +51,19 @@ def vider_repertoires():
     except Exception as e:
         print("Une erreur s'est produite :", str(e))
         
-        
+def get_default_download_directory():
+    if os.name == 'nt':  # Windows
+        return os.path.join(os.path.expanduser("~"), "Downloads")
+    elif os.name == 'posix':  # macOS or Linux
+        return os.path.join(os.path.expanduser("~"), "Downloads")
+    else:
+        raise NotImplementedError("Unsupported operating system")
+    
+def copy_file_to_default_directory(file_path):
+    default_directory = get_default_download_directory()
+    destination_path = os.path.join(default_directory, os.path.basename(file_path))
+    shutil.copy2(file_path, destination_path)
+    
 def is_file_exist(directory, filename):
     file_path = os.path.join(directory, filename)
     return os.path.isfile(file_path)

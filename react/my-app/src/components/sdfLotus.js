@@ -27,7 +27,9 @@ function SdfLotus() {
   const [selectedClass, setSelectedClass] = useState(undefined);
 
   const [selectedItem, setSelectedItem] = useState(null);
-  
+
+  const [upload, setUpload] = useState(false);
+
   const [statusMessage, setStatusMessage] = useState('');
   const [selectedOption, setSelectedOption] = useState('union'); 
   const [isChecked, setIsChecked] = useState(false); 
@@ -125,6 +127,7 @@ function SdfLotus() {
 
 
   const handleCreateSdfClick = async () => {
+    setUpload(false)
     let uploadValue = true;
 
     if (fileName === "" && isChecked) {
@@ -158,6 +161,9 @@ function SdfLotus() {
           isSave: isChecked
         });  
         const serverMessage = response.data;
+        if (!serverMessage.includes("No SDF created")) {
+          setUpload(true)
+        }
         setStatusMessage(serverMessage);
         
       } catch (error) {
@@ -481,7 +487,9 @@ function SdfLotus() {
                       placeholder="sdf name"
                     />
                   <button onClick={() => handleCreateSdfClick()}>Create SDF</button>
+
                   <p>{statusMessage}</p>
+                  {upload && <p>The SDF file is available in your downloads</p>}
                   <button onClick={() => handleDeleteFiltreClick()}>Delete</button>
                   <button onClick={() => handleDeleteAllFiltreClick()}>Delete all</button>
               </div>            
