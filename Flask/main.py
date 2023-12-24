@@ -152,7 +152,12 @@ def createSdf():
         subprocess.run(command, shell=True)
         # Reviens au répertoire initial (si nécessaire)
         os.chdir(original_working_directory)
-        if motor.tool_path.is_file_exist(original_working_directory+'/Your_NMR_DataBase','c_type_13C_NMR_Database.sdf'):
+        errorlog_path = "NMRshift/errorlog.txt"
+
+        # Vérifier la taille du fichier
+        errorlog_size = os.path.getsize(errorlog_path)
+        
+        if motor.tool_path.is_file_exist(original_working_directory+'/Your_NMR_DataBase','c_type_13C_NMR_Database.sdf') and errorlog_size == 0:
             msg += " SDF created"
             sdfName = 'c_type_13C_NMR_Database'
             if fileName != "":

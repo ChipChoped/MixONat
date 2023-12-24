@@ -29,7 +29,7 @@ def run_command(command):
 
 
 if "NMRshift" in path_idg:
-	command = "python " + path_idg + "/dependencies/l2sdf.py " 
+	command = "python " + path_idg + "/dependencies/l2sdf.py 2>errorlog.txt" 
 	run_command(command)
 	"""
 	l2sdf.py:
@@ -47,7 +47,7 @@ if "NMRshift" in path_idg:
 		writes: standard error, redirected to errorlog.txt
 	"""
 
-	command = "python " + path_idg + "/dependencies/molsort.py "
+	command = "python " + path_idg + "/dependencies/molsort.py 2>errorlog.txt"
 	run_command(command)
 	"""
 	molsort.py:
@@ -55,7 +55,7 @@ if "NMRshift" in path_idg:
 		writes: cfmid_input_2D_nmr_sorted.txt
 	"""
 
-	command = "python " + path_idg + "/dependencies/nmr_tags.py "
+	command = "python " + path_idg + "/dependencies/nmr_tags.py 2>errorlog.txt"
 	run_command(command)
 	"""
 	nmr_tags.py:
@@ -64,7 +64,7 @@ if "NMRshift" in path_idg:
 		writes: LOTUS_DB_predict.sdf
 	"""
 
-	command = "python " + path_idg + "/dependencies/fake_ACD.py " + './LOTUS_DB_predict.sdf'
+	command = "python " + path_idg + "/dependencies/fake_ACD.py " + './LOTUS_DB_predict.sdf 2>errorlog.txt'
 	run_command(command)
 	"""
 	tagged.py:
@@ -72,24 +72,24 @@ if "NMRshift" in path_idg:
 		writes: fake_acd_LOTUS_DB_predict.sdf
 	"""
 
-	command = "python " + path_idg + "/dependencies/tagged.py "
+	command = "python " + path_idg + "/dependencies/tagged.py 2>errorlog.txt"
 	run_command(command)
 	"""
 	creat_folder.py:
 		create 'Your_DataBase' folder,
 		containing sdf files and txt files
 	"""
-	command = "python " + path_idg + "/dependencies/create_folder.py "
+	command = "python " + path_idg + "/dependencies/create_folder.py 2>errorlog.txt"
 	run_command(command)
  
 
-	command = "python " + path_idg + "/dependencies/refactor.py "
+	command = "python " + path_idg + "/dependencies/refactor.py 2>errorlog.txt"
 	run_command(command)
  
-	command = "python " + path_idg + "/dependencies/no_stereo.py "
+	command = "python " + path_idg + "/dependencies/no_stereo.py 2>errorlog.txt"
 	run_command(command)
  
-	command = "python " + path_idg + "/dependencies/c_type.py "
+	command = "python " + path_idg + "/dependencies/c_type.py 2>errorlog.txt"
 	run_command(command)
  
  
