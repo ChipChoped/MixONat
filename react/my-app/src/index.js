@@ -42,7 +42,8 @@ const router = createBrowserRouter([
       },
       {
         path:"/sdfLotus",
-        element:<SdfLotus/>
+        element:<SdfLotus/>,
+        loader: getSdfFilesNames
       }
     ]
   },

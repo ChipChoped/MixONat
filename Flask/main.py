@@ -14,6 +14,9 @@ import motor.tool_path
 import NMRshift.process as nmrShift
 import subprocess
 import os
+import json
+import base64
+import requests
 
 app = Flask(__name__)
 CORS(app)
@@ -117,6 +120,7 @@ def createSdf():
     data = request.json.get('array')
     fileName = request.json.get('fileName')
     type = request.json.get('type')
+    isSave = request.json.get('isSave')
     flat_list = [item for sublist in data for item in sublist]
     if type == 'union':
         nb_mol = motor.ginfo.get_lotus_add(flat_list)
@@ -150,10 +154,26 @@ def createSdf():
         os.chdir(original_working_directory)
         if motor.tool_path.is_file_exist(original_working_directory+'/Your_NMR_DataBase','c_type_13C_NMR_Database.sdf'):
             msg += " SDF created"
+            sdfName = 'c_type_13C_NMR_Database'
+            if fileName != "":
+                sdfName = fileName
+                os.rename(original_working_directory+'/Your_NMR_DataBase/c_type_13C_NMR_Database.sdf',original_working_directory+'/Your_NMR_DataBase/'+fileName+'.sdf')
+            if isSave:
+                sdfDirectory = original_working_directory+'/Your_NMR_DataBase/'+sdfName+".sdf"           
+                url = 'http://localhost:9000/rmn/sdf'
+                with open(sdfDirectory, 'r') as file:
+                    file_content = file.read()
+                data = {'name': sdfName, 'sdf_file': file_content}
+                json_data = json.dumps(data)
+                response = requests.post(url, data=json_data, headers={'Content-Type': 'application/json'})
+                if response.status_code == 200:
+                    print(" SDF save ")
+                else:
+                    print(" Error to save SDF ")
+                
         else:
             msg += " Error: no SDF created"
-        if fileName != "":
-            os.rename(original_working_directory+'/Your_NMR_DataBase/c_type_13C_NMR_Database.sdf',original_working_directory+'/Your_NMR_DataBase/'+fileName+'.sdf')
+        
 
     return msg,200
     

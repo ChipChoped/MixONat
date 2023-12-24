@@ -19,7 +19,6 @@ from motor.c_type_writer import *
 path_id = os.getcwd()
 path_id_2 = str('/'.join(path_id.split('\\')[:-1]) + '/')
 
-print(path_id_2)
 sdf = SDF(path_id_2+'/Your_NMR_DataBase/13C_NMR_Database_refactor.sdf',True)
 sdf_ns = SDF(path_id_2+'/Your_NMR_DataBase/13C_NMR_Database-ns.sdf',True)
 

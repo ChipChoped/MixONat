@@ -1,9 +1,11 @@
 
 import 'alertifyjs/build/css/alertify.css';
 import "../styles/rmn.scss";
+import { useLoaderData } from "react-router-dom";
 import React, {useEffect, useState } from 'react';
 import "../styles/sdfLotus.scss";
 import axios from 'axios';
+import alertify from 'alertifyjs';
 
 function SdfLotus() {
 
@@ -28,6 +30,7 @@ function SdfLotus() {
   
   const [statusMessage, setStatusMessage] = useState('');
   const [selectedOption, setSelectedOption] = useState('union'); 
+  const [isChecked, setIsChecked] = useState(false); 
 
   const [filtreList, setFiltreList] = useState([]);
   const addElementToFiltreList = (newElement) => {
@@ -37,6 +40,7 @@ function SdfLotus() {
   };
 
   const [fileName, setFileName] = useState("");
+  const { sdfList } = useLoaderData()
 
   const handleFamilyClick = (family) => {
     setSelectedGenus(undefined);
@@ -121,20 +125,46 @@ function SdfLotus() {
 
 
   const handleCreateSdfClick = async () => {
-    try {
-      setStatusMessage('is running...'); 
-      const response = await axios.post('http://localhost:5000/createSdf', {
-        array: filtreList,
-        fileName: fileName,
-        type: selectedOption
-      });  
-      const serverMessage = response.data;
-      setStatusMessage(serverMessage);
-      
-    } catch (error) {
-      console.error('Erreur lors de l appel de la route createSdf :', error);
-      if (error.response) {
-        setStatusMessage('Erreurlors de la creation du SDF');
+    let uploadValue = true;
+
+    if (fileName === "" && isChecked) {
+      uploadValue = false;
+      setStatusMessage('Choose a name before saving in the database');
+    } else if (isChecked && sdfList.includes(fileName)) {
+      // Utiliser une promesse pour attendre la réponse du confirm
+      const confirmResult = await new Promise((resolve) => {
+        alertify.confirm(
+          "Confirm",
+          "Are you sure to continue? You will overwrite an SDF file.",
+          function () {
+            resolve(true);
+          },
+          function () {
+            resolve(false);
+          }
+        );
+      });
+  
+      uploadValue = confirmResult;
+    }
+    
+    if (uploadValue) {
+      try {
+        setStatusMessage('is running...'); 
+        const response = await axios.post('http://localhost:5000/createSdf', {
+          array: filtreList,
+          fileName: fileName,
+          type: selectedOption,
+          isSave: isChecked
+        });  
+        const serverMessage = response.data;
+        setStatusMessage(serverMessage);
+        
+      } catch (error) {
+        console.error('Erreur lors de l appel de la route createSdf :', error);
+        if (error.response) {
+          setStatusMessage('Erreurlors de la creation du SDF');
+        }
       }
     }
   };
@@ -415,6 +445,7 @@ function SdfLotus() {
                         ))}
                       </ul>
                   </div>
+                  <div className="radio-btn">
                   <label>
                     <input
                       type="radio"
@@ -424,7 +455,7 @@ function SdfLotus() {
                     />
                     Get all catagories
                   </label>
-                  <div className="radio-btn">
+                  
                     <label>
                       <input
                         type="radio"
@@ -434,7 +465,16 @@ function SdfLotus() {
                       />
                       Get chemical class in family
                     </label>
+                    <label>
+                      <input
+                        type="checkbox"
+                        checked={isChecked}
+                        onChange={() => setIsChecked(!isChecked)}
+                      />
+                      Save in database
+                    </label>
                   </div>
+                  
                   <input
                       type="text"
                       onChange={(e) => setFileName(e.target.value)}
