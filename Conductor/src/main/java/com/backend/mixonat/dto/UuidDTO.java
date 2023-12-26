@@ -11,6 +11,6 @@ import java.util.UUID;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class UuidDTO implements JsonResponse {
+public class UuidDTO implements JsonResponse, JsonRequest {
     private UUID uuid;
 }
