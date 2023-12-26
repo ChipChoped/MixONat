@@ -11,19 +11,9 @@ $$;
 
 \connect mixonat
 
+DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS sdf;
 DROP TABLE IF EXISTS rmn;
-DROP TABLE IF EXISTS users;
-
-CREATE TABLE sdf (
-	id SERIAL PRIMARY KEY,
-	name TEXT,
-	sdf_file TEXT);
-
-CREATE TABLE IF NOT EXISTS rmn (
-    id SERIAL PRIMARY KEY,
-    name TEXT,
-    rmn_file TEXT);
 
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
@@ -37,6 +27,24 @@ CREATE TABLE users (
     role VARCHAR(20),
     created_at TIMESTAMPTZ DEFAULT NOW(),
     updated_at TIMESTAMPTZ DEFAULT NOW());
+
+CREATE TABLE sdf (
+    id SERIAL,
+    uuid UUID PRIMARY KEY NOT NULL UNIQUE DEFAULT uuid_generate_v4(),
+    name TEXT,
+    file TEXT,
+    author TEXT NOT NULL,
+    added_by UUID REFERENCES users(uuid),
+    added_at TIMESTAMPTZ DEFAULT NOW());
+
+CREATE TABLE IF NOT EXISTS rmn (
+    id SERIAL,
+    uuid UUID PRIMARY KEY NOT NULL UNIQUE DEFAULT uuid_generate_v4(),
+    name TEXT,
+    file TEXT,
+    author TEXT NOT NULL,
+    added_by UUID REFERENCES users(uuid),
+    added_at TIMESTAMPTZ DEFAULT NOW());
 
 INSERT INTO users (first_name, last_name, email, password, role)
 VALUES ('Admin', 'Admin', 'admin@mixonat.fr',
