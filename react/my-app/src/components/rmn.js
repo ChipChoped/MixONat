@@ -14,7 +14,7 @@ function Rmn()
     const [file,setFile] = useState(undefined)
     const [fileIsLoading,setFileIsLoading] = useState(false)
     const [upload,setUpload] = useState(false)
-    const [deleteFileName,setDeleteFileName] = useState(undefined)
+    const [deleteFileUuid,setDeleteFileUuid] = useState(undefined)
     const [deleteFile,setDeleteFile] = useState(false)
     const navigate = useNavigate();
 
@@ -76,12 +76,12 @@ function Rmn()
         }
     }
 
-    const deleteFileButton = (deleteFileName) => {
+    const deleteFileButton = (deleteFileUuid) => {
         alertify.confirm("Confirm","Are you sure to continue ? You will delete this RMN file.",
       
                 function()
                 {
-                    setDeleteFileName(deleteFileName)
+                    setDeleteFileUuid(deleteFileUuid)
                     setDeleteFile(true)
                 },
                 function(){});
@@ -135,12 +135,12 @@ function Rmn()
                     method: 'DELETE',
                     headers: { 'Content-Type': 'application/json',
                                'Authorization': 'Bearer ' + cookies.get("authentication_token") },
-                    body: JSON.stringify({ name: deleteFileName })
+                    body: JSON.stringify({ uuid: deleteFileUuid })
                 };
 
                 // Send it to Spring server
                 fetch("http://localhost:9000/rmn/rmnDB",requestOptions).then((response) => {
-                    if(response.status === 200)
+                    if(response.status === 204)
                     {
                         navigate("/rmnDB")
                     }

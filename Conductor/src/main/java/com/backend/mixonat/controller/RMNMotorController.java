@@ -104,12 +104,12 @@ public class RMNMotorController
 		responseHeaders.set("Content-Type","application/json");
 
 		try {
-			UUID uuidUser = UUID.fromString(jwtService.extractUserName(token.split(" ")[1]));
+			UUID userUuid = UUID.fromString(jwtService.extractUserName(token.split(" ")[1]));
 
 			var sdf = sdfService.findSdfByUuid(uuid.getUuid())
 					.orElseThrow(IllegalArgumentException::new);
 
-			if (!sdf.getAddedBy().equals(uuidUser)) {
+			if (!sdf.getAddedBy().equals(userUuid)) {
 				return ResponseEntity.status(403).headers(responseHeaders).body(new ExceptionDTO("You don't have permission to delete this sdf"));
 			} else {
 				sdfService.deleteSdf(sdf);
@@ -240,12 +240,12 @@ public class RMNMotorController
 		responseHeaders.set("Content-Type","application/json");
 
 		try {
-			UUID uuidUser = UUID.fromString(jwtService.extractUserName(token.split(" ")[1]));
+			UUID userUuid = UUID.fromString(jwtService.extractUserName(token.split(" ")[1]));
 
 			var rmn = rmnService.findRmnByUuid(deleteRmn.getUuid())
 					.orElseThrow(IllegalArgumentException::new);
 
-			if (!rmn.getAddedBy().equals(uuidUser)) {
+			if (!rmn.getAddedBy().equals(userUuid)) {
 				return ResponseEntity.status(403).headers(responseHeaders).body(new ExceptionDTO("You don't have permission to delete this rmn"));
 			} else {
 				rmnService.deleteRmn(rmn);
