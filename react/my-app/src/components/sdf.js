@@ -18,6 +18,8 @@ function Sdf()
     const [deleteFile,setDeleteFile] = useState(false)
     const navigate = useNavigate();
 
+    const options = { year: 'numeric', month: '2-digit', day: '2-digit'}
+
     const { sdfList } = useLoaderData()
 
     const cookies = new Cookies();
@@ -178,11 +180,28 @@ function Sdf()
 
             <div className='sdf-files'>
                 <span>All SDF FILES IN THE DATABASE</span>
-                {sdfList.map((file) => (
-                    <div key={file}>
-                        <span>{file}</span>
-                        <input className="sdf-input-image" type="image" src={red_cross} onClick={() => {deleteFileButton(file)}}/>
-                    </div>))}
+                { sdfList.sdfList.map((sdf) => (
+                    <div className='sdf-file'>
+                        <div className='sdf-info' key={ sdf.uuid }>
+                            <div className='sdf-name-date'>
+                                <span>
+                                    <a href={ "/sdf/preview/" + sdf.uuid }>
+                                        { sdf.name }
+                                    </a>
+                                </span>
+                                <span> { new Date(sdf.added_at).toLocaleDateString(undefined, options) } </span>
+                            </div>
+                            <div className='sdf-attribution'>
+                                <span> Author: <b> { sdf.author } </b> </span>
+                                <span> Added by:&nbsp;
+                                    <a href={ "/profile?u=" + sdf.added_by } target="_blank" rel="noreferrer">
+                                        { sdf.added_by_name }
+                                    </a>
+                                </span>
+                            </div>
+                        </div>
+                        <input className="sdf-input-image" type="image" src={ red_cross } onClick={() => { deleteFileButton(sdf.uuid) }}/>
+                    </div>)) }
             </div>
         </div>
     )

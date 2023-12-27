@@ -18,6 +18,8 @@ function Rmn()
     const [deleteFile,setDeleteFile] = useState(false)
     const navigate = useNavigate();
 
+    const options = { year: 'numeric', month: '2-digit', day: '2-digit'}
+
     const { rmnList } = useLoaderData()
 
     const cookies = new Cookies();
@@ -178,11 +180,28 @@ function Rmn()
 
             <div className='rmn-files'>
                 <span>All RMN FILES IN THE DATABASE</span>
-                {rmnList.map((file) => (
-                    <div key={file}>
-                        <span>{file}</span>
-                        <input className="rmn-input-image" type="image" src={red_cross} onClick={() => {deleteFileButton(file)}}/>
-                    </div>))}
+                { rmnList.rmnList.map((rmn) => (
+                    <div className='rmn-file'>
+                        <div className='rmn-info' key={ rmn.uuid }>
+                            <div className='rmn-name-date'>
+                                <span>
+                                    <a href={"/sdf/preview/" + rmn.name}>
+                                        { rmn.name }
+                                    </a>
+                                </span>
+                                <span> { new Date(rmn.added_at).toLocaleDateString(undefined, options) } </span>
+                            </div>
+                            <div className='rmn-attribution'>
+                                <span> Author: <b> { rmn.author } </b> </span>
+                                <span> Added by:&nbsp;
+                                    <a href={"/profile?u=" + rmn.added_by}>
+                                        <b> { rmn.added_by_name } </b>
+                                    </a>
+                                </span>
+                            </div>
+                        </div>
+                        <input className="rmn-input-image" type="image" src={ red_cross } onClick={() => { deleteFileButton(rmn.uuid) }}/>
+                    </div> ))}
             </div>
         </div>
     )
