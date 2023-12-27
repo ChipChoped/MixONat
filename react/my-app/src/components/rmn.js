@@ -10,15 +10,16 @@ import Cookies from "universal-cookie";
 
 function Rmn()
 {
-    const [rmnName,setRMNName] = useState('')
-    const [file,setFile] = useState(undefined)
-    const [fileIsLoading,setFileIsLoading] = useState(false)
-    const [upload,setUpload] = useState(false)
-    const [deleteFileUuid,setDeleteFileUuid] = useState(undefined)
-    const [deleteFile,setDeleteFile] = useState(false)
+    const [name, setName] = useState('')
+    const [file, setFile] = useState(undefined)
+    const [author, setAuthor] = useState('')
+    const [fileIsLoading, setFileIsLoading] = useState(false)
+    const [upload, setUpload] = useState(false)
+    const [deleteFileUuid, setDeleteFileUuid] = useState(undefined)
+    const [deleteFile, setDeleteFile] = useState(false)
     const navigate = useNavigate();
 
-    const options = { year: 'numeric', month: '2-digit', day: '2-digit'}
+    const options = { year: 'numeric', month: '2-digit', day: '2-digit' }
 
     const { rmnList } = useLoaderData()
 
@@ -49,22 +50,9 @@ function Rmn()
     }
 
     const checkFile = () => {
-        if(file !== undefined && rmnName !== '')
+        if(file !== undefined && name !== '')
         {
-            if(rmnList.includes(rmnName))
-            {
-                alertify.confirm("Confirm","Are you sure to continue ? You will overwrite a RMN file.",
-      
-                function()
-                {
-                    setUpload(true)
-                },
-                function(){});
-            }
-            else
-            {
-                setUpload(true)
-            }
+            setUpload(true)
         }
         else if(file !== undefined)
         {
@@ -100,12 +88,12 @@ function Rmn()
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json',
                                'Authorization': 'Bearer ' + cookies.get("authentication_token") },
-                    body: JSON.stringify({ name: rmnName, rmn_file: file})
+                    body: JSON.stringify({ name: name, file: file, author: author })
                 };
 
                 // Send it to Spring server
                 fetch("http://localhost:9000/rmn/rmnDB",requestOptions).then((response) => {
-                    if(response.status === 200)
+                    if(response.status === 201)
                     {
                         navigate("/rmnDB")
                     }
@@ -167,7 +155,11 @@ function Rmn()
                 </div>
                 <div>
                     <label htmlFor='rmnName'>FILE'S NAME</label>
-                    <input type="text" id="rmnName" value={rmnName} placeholder="Enter the name of the RMN's file" onChange={(e) => {setRMNName(e.target.value)}}></input>
+                    <input type="text" id="rmnName" value={name} placeholder="Enter the name of the RMN's file" onChange={(e) => {setName(e.target.value)}}></input>
+                </div>
+                <div>
+                    <label htmlFor='rmnAuthor'>FILE'S AUTHOR</label>
+                    <input type="text" id="rmnAuthor" value={author} placeholder="Enter the author of the RMN's file" onChange={(e) => {setAuthor(e.target.value)}}></input>
                 </div>
                 <div className='rmn-button'>
                     {fileIsLoading 

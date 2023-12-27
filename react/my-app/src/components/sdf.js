@@ -10,22 +10,23 @@ import Cookies from "universal-cookie";
 
 function Sdf()
 {
-    const [sdfName,setSdfName] = useState('')
-    const [file,setFile] = useState(undefined)
-    const [fileIsLoading,setFileIsLoading] = useState(false)
-    const [upload,setUpload] = useState(false)
-    const [deleteFileUuid,setDeleteFileUuid] = useState(undefined)
-    const [deleteFile,setDeleteFile] = useState(false)
+    const [name,setName] = useState('')
+    const [file, setFile] = useState(undefined)
+    const [author, setAuthor] = useState('')
+    const [fileIsLoading, setFileIsLoading] = useState(false)
+    const [upload, setUpload] = useState(false)
+    const [deleteFileUuid, setDeleteFileUuid] = useState(undefined)
+    const [deleteFile, setDeleteFile] = useState(false)
     const navigate = useNavigate();
 
-    const options = { year: 'numeric', month: '2-digit', day: '2-digit'}
+    const options = { year: 'numeric', month: '2-digit', day: '2-digit' }
 
     const { sdfList } = useLoaderData()
 
     const cookies = new Cookies();
 
     const readFile = (file) => {
-        if (file===undefined)
+        if (file === undefined)
         {
           setFileIsLoading(false)
           return 
@@ -49,24 +50,11 @@ function Sdf()
     }
 
     const checkFile = () => {
-        if(file !== undefined && sdfName !== '')
+        if (file !== undefined && name !== '')
         {
-            if(sdfList.includes(sdfName))
-            {
-                alertify.confirm("Confirm","Are you sure to continue ? You will overwrite a SDF file.",
-      
-                function()
-                {
-                    setUpload(true)
-                },
-                function(){});
-            }
-            else
-            {
-                setUpload(true)
-            }
+            setUpload(true)
         }
-        else if(file !== undefined)
+        else if (file !== undefined)
         {
             alertify.error('Error, you have to choose a file to upload.')
         }
@@ -100,12 +88,12 @@ function Sdf()
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json',
                                'Authorization': 'Bearer ' + cookies.get("authentication_token") },
-                    body: JSON.stringify({ name: sdfName, sdf_file: file})
+                    body: JSON.stringify({ name: name, file: file, author: author })
                 };
 
                 // Send it to Spring server
                 fetch("http://localhost:9000/rmn/sdf",requestOptions).then((response) => {
-                    if(response.status === 200)
+                    if(response.status === 201)
                     {
                         navigate("/sdf")
                     }
@@ -167,7 +155,11 @@ function Sdf()
                 </div>
                 <div>
                     <label htmlFor='sdfName'>FILE'S NAME</label>
-                    <input type="text" id="sdfName" value={sdfName} placeholder="Enter the name of the SDF's file" onChange={(e) => {setSdfName(e.target.value)}}></input>
+                    <input type="text" id="sdfName" value={name} placeholder="Enter the name of the SDF's file" onChange={(e) => {setName(e.target.value)}}></input>
+                </div>
+                <div>
+                    <label htmlFor='sdfAuthor'>FILE'S AUTHOR</label>
+                    <input type="text" id="sdfAuthor" value={author} placeholder="Enter the author of the SDF's file" onChange={(e) => {setAuthor(e.target.value)}}></input>
                 </div>
                 <div className='sdf-button'>
                     {fileIsLoading 
