@@ -15,12 +15,12 @@ def no_stereo(line):
     return line
 
 # Ouvrir le fichier SDF en mode lecture
-with open(path_id_2+'/Your_NMR_DataBase/13C_NMR_Database_refactor.sdf', 'r') as file:
+with open(path_id+'/13C_NMR_Database_refactor.sdf', 'r') as file:
     # Lire les lignes du fichier
     lines = file.readlines()
 
 # Ouvrir le fichier SDF en mode écriture
-with open(path_id_2+'/Your_NMR_DataBase/13C_NMR_Database-ns.sdf', 'w') as file:
+with open(path_id+'/13C_NMR_Database-ns.sdf', 'w') as file:
     start_mol = True
     for line in lines:
         if line.startswith('LTS'):

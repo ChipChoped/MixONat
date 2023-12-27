@@ -111,7 +111,17 @@ def getOntologyFiltre(type,criteria):
 @app.route('/createSdf', methods=['POST'])
 def createSdf():
     
-    motor.tool_path.vider_repertoires()
+    #motor.tool_path.vider_repertoires()
+    motor.tool_path.deleteFile('NMRshift/13C_NMR_Database.sdf')
+    motor.tool_path.deleteFile('NMRshift/cfmid_input_2D_nmr_sorted.txt')
+    motor.tool_path.deleteFile('NMRshift/cfmid_input_2D_nmr.txt')
+    motor.tool_path.deleteFile('NMRshift/cfmid_input_2D.sdf')
+    motor.tool_path.deleteFile('NMRshift/errorlog.txt')
+    motor.tool_path.deleteFile('NMRshift/fake_acd_LOTUS_DB_predict.sdf')
+    motor.tool_path.deleteFile('NMRshift/LOTUS_DB_predict.sdf')
+    motor.tool_path.deleteFileInDirectory('LOTUS_DB_INPUT')
+    motor.tool_path.deleteFileInDirectory('Your_NMR_DataBase')
+
     data = request.json.get('array')
     fileName = request.json.get('fileName')
     type = request.json.get('type')
@@ -145,7 +155,7 @@ def createSdf():
         subprocess.run(command, shell=True)
         # Reviens au répertoire initial (si nécessaire)
         os.chdir(original_working_directory)
-        errorlog_path = "NMRshift/errorlog.txt"
+        errorlog_path = "Your_NMR_DataBase/errorlog.txt"
 
         # Vérifier la taille du fichier
         errorlog_size = os.path.getsize(errorlog_path)

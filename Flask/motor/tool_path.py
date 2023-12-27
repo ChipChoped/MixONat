@@ -67,3 +67,21 @@ def copy_file_to_default_directory(file_path):
 def is_file_exist(directory, filename):
     file_path = os.path.join(directory, filename)
     return os.path.isfile(file_path)
+
+
+def deleteFile(file_path):
+    if os.path.exists(file_path):
+        try:
+            os.remove(file_path)
+        except OSError as e:
+            print(f'Error deleting the file {file_path}: {e}')
+        
+def deleteFileInDirectory(directory_path):
+    try:
+        if os.path.exists(directory_path):
+            for file_name in os.listdir(directory_path):
+                file_path = os.path.join(directory_path, file_name)                
+                if os.path.isfile(file_path):
+                    os.remove(file_path)
+    except OSError as e:
+        print(f'Error deleting files in the directory {directory_path}: {e}')

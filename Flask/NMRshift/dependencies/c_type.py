@@ -19,10 +19,10 @@ from motor.c_type_writer import *
 path_id = os.getcwd()
 path_id_2 = str('/'.join(path_id.split('\\')[:-1]) + '/')
 
-sdf = SDF(path_id_2+'/Your_NMR_DataBase/13C_NMR_Database_refactor.sdf',True)
-sdf_ns = SDF(path_id_2+'/Your_NMR_DataBase/13C_NMR_Database-ns.sdf',True)
+sdf = SDF(path_id+'/13C_NMR_Database_refactor.sdf',True)
+sdf_ns = SDF(path_id+'/13C_NMR_Database-ns.sdf',True)
 
-writer = CTypeWriter(sdf, sdf_ns, path_id_2+'/Your_NMR_DataBase/13C_NMR_Database_refactor.sdf')
+writer = CTypeWriter(sdf, sdf_ns, path_id+'/13C_NMR_Database_refactor.sdf')
 writer.create_carbon_atoms_dictionary()
 writer.create_carbon_shifts_dictionary()
-writer.create_output_file(path_id_2+'/Your_NMR_DataBase','13C_NMR_Database.sdf')
+writer.create_output_file(path_id+'','13C_NMR_Database.sdf')
