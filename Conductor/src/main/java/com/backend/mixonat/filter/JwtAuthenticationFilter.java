@@ -2,6 +2,8 @@ package com.backend.mixonat.filter;
 
 import com.backend.mixonat.service.JwtService;
 import com.backend.mixonat.service.UserService;
+import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.MalformedJwtException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -9,6 +11,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -33,30 +36,54 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         final String jwtToken;
         final String uuid;
 
-        if (!StringUtils.hasLength(authHeader) || !StringUtils.startsWithIgnoreCase(authHeader, "Bearer ")) {
-            filterChain.doFilter(request, response);
-            return;
-        }
-
-        jwtToken = authHeader.substring(7);
-        log.debug("JWT - {}", jwtToken);
-        uuid = jwtService.extractUserName(jwtToken);
-
-        if (StringUtils.hasLength(uuid) && SecurityContextHolder.getContext().getAuthentication() == null) {
-            UserDetails userDetails = userService.userDetailsService().loadUserByUsername(uuid);
-
-            if (jwtService.isTokenValid(jwtToken, userDetails)) {
-                log.debug("User - {}", userDetails);
-
-                SecurityContext context = SecurityContextHolder.createEmptyContext();
-                UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
-                        userDetails, null, userDetails.getAuthorities());
-                authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-                context.setAuthentication(authToken);
-                SecurityContextHolder.setContext(context);
+        try {
+            if (!StringUtils.hasLength(authHeader) || !StringUtils.startsWithIgnoreCase(authHeader, "Bearer ")) {
+                filterChain.doFilter(request, response);
+                return;
             }
-        }
 
-        filterChain.doFilter(request, response);
+            jwtToken = authHeader.substring(7);
+            log.debug("JWT - {}", jwtToken);
+            uuid = jwtService.extractUserName(jwtToken);
+
+            if (StringUtils.hasLength(uuid) && SecurityContextHolder.getContext().getAuthentication() == null) {
+                UserDetails userDetails = userService.userDetailsService().loadUserByUsername(uuid);
+
+                if (jwtService.isTokenValid(jwtToken, userDetails)) {
+                    log.debug("User - {}", userDetails);
+
+                    SecurityContext context = SecurityContextHolder.createEmptyContext();
+                    UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
+                            userDetails, null, userDetails.getAuthorities());
+                    authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                    context.setAuthentication(authToken);
+                    SecurityContextHolder.setContext(context);
+                }
+            }
+
+            filterChain.doFilter(request, response);
+        } catch (MalformedJwtException e) {
+            HttpHeaders responseHeaders = new HttpHeaders();
+            responseHeaders.set("Content-Type","application/json");
+
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+
+            if (!e.getMessage().isEmpty()) {
+                response.getWriter().write("{\"message\":\"" + e.getMessage() + "\"}");
+            } else {
+                response.getWriter().write("{\"message\":\"Invalid authentication token\"}");
+            }
+
+            response.getWriter().flush();
+            response.getWriter().close();
+        } catch (ExpiredJwtException e) {
+            HttpHeaders responseHeaders = new HttpHeaders();
+            responseHeaders.set("Content-Type","application/json");
+
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            response.getWriter().write("{\"message\":\"Authentication token expired\"}");
+            response.getWriter().flush();
+            response.getWriter().close();
+        }
     }
 }
