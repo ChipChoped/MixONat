@@ -39,7 +39,7 @@ public class RMNMotorController
 	private UserRepository userRepository;
 
 	@CrossOrigin(origins="http://localhost:3000")
-	@GetMapping("/rmn/sdf/names")
+	@GetMapping("/sdf/list")
 	public ResponseEntity<JsonResponse> getSdf()
 	{
 		HttpHeaders responseHeaders = new HttpHeaders();
@@ -54,7 +54,7 @@ public class RMNMotorController
 	}
 
 	@CrossOrigin(origins="http://localhost:3000")
-	@PostMapping("/rmn/sdf")
+	@PostMapping("/sdf")
 	public ResponseEntity<JsonResponse> saveSdf(@RequestHeader("Authorization") String token, @RequestBody NewSdfDTO newSdf)
 	{
 		HttpHeaders responseHeaders = new HttpHeaders();
@@ -97,7 +97,7 @@ public class RMNMotorController
 	}
 
 	@CrossOrigin(origins="http://localhost:3000")
-	@DeleteMapping("/rmn/sdf")
+	@DeleteMapping("/sdf")
 	public ResponseEntity<JsonResponse> deleteSdf(@RequestHeader("Authorization") String token, @RequestBody UuidDTO uuid)
 	{
 		HttpHeaders responseHeaders = new HttpHeaders();
@@ -124,7 +124,7 @@ public class RMNMotorController
 
 	// Function to handle motor requests from React
 	@CrossOrigin(origins="http://localhost:3000")
-	@PostMapping("/rmn")
+	@PostMapping("/motor")
 	public ResponseEntity<JsonResponse> getMolecules(@RequestBody MotorDTO motorDTO)
 	{
 		HttpHeaders responseHeaders = new HttpHeaders();
@@ -175,7 +175,7 @@ public class RMNMotorController
 	}
 
 
-	@GetMapping("/rmn/rmnDB/names")
+	@GetMapping("/rmn/list")
 	public ResponseEntity<JsonResponse> getRmn()
 	{
 		HttpHeaders responseHeaders = new HttpHeaders();
@@ -190,7 +190,7 @@ public class RMNMotorController
 	}
 
 	@CrossOrigin(origins="http://localhost:3000")
-	@PostMapping("/rmn/rmnDB")
+	@PostMapping("/rmn")
 	public ResponseEntity<JsonResponse> saveRmn(@RequestHeader("Authorization") String token, @RequestBody NewRmnDTO newRmn)
 	{
 		HttpHeaders responseHeaders = new HttpHeaders();
@@ -233,7 +233,7 @@ public class RMNMotorController
 	}
 
 	@CrossOrigin(origins="http://localhost:3000")
-	@DeleteMapping("/rmn/rmnDB")
+	@DeleteMapping("/rmn")
 	public ResponseEntity<JsonResponse> deleteRmn(@RequestHeader("Authorization") String token, @RequestBody Rmn deleteRmn)
 	{
 		HttpHeaders responseHeaders = new HttpHeaders();

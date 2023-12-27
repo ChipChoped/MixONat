@@ -92,7 +92,7 @@ function Rmn()
                 };
 
                 // Send it to Spring server
-                fetch("http://localhost:9000/rmn/rmnDB",requestOptions).then((response) => {
+                fetch("http://localhost:9000/rmn",requestOptions).then((response) => {
                     if(response.status === 201)
                     {
                         navigate("/rmnDB")
@@ -127,7 +127,7 @@ function Rmn()
                 };
 
                 // Send it to Spring server
-                fetch("http://localhost:9000/rmn/rmnDB",requestOptions).then((response) => {
+                fetch("http://localhost:9000/rmn",requestOptions).then((response) => {
                     if(response.status === 204)
                     {
                         navigate("/rmnDB")
@@ -207,7 +207,7 @@ export async function getRmnFilesNames()
 
     // Send request to Spring server
 
-    const response = await fetch("http://localhost:9000/rmn/rmnDB/names",requestOptions);
+    const response = await fetch("http://localhost:9000/rmn/list",requestOptions);
 
     const json = await response.json();
 

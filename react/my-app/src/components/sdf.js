@@ -92,7 +92,7 @@ function Sdf()
                 };
 
                 // Send it to Spring server
-                fetch("http://localhost:9000/rmn/sdf",requestOptions).then((response) => {
+                fetch("http://localhost:9000/sdf",requestOptions).then((response) => {
                     if(response.status === 201)
                     {
                         navigate("/sdf")
@@ -127,7 +127,7 @@ function Sdf()
                 };
 
                 // Send it to Spring server
-                fetch("http://localhost:9000/rmn/sdf",requestOptions).then((response) => {
+                fetch("http://localhost:9000/sdf",requestOptions).then((response) => {
                     if(response.status === 204)
                     {
                         navigate("/sdf")
@@ -207,7 +207,7 @@ export async function getSdfFilesNames()
 
     // Send request to Spring server
 
-    const response = await fetch("http://localhost:9000/rmn/sdf/names",requestOptions);
+    const response = await fetch("http://localhost:9000/sdf/list",requestOptions);
 
     const json = await response.json();
 

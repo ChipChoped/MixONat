@@ -81,19 +81,19 @@ public class SecurityConfigurer {
                                 antMatcher(HttpMethod.GET, "/user"),
                                 antMatcher(HttpMethod.GET, "/user/uuid")).hasAnyRole("ADMIN", "USER")
                         .requestMatchers(
-                                antMatcher(HttpMethod.GET, "/rmn/sdf/names"),
-                                antMatcher(HttpMethod.GET, "/rmn/rmnDB/names"),
-                                antMatcher(HttpMethod.POST, "/rmn"),
+                                antMatcher(HttpMethod.POST, "/motor"),
+                                antMatcher(HttpMethod.GET, "/sdf/list"),
+                                antMatcher(HttpMethod.GET, "/rmn/list"),
                                 antMatcher(HttpMethod.POST, "/checkFile"),
+                                antMatcher(HttpMethod.OPTIONS, "/motor"),
+                                antMatcher(HttpMethod.OPTIONS, "/sdf"),
                                 antMatcher(HttpMethod.OPTIONS, "/rmn"),
-                                antMatcher(HttpMethod.OPTIONS, "/rmn/sdf"),
-                                antMatcher(HttpMethod.OPTIONS, "/rmn/rmnDB"),
                                 antMatcher(HttpMethod.OPTIONS, "/checkFile")).permitAll()
                         .requestMatchers(
-                                antMatcher(HttpMethod.POST, "/rmn/sdf"),
-                                antMatcher(HttpMethod.POST, "/rmn/rmnDB"),
-                                antMatcher(HttpMethod.DELETE, "/rmn/sdf"),
-                                antMatcher(HttpMethod.DELETE, "/rmn/rmnDB")).hasAnyRole("ADMIN", "USER")
+                                antMatcher(HttpMethod.POST, "/sdf"),
+                                antMatcher(HttpMethod.POST, "/rmn"),
+                                antMatcher(HttpMethod.DELETE, "/sdf"),
+                                antMatcher(HttpMethod.DELETE, "/rmn")).hasAnyRole("ADMIN", "USER")
                         .anyRequest()
                         .authenticated()
                 )

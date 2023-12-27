@@ -103,7 +103,7 @@ function RmnMotor()
                 };
 
                 // Send it to Spring server
-                fetch("http://localhost:9000/rmn",requestOptions).then((response) => {
+                fetch("http://localhost:9000/motor",requestOptions).then((response) => {
                   response.json().then((json) => {
                     // If there is a response, save results in the data parameter and display them in the console
                     setData(json);
