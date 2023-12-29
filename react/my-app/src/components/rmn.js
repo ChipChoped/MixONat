@@ -177,7 +177,7 @@ function Rmn()
                         <div className='rmn-info' key={ rmn.uuid }>
                             <div className='rmn-name-date'>
                                 <span>
-                                    <a href={"/sdf/preview/" + rmn.name}>
+                                    <a href={"/preview?t=rmn&f=" + rmn.uuid}>
                                         { rmn.name }
                                     </a>
                                 </span>

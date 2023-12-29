@@ -177,7 +177,7 @@ function Sdf()
                         <div className='sdf-info' key={ sdf.uuid }>
                             <div className='sdf-name-date'>
                                 <span>
-                                    <a href={ "/sdf/preview/" + sdf.uuid }>
+                                    <a href={ "/preview?t=sdf&f=" + sdf.uuid }>
                                         { sdf.name }
                                     </a>
                                 </span>
