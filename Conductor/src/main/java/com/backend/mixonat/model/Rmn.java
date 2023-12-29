@@ -3,6 +3,7 @@ package com.backend.mixonat.model;
 import lombok.*;
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Data
@@ -32,5 +33,5 @@ public class Rmn
     UUID addedBy;
 
     @Column(name = "added_at")
-    String createdAt;
+    LocalDateTime addedAt;
 }
