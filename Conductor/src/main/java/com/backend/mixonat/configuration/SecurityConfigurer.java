@@ -81,9 +81,11 @@ public class SecurityConfigurer {
                                 antMatcher(HttpMethod.GET, "/user"),
                                 antMatcher(HttpMethod.GET, "/user/uuid")).hasAnyRole("ADMIN", "USER")
                         .requestMatchers(
-                                antMatcher(HttpMethod.POST, "/motor"),
                                 antMatcher(HttpMethod.GET, "/sdf/list"),
                                 antMatcher(HttpMethod.GET, "/rmn/list"),
+                                antMatcher(HttpMethod.GET, "/sdf/{uuid}"),
+                                antMatcher(HttpMethod.GET, "/rmn/{uuid}"),
+                                antMatcher(HttpMethod.POST, "/motor"),
                                 antMatcher(HttpMethod.POST, "/checkFile"),
                                 antMatcher(HttpMethod.OPTIONS, "/motor"),
                                 antMatcher(HttpMethod.OPTIONS, "/sdf"),

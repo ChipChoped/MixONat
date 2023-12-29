@@ -1,24 +1,19 @@
 package com.backend.mixonat.controller;
 
-import java.util.List;
-import java.util.UUID;
-
 import com.backend.mixonat.dto.*;
+import com.backend.mixonat.model.*;
 import com.backend.mixonat.repository.UserRepository;
 import com.backend.mixonat.service.JwtService;
+import com.backend.mixonat.service.RMNMotorService;
+import com.backend.mixonat.service.RmnService;
+import com.backend.mixonat.service.SdfService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.backend.mixonat.model.checkRequest;
-import com.backend.mixonat.model.checkResponse;
-import com.backend.mixonat.model.Sdf;
-import com.backend.mixonat.model.Rmn;
-import com.backend.mixonat.model.MotorDTO;
-import com.backend.mixonat.service.RMNMotorService;
-import com.backend.mixonat.service.SdfService;
-import com.backend.mixonat.service.RmnService;
+import java.time.LocalDateTime;
+import java.util.UUID;
 
 @RestController
 public class RMNMotorController
@@ -51,6 +46,39 @@ public class RMNMotorController
 				.build();
 
 		return ResponseEntity.ok().headers(responseHeaders).body(sdfListDTO);
+	}
+
+	@CrossOrigin(origins="http://localhost:3000")
+	@GetMapping("/sdf/{uuid}")
+	public ResponseEntity<JsonResponse> getSdfByUuid(@PathVariable("uuid") UUID uuid)
+	{
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.set("Content-Type","application/json");
+		responseHeaders.set("Access-Control-Allow-Origin","*");
+
+		try {
+			var sdf = sdfService.findSdfByUuid(uuid)
+					.orElseThrow(() -> new IllegalArgumentException("The sdf doesn't exist"));
+
+			var addedBy = userRepository.findUserByUuid(sdf.getAddedBy())
+					.orElseThrow(() -> new IllegalArgumentException("The user doesn't exist"));
+
+			SdfDTO sdfDTO = SdfDTO.builder()
+					.uuid(sdf.getUuid())
+					.name(sdf.getName())
+					.file(sdf.getFile())
+					.author(sdf.getAuthor())
+					.added_by(sdf.getAddedBy())
+					.added_by_name(addedBy.getFirstName() + " " + addedBy.getLastName())
+					.added_at(sdf.getAddedAt())
+					.build();
+
+			return ResponseEntity.ok().headers(responseHeaders).body(sdfDTO);
+		} catch (IllegalArgumentException e) {
+			return ResponseEntity.status(404).headers(responseHeaders).body(new ExceptionDTO("The sdf doesn't exist"));
+		} catch (Exception e) {
+			return ResponseEntity.status(500).headers(responseHeaders).body(new ExceptionDTO("Internal server error"));
+		}
 	}
 
 	@CrossOrigin(origins="http://localhost:3000")
@@ -229,6 +257,39 @@ public class RMNMotorController
 //			catch (Exception e) {
 //				return ResponseEntity.status(500).headers(responseHeaders).body(new ExceptionDTO("Internal server error"));
 //			}
+		}
+	}
+
+	@CrossOrigin(origins="http://localhost:3000")
+	@GetMapping("/rmn/{uuid}")
+	public ResponseEntity<JsonResponse> getRmnByUuid(@PathVariable("uuid") UUID uuid)
+	{
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.set("Content-Type","application/json");
+		responseHeaders.set("Access-Control-Allow-Origin","*");
+
+		try {
+			var rmn = rmnService.findRmnByUuid(uuid)
+					.orElseThrow(() -> new IllegalArgumentException("The rmn doesn't exist"));
+
+			var addedBy = userRepository.findUserByUuid(rmn.getAddedBy())
+					.orElseThrow(() -> new IllegalArgumentException("The user doesn't exist"));
+
+			RmnDTO rmnDTO = RmnDTO.builder()
+					.uuid(rmn.getUuid())
+					.name(rmn.getName())
+					.file(rmn.getFile())
+					.author(rmn.getAuthor())
+					.added_by(rmn.getAddedBy())
+					.added_by_name(addedBy.getFirstName() + " " + addedBy.getLastName())
+					.added_at(rmn.getAddedAt())
+					.build();
+
+			return ResponseEntity.ok().headers(responseHeaders).body(rmnDTO);
+		} catch (IllegalArgumentException e) {
+			return ResponseEntity.status(404).headers(responseHeaders).body(new ExceptionDTO(e.getMessage()));
+		} catch (Exception e) {
+			return ResponseEntity.status(500).headers(responseHeaders).body(new ExceptionDTO("Internal server error"));
 		}
 	}
 
