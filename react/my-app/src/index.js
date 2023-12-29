@@ -39,7 +39,7 @@ const router = createBrowserRouter([
         loader: getSdfFilesNames
       },
       {
-        path:"/rmnDB",
+        path:"/rmn",
         element:<Rmn/>,
         loader: getRmnFilesNames
       },

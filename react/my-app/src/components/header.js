@@ -29,7 +29,7 @@ export function Header()
                         : null}
                     {cookies.get("authentication_token")
                         ? <li>
-                            <a href={"/rmnDB"} className="header-link">
+                            <a href={"/rmn"} className="header-link">
                                 <span>RMN Database</span>
                             </a>
                         </li>
