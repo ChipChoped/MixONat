@@ -16,6 +16,7 @@ import SignIn from "./components/signIn";
 import SignUp from "./components/signUp";
 import { getRmnFilesNames } from './components/rmn';
 import Profile, {getUser} from "./components/profile";
+import Preview, {getFile} from "./components/preview";
 
 const router = createBrowserRouter([
   {
@@ -54,6 +55,11 @@ const router = createBrowserRouter([
         path:"/profile",
         element:<Profile/>,
         loader: getUser
+      },
+      {
+        path:"/preview",
+        element:<Preview/>,
+        loader: getFile
       }
     ]
   },
