@@ -5,22 +5,28 @@ import ClipLoader from "react-spinners/ClipLoader";
 import 'alertifyjs/build/css/alertify.css';
 import "../styles/sdf.scss";
 import red_cross from "../assets/img/red-cross.png";
+import Cookies from "universal-cookie";
 
 
 function Sdf()
 {
-    const [sdfName,setSdfName] = useState('')
-    const [file,setFile] = useState(undefined)
-    const [fileIsLoading,setFileIsLoading] = useState(false)
-    const [upload,setUpload] = useState(false)
-    const [deleteFileName,setDeleteFileName] = useState(undefined)
-    const [deleteFile,setDeleteFile] = useState(false)
+    const [name,setName] = useState('')
+    const [file, setFile] = useState(undefined)
+    const [author, setAuthor] = useState('')
+    const [fileIsLoading, setFileIsLoading] = useState(false)
+    const [upload, setUpload] = useState(false)
+    const [deleteFileUuid, setDeleteFileUuid] = useState(undefined)
+    const [deleteFile, setDeleteFile] = useState(false)
     const navigate = useNavigate();
+
+    const options = { year: 'numeric', month: '2-digit', day: '2-digit' }
 
     const { sdfList } = useLoaderData()
 
+    const cookies = new Cookies();
+
     const readFile = (file) => {
-        if (file===undefined)
+        if (file === undefined)
         {
           setFileIsLoading(false)
           return 
@@ -44,24 +50,11 @@ function Sdf()
     }
 
     const checkFile = () => {
-        if(file !== undefined && sdfName !== '')
+        if (file !== undefined && name !== '')
         {
-            if(sdfList.includes(sdfName))
-            {
-                alertify.confirm("Confirm","Are you sure to continue ? You will overwrite a SDF file.",
-      
-                function()
-                {
-                    setUpload(true)
-                },
-                function(){});
-            }
-            else
-            {
-                setUpload(true)
-            }
+            setUpload(true)
         }
-        else if(file !== undefined)
+        else if (file !== undefined)
         {
             alertify.error('Error, you have to choose a file to upload.')
         }
@@ -71,12 +64,12 @@ function Sdf()
         }
     }
 
-    const deleteFileButton = (deleteFileName) => {
+    const deleteFileButton = (deleteFileUuid) => {
         alertify.confirm("Confirm","Are you sure to continue ? You will delete this SDF file.",
       
                 function()
                 {
-                    setDeleteFileName(deleteFileName)
+                    setDeleteFileUuid(deleteFileUuid)
                     setDeleteFile(true)
                 },
                 function(){});
@@ -93,13 +86,14 @@ function Sdf()
 
                 const requestOptions = {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ name: sdfName, sdf_file: file})
+                    headers: { 'Content-Type': 'application/json',
+                               'Authorization': 'Bearer ' + cookies.get("authentication_token") },
+                    body: JSON.stringify({ name: name, file: file, author: author })
                 };
 
                 // Send it to Spring server
-                fetch("http://localhost:9000/rmn/sdf",requestOptions).then((response) => {
-                    if(response.status === 200)
+                fetch("http://localhost:9000/sdf",requestOptions).then((response) => {
+                    if(response.status === 201)
                     {
                         navigate("/sdf")
                     }
@@ -127,13 +121,14 @@ function Sdf()
 
                 const requestOptions = {
                     method: 'DELETE',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ name: deleteFileName })
+                    headers: { 'Content-Type': 'application/json',
+                               'Authorization': 'Bearer ' + cookies.get("authentication_token") },
+                    body: JSON.stringify({ uuid: deleteFileUuid })
                 };
 
                 // Send it to Spring server
-                fetch("http://localhost:9000/rmn/sdf",requestOptions).then((response) => {
-                    if(response.status === 200)
+                fetch("http://localhost:9000/sdf",requestOptions).then((response) => {
+                    if(response.status === 204)
                     {
                         navigate("/sdf")
                     }
@@ -160,7 +155,11 @@ function Sdf()
                 </div>
                 <div>
                     <label htmlFor='sdfName'>FILE'S NAME</label>
-                    <input type="text" id="sdfName" value={sdfName} placeholder="Enter the name of the SDF's file" onChange={(e) => {setSdfName(e.target.value)}}></input>
+                    <input type="text" id="sdfName" value={name} placeholder="Enter the name of the SDF's file" onChange={(e) => {setName(e.target.value)}}></input>
+                </div>
+                <div>
+                    <label htmlFor='sdfAuthor'>FILE'S AUTHOR</label>
+                    <input type="text" id="sdfAuthor" value={author} placeholder="Enter the author of the SDF's file" onChange={(e) => {setAuthor(e.target.value)}}></input>
                 </div>
                 <div className='sdf-button'>
                     {fileIsLoading 
@@ -173,11 +172,28 @@ function Sdf()
 
             <div className='sdf-files'>
                 <span>All SDF FILES IN THE DATABASE</span>
-                {sdfList.map((file) => (
-                    <div key={file}>
-                        <span>{file}</span>
-                        <input className="sdf-input-image" type="image" src={red_cross} onClick={() => {deleteFileButton(file)}}/>
-                    </div>))}
+                { sdfList.sdfList.map((sdf) => (
+                    <div className='sdf-file'>
+                        <div className='sdf-info' key={ sdf.uuid }>
+                            <div className='sdf-name-date'>
+                                <span>
+                                    <a href={ "/preview?t=sdf&f=" + sdf.uuid }>
+                                        { sdf.name }
+                                    </a>
+                                </span>
+                                <span> { new Date(sdf.added_at).toLocaleDateString(undefined, options) } </span>
+                            </div>
+                            <div className='sdf-attribution'>
+                                <span> Author: <b> { sdf.author } </b> </span>
+                                <span> Added by:&nbsp;
+                                    <a href={ "/profile?u=" + sdf.added_by } target="_blank" rel="noreferrer">
+                                        { sdf.added_by_name }
+                                    </a>
+                                </span>
+                            </div>
+                        </div>
+                        <input className="sdf-input-image" type="image" src={ red_cross } onClick={() => { deleteFileButton(sdf.uuid) }}/>
+                    </div>)) }
             </div>
         </div>
     )
@@ -191,7 +207,7 @@ export async function getSdfFilesNames()
 
     // Send request to Spring server
 
-    const response = await fetch("http://localhost:9000/rmn/sdf/names",requestOptions);
+    const response = await fetch("http://localhost:9000/sdf/list",requestOptions);
 
     const json = await response.json();
 

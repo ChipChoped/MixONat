@@ -38,13 +38,13 @@ services:
       context: ./database
       dockerfile: Dockerfile
     ports:
-      - "5432:5432"
+      - "54320:5432"
     environment:
       - POSTGRES_USER=mixo
       - POSTGRES_PASSWORD=mixo
       - PGDATA=/tmp
     volumes:
-      - ./database:/var/lib/postgres/data
+      - postgres-db:/var/lib/postgres/data
 volumes:
   postgres-db:
     driver: local

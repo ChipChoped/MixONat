@@ -1,16 +1,37 @@
 package com.backend.mixonat.model;
 
-import lombok.Data;
+import lombok.*;
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
+import java.util.UUID;
+
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
+@ToString
 @Table(name = "rmn")
 public class Rmn
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int id;
+    Integer id;
+
+    @Column(unique = true)
+    UUID uuid;
+
     String name;
-    String rmn_file;
+
+    @Column(name = "file")
+    String file;
+
+    String author;
+
+    @Column(name = "added_by")
+    UUID addedBy;
+
+    @Column(name = "added_at")
+    LocalDateTime addedAt;
 }

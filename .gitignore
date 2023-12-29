@@ -1,4 +1,4 @@
-react/my-app/node_modules
+react/my-app/node_modules/
 
 Flask/__pycache__/
 Flask/motor/__pycache__/

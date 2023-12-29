@@ -2,7 +2,10 @@ package com.backend.mixonat.service;
 
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
+import com.backend.mixonat.model.SdfNoFile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,30 +17,23 @@ public class SdfService {
     @Autowired
     SdfRepository sdfRepository;
 
-    public List<String> getSdfWithoutFile()
+    public List<SdfNoFile> getSdfWithoutFile()
     {
         return sdfRepository.findAllWithoutFile();
     }
 
-    public List<Integer> findSdfIdByName(String name)
+    public Optional<Sdf> findSdfByUuid(UUID uuid)
     {
-        return sdfRepository.findSdfIdByName(name);
+        return sdfRepository.findSdfByUuid(uuid);
     }
 
-    public Sdf findOneByName(String name)
+    public void saveSdf(Sdf newSdf)
     {
-        return sdfRepository.findOneByName(name);
+        sdfRepository.save(newSdf.getName(), newSdf.getFile(), newSdf.getAuthor(), newSdf.getAddedBy());
     }
 
-    public Sdf saveSdf(Sdf newSdf)
-    {
-        return sdfRepository.save(newSdf);
-    }
-
-    public Boolean deleteSdf(Sdf deleteSdf)
+    public void deleteSdf(Sdf deleteSdf)
     {
         sdfRepository.delete(deleteSdf);
-
-        return true;
     }
 }

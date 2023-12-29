@@ -2,13 +2,12 @@ package com.backend.mixonat.service;
 
 import com.backend.mixonat.dto.JsonResponse;
 import com.backend.mixonat.dto.TokenDTO;
-import com.backend.mixonat.dto.UserDTO;
+import com.backend.mixonat.dto.NewUserDTO;
 import com.backend.mixonat.dto.LoginsDTO;
 import com.backend.mixonat.dto.ExceptionDTO;
 import com.backend.mixonat.model.Role;
 import com.backend.mixonat.model.User;
 import com.backend.mixonat.repository.UserRepository;
-import jakarta.validation.ConstraintViolationException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -19,6 +18,8 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 @Service
 @RequiredArgsConstructor
 public class AuthenticationService {
@@ -28,7 +29,7 @@ public class AuthenticationService {
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
 
-    public ResponseEntity<JsonResponse> signUp(UserDTO request) {
+    public ResponseEntity<JsonResponse> signUp(NewUserDTO request) {
         HttpHeaders responseHeaders = new HttpHeaders();
         responseHeaders.set("Content-Type","application/json");
 
@@ -57,8 +58,10 @@ public class AuthenticationService {
         responseHeaders.set("Content-Type","application/json");
 
         try {
+            UUID uuid = userRepository.findUuidByEmail(request.getEmail());
+
             authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));
+                    new UsernamePasswordAuthenticationToken(uuid, request.getPassword()));
 
             var user = userRepository.findUserByEmail(request.getEmail())
                     .orElseThrow(IllegalArgumentException::new);
@@ -69,26 +72,6 @@ public class AuthenticationService {
         }
         catch (AuthenticationException | IllegalArgumentException e) {
             return ResponseEntity.status(401).headers(responseHeaders).body(new ExceptionDTO("Incorrect email or password"));
-        }
-    }
-
-    public ResponseEntity<JsonResponse> deleteAccount(LoginsDTO request) {
-        HttpHeaders responseHeaders = new HttpHeaders();
-        responseHeaders.set("Content-Type","application/json");
-
-        try {
-            var user = userRepository.findUserByEmail(request.getEmail())
-                    .orElseThrow(IllegalArgumentException::new);
-
-            if (passwordEncoder.matches(request.getPassword(), user.getPassword())) {
-                userRepository.delete(user);
-                return ResponseEntity.status(204).headers(responseHeaders).build();
-            }
-            else
-                return ResponseEntity.status(403).headers(responseHeaders).body(new ExceptionDTO("Incorrect password"));
-        }
-        catch (IllegalArgumentException e) {
-            return ResponseEntity.status(403).headers(responseHeaders).body(new ExceptionDTO("The email doesn't match the current account"));
         }
     }
 }

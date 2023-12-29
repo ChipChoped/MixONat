@@ -12,11 +12,12 @@ import java.util.UUID;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserDTO implements JsonResponse {
-    UUID uuid;
-    String first_name;
-    String last_name;
-    String email;
-    LocalDateTime created_at;
-    LocalDateTime updated_at;
+public class RmnDTO implements JsonResponse {
+    private UUID uuid;
+    private String name;
+    private String file;
+    private String author;
+    private UUID added_by;
+    private String added_by_name;
+    private LocalDateTime added_at;
 }

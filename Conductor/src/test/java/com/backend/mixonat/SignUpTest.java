@@ -1,14 +1,11 @@
 package com.backend.mixonat;
 
-import static org.hamcrest.Matchers.containsString;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import com.backend.mixonat.dto.JsonResponse;
-import com.backend.mixonat.dto.UserDTO;
+import com.backend.mixonat.dto.NewUserDTO;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
@@ -19,7 +16,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
-import org.springframework.http.RequestEntity;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
@@ -31,7 +27,7 @@ public class SignUpTest {
     @Autowired
     private MockMvc mockMvc;
 
-    UserDTO newUser = UserDTO.builder()
+    NewUserDTO newUser = NewUserDTO.builder()
             .firstName("Test")
             .lastName("Test")
             .email("test@test.com")

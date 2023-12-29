@@ -1,7 +1,7 @@
 package com.backend.mixonat.repository;
 
 import com.backend.mixonat.configuration.CustomProperties;
-import com.backend.mixonat.model.FrontRequest;
+import com.backend.mixonat.model.MotorDTO;
 import com.backend.mixonat.model.Molecules;
 import com.backend.mixonat.model.checkRequest;
 import com.backend.mixonat.model.checkResponse;
@@ -19,7 +19,7 @@ public class RMNMotorRepository
 	private CustomProperties props;
 
 	// Function to request response from the python motor for the data 
-    public Molecules getMolecules(FrontRequest request)
+    public Molecules getMolecules(MotorDTO request)
 	{
 		RestClient restClient = RestClient.create();
 
