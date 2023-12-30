@@ -21,15 +21,15 @@ public class UserController {
     private final JwtService jwtService;
 
     @CrossOrigin(origins="http://localhost:3000")
-    @GetMapping("/user/uuid")
+    @GetMapping("/user/id")
     public ResponseEntity<JsonResponse> getUser(@RequestHeader("Authorization") String token) {
         HttpHeaders responseHeaders = new HttpHeaders();
         responseHeaders.set("Content-Type", "application/json");
 
         try {
-            UUID uuid = UUID.fromString(jwtService.extractUserName(token.split(" ")[1]));
+            UUID id = UUID.fromString(jwtService.extractUserName(token.split(" ")[1]));
 
-            return ResponseEntity.status(200).headers(responseHeaders).body(UuidDTO.builder().uuid(uuid).build());
+            return ResponseEntity.status(200).headers(responseHeaders).body(IdDTO.builder().id(id).build());
         }
         catch (IllegalArgumentException e) {
             return ResponseEntity.status(404).headers(responseHeaders).body(new ExceptionDTO("The user doesn't exist"));
@@ -37,17 +37,17 @@ public class UserController {
     }
 
     @CrossOrigin(origins="http://localhost:3000")
-    @GetMapping("/user/{uuid}")
-    public ResponseEntity<JsonResponse> getUser(@PathVariable UUID uuid) {
+    @GetMapping("/user/{id}")
+    public ResponseEntity<JsonResponse> getUser(@PathVariable UUID id) {
         HttpHeaders responseHeaders = new HttpHeaders();
         responseHeaders.set("Content-Type", "application/json");
 
         try {
-            var user = userRepository.findUserByUuid(uuid)
+            var user = userRepository.findUserById(id)
                     .orElseThrow(IllegalArgumentException::new);
 
             UserDTO userDTO = UserDTO.builder()
-                .uuid(user.getUuid())
+                .id(user.getId())
                 .first_name(user.getFirstName())
                 .last_name(user.getLastName())
                 .email(user.getEmail())

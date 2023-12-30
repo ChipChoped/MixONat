@@ -22,9 +22,9 @@ public class SdfService {
         return sdfRepository.findAllWithoutFile();
     }
 
-    public Optional<Sdf> findSdfByUuid(UUID uuid)
+    public Optional<Sdf> findSdfById(UUID id)
     {
-        return sdfRepository.findSdfByUuid(uuid);
+        return sdfRepository.findSdfById(id);
     }
 
     public void saveSdf(Sdf newSdf)

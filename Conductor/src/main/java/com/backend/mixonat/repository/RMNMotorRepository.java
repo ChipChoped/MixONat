@@ -1,7 +1,7 @@
 package com.backend.mixonat.repository;
 
 import com.backend.mixonat.configuration.CustomProperties;
-import com.backend.mixonat.model.MotorDTO;
+import com.backend.mixonat.dto.MotorDTO;
 import com.backend.mixonat.model.Molecules;
 import com.backend.mixonat.model.checkRequest;
 import com.backend.mixonat.model.checkResponse;

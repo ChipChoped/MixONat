@@ -1,7 +1,8 @@
-package com.backend.mixonat.model;
+package com.backend.mixonat.dto;
 
 import java.io.Serializable;
 
+import com.backend.mixonat.model.Parametres;
 import lombok.Data;
 
 @Data

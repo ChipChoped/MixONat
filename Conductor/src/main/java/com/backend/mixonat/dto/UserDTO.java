@@ -13,7 +13,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserDTO implements JsonResponse {
-    UUID uuid;
+    UUID id;
     String first_name;
     String last_name;
     String email;

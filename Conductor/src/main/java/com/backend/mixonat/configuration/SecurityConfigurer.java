@@ -68,23 +68,23 @@ public class SecurityConfigurer {
                 )
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(
-                                antMatcher(HttpMethod.GET, "/user/{uuid}"),
+                                antMatcher(HttpMethod.GET, "/user/{id}"),
                                 antMatcher(HttpMethod.PUT, "/user/sign-up"),
                                 antMatcher(HttpMethod.POST, "/user/sign-in"),
                                 antMatcher(HttpMethod.DELETE, "/user/delete-account"),
                                 antMatcher(HttpMethod.OPTIONS, "/user"),
-                                antMatcher(HttpMethod.OPTIONS, "/user/uuid"),
+                                antMatcher(HttpMethod.OPTIONS, "/user/id"),
                                 antMatcher(HttpMethod.OPTIONS, "/user/sign-up"),
                                 antMatcher(HttpMethod.OPTIONS, "/user/sign-in"),
                                 antMatcher(HttpMethod.OPTIONS, "/user/delete-account")).permitAll()
                         .requestMatchers(
                                 antMatcher(HttpMethod.GET, "/user"),
-                                antMatcher(HttpMethod.GET, "/user/uuid")).hasAnyRole("ADMIN", "USER")
+                                antMatcher(HttpMethod.GET, "/user/id")).hasAnyRole("ADMIN", "USER")
                         .requestMatchers(
                                 antMatcher(HttpMethod.GET, "/sdf/list"),
                                 antMatcher(HttpMethod.GET, "/rmn/list"),
-                                antMatcher(HttpMethod.GET, "/sdf/{uuid}"),
-                                antMatcher(HttpMethod.GET, "/rmn/{uuid}"),
+                                antMatcher(HttpMethod.GET, "/sdf/{id}"),
+                                antMatcher(HttpMethod.GET, "/rmn/{id}"),
                                 antMatcher(HttpMethod.POST, "/motor"),
                                 antMatcher(HttpMethod.POST, "/checkFile"),
                                 antMatcher(HttpMethod.OPTIONS, "/motor"),

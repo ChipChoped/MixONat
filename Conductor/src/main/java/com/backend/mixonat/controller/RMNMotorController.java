@@ -12,7 +12,6 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
 import java.util.UUID;
 
 @RestController
@@ -49,22 +48,22 @@ public class RMNMotorController
 	}
 
 	@CrossOrigin(origins="http://localhost:3000")
-	@GetMapping("/sdf/{uuid}")
-	public ResponseEntity<JsonResponse> getSdfByUuid(@PathVariable("uuid") UUID uuid)
+	@GetMapping("/sdf/{id}")
+	public ResponseEntity<JsonResponse> getSdfById(@PathVariable("id") UUID id)
 	{
 		HttpHeaders responseHeaders = new HttpHeaders();
 		responseHeaders.set("Content-Type","application/json");
 		responseHeaders.set("Access-Control-Allow-Origin","*");
 
 		try {
-			var sdf = sdfService.findSdfByUuid(uuid)
+			var sdf = sdfService.findSdfById(id)
 					.orElseThrow(() -> new IllegalArgumentException("The sdf doesn't exist"));
 
-			var addedBy = userRepository.findUserByUuid(sdf.getAddedBy())
+			var addedBy = userRepository.findUserById(sdf.getAddedBy())
 					.orElseThrow(() -> new IllegalArgumentException("The user doesn't exist"));
 
 			SdfDTO sdfDTO = SdfDTO.builder()
-					.uuid(sdf.getUuid())
+					.id(sdf.getId())
 					.name(sdf.getName())
 					.file(sdf.getFile())
 					.author(sdf.getAuthor())
@@ -95,8 +94,8 @@ public class RMNMotorController
 		else
 		{
 			try {
-				UUID uuid = UUID.fromString(jwtService.extractUserName(token.split(" ")[1]));
-				var user = userRepository.findUserByUuid(uuid)
+				UUID id = UUID.fromString(jwtService.extractUserName(token.split(" ")[1]));
+				var user = userRepository.findUserById(id)
 						.orElseThrow(IllegalArgumentException::new);
 
 				if (newSdf.getAuthor().isEmpty())
@@ -108,7 +107,7 @@ public class RMNMotorController
 						.name(newSdf.getName())
 						.file(newSdf.getFile())
 						.author(newSdf.getAuthor())
-						.addedBy(uuid)
+						.addedBy(id)
 						.build();
 
 				sdfService.saveSdf(sdf);
@@ -126,18 +125,18 @@ public class RMNMotorController
 
 	@CrossOrigin(origins="http://localhost:3000")
 	@DeleteMapping("/sdf")
-	public ResponseEntity<JsonResponse> deleteSdf(@RequestHeader("Authorization") String token, @RequestBody UuidDTO uuid)
+	public ResponseEntity<JsonResponse> deleteSdf(@RequestHeader("Authorization") String token, @RequestBody IdDTO id)
 	{
 		HttpHeaders responseHeaders = new HttpHeaders();
 		responseHeaders.set("Content-Type","application/json");
 
 		try {
-			UUID userUuid = UUID.fromString(jwtService.extractUserName(token.split(" ")[1]));
+			UUID userId = UUID.fromString(jwtService.extractUserName(token.split(" ")[1]));
 
-			var sdf = sdfService.findSdfByUuid(uuid.getUuid())
+			var sdf = sdfService.findSdfById(id.getId())
 					.orElseThrow(IllegalArgumentException::new);
 
-			if (!sdf.getAddedBy().equals(userUuid)) {
+			if (!sdf.getAddedBy().equals(userId)) {
 				return ResponseEntity.status(403).headers(responseHeaders).body(new ExceptionDTO("You don't have permission to delete this sdf"));
 			} else {
 				sdfService.deleteSdf(sdf);
@@ -162,7 +161,7 @@ public class RMNMotorController
 			if (motorDTO.getUseSdfDatabase() || motorDTO.getUseRmnDatabase()) {
 				try {
 					if (motorDTO.getUseSdfDatabase()) {
-						var sdf = sdfService.findSdfByUuid(UUID.fromString(motorDTO.getSdf()))
+						var sdf = sdfService.findSdfById(UUID.fromString(motorDTO.getSdf()))
 								.orElseThrow(IllegalArgumentException::new);
 
 						motorDTO.setSdf(sdf.getFile());
@@ -174,7 +173,7 @@ public class RMNMotorController
 
 				try {
 					if (motorDTO.getUseRmnDatabase()) {
-						var rmn = rmnService.findRmnByUuid(UUID.fromString(motorDTO.getSpectrum()))
+						var rmn = rmnService.findRmnById(UUID.fromString(motorDTO.getSpectrum()))
 								.orElseThrow(IllegalArgumentException::new);
 
 						motorDTO.setSpectrum(rmn.getFile());
@@ -231,8 +230,8 @@ public class RMNMotorController
 		else
 		{
 			try {
-				UUID uuid = UUID.fromString(jwtService.extractUserName(token.split(" ")[1]));
-				var user = userRepository.findUserByUuid(uuid)
+				UUID id = UUID.fromString(jwtService.extractUserName(token.split(" ")[1]));
+				var user = userRepository.findUserById(id)
 						.orElseThrow(IllegalArgumentException::new);
 
 				if (newRmn.getAuthor().isEmpty())
@@ -244,7 +243,7 @@ public class RMNMotorController
 						.name(newRmn.getName())
 						.file(newRmn.getFile())
 						.author(newRmn.getAuthor())
-						.addedBy(uuid)
+						.addedBy(id)
 						.build();
 
 				rmnService.saveRmn(rmn);
@@ -261,22 +260,22 @@ public class RMNMotorController
 	}
 
 	@CrossOrigin(origins="http://localhost:3000")
-	@GetMapping("/rmn/{uuid}")
-	public ResponseEntity<JsonResponse> getRmnByUuid(@PathVariable("uuid") UUID uuid)
+	@GetMapping("/rmn/{id}")
+	public ResponseEntity<JsonResponse> getRmnById(@PathVariable("id") UUID id)
 	{
 		HttpHeaders responseHeaders = new HttpHeaders();
 		responseHeaders.set("Content-Type","application/json");
 		responseHeaders.set("Access-Control-Allow-Origin","*");
 
 		try {
-			var rmn = rmnService.findRmnByUuid(uuid)
+			var rmn = rmnService.findRmnById(id)
 					.orElseThrow(() -> new IllegalArgumentException("The rmn doesn't exist"));
 
-			var addedBy = userRepository.findUserByUuid(rmn.getAddedBy())
+			var addedBy = userRepository.findUserById(rmn.getAddedBy())
 					.orElseThrow(() -> new IllegalArgumentException("The user doesn't exist"));
 
 			RmnDTO rmnDTO = RmnDTO.builder()
-					.uuid(rmn.getUuid())
+					.id(rmn.getId())
 					.name(rmn.getName())
 					.file(rmn.getFile())
 					.author(rmn.getAuthor())
@@ -301,12 +300,12 @@ public class RMNMotorController
 		responseHeaders.set("Content-Type","application/json");
 
 		try {
-			UUID userUuid = UUID.fromString(jwtService.extractUserName(token.split(" ")[1]));
+			UUID userId = UUID.fromString(jwtService.extractUserName(token.split(" ")[1]));
 
-			var rmn = rmnService.findRmnByUuid(deleteRmn.getUuid())
+			var rmn = rmnService.findRmnById(deleteRmn.getId())
 					.orElseThrow(IllegalArgumentException::new);
 
-			if (!rmn.getAddedBy().equals(userUuid)) {
+			if (!rmn.getAddedBy().equals(userId)) {
 				return ResponseEntity.status(403).headers(responseHeaders).body(new ExceptionDTO("You don't have permission to delete this rmn"));
 			} else {
 				rmnService.deleteRmn(rmn);

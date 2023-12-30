@@ -17,7 +17,7 @@ public class UserService {
     private final UserRepository userRepository;
 
     public UserDetailsService userDetailsService() {
-        return uuid -> userRepository.findUserByUuid(UUID.fromString(uuid))
+        return uuid -> userRepository.findUserById(UUID.fromString(uuid))
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
     }
 

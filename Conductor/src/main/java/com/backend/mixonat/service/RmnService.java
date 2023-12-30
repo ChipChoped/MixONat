@@ -22,9 +22,9 @@ public class RmnService {
         return rmnRepository.findAllWithoutFile();
     }
 
-    public Optional<Rmn> findRmnByUuid(UUID uuid)
+    public Optional<Rmn> findRmnById(UUID id)
     {
-        return rmnRepository.findRmnByUuid(uuid);
+        return rmnRepository.findRmnById(id);
     }
 
     public void saveRmn(Rmn newRmn)
@@ -32,10 +32,9 @@ public class RmnService {
         rmnRepository.save(newRmn.getName(), newRmn.getFile(), newRmn.getAuthor(), newRmn.getAddedBy());
     }
 
-    public Boolean deleteRmn(Rmn deleteRmn)
+    public void deleteRmn(Rmn deleteRmn)
     {
         rmnRepository.delete(deleteRmn);
 
-        return true;
     }
 }

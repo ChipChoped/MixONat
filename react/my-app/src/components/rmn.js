@@ -15,7 +15,7 @@ function Rmn()
     const [author, setAuthor] = useState('')
     const [fileIsLoading, setFileIsLoading] = useState(false)
     const [upload, setUpload] = useState(false)
-    const [deleteFileUuid, setDeleteFileUuid] = useState(undefined)
+    const [deleteFileId, setDeleteFileId] = useState(undefined)
     const [deleteFile, setDeleteFile] = useState(false)
     const navigate = useNavigate();
 
@@ -64,12 +64,12 @@ function Rmn()
         }
     }
 
-    const deleteFileButton = (deleteFileUuid) => {
+    const deleteFileButton = (deleteFileId) => {
         alertify.confirm("Confirm","Are you sure to continue ? You will delete this RMN file.",
       
                 function()
                 {
-                    setDeleteFileUuid(deleteFileUuid)
+                    setDeleteFileId(deleteFileId)
                     setDeleteFile(true)
                 },
                 function(){});
@@ -95,7 +95,7 @@ function Rmn()
                 fetch("http://localhost:9000/rmn",requestOptions).then((response) => {
                     if(response.status === 201)
                     {
-                        navigate("/rmnDB")
+                        navigate("/rmn")
                     }
                     else
                     {
@@ -123,14 +123,14 @@ function Rmn()
                     method: 'DELETE',
                     headers: { 'Content-Type': 'application/json',
                                'Authorization': 'Bearer ' + cookies.get("authentication_token") },
-                    body: JSON.stringify({ uuid: deleteFileUuid })
+                    body: JSON.stringify({ id: deleteFileId })
                 };
 
                 // Send it to Spring server
                 fetch("http://localhost:9000/rmn",requestOptions).then((response) => {
                     if(response.status === 204)
                     {
-                        navigate("/rmnDB")
+                        navigate("/rmn")
                     }
                     else
                     {
@@ -174,10 +174,10 @@ function Rmn()
                 <span>All RMN FILES IN THE DATABASE</span>
                 { rmnList.rmnList.map((rmn) => (
                     <div className='rmn-file'>
-                        <div className='rmn-info' key={ rmn.uuid }>
+                        <div className='rmn-info' key={ rmn.id }>
                             <div className='rmn-name-date'>
                                 <span>
-                                    <a href={"/preview?t=rmn&f=" + rmn.uuid}>
+                                    <a href={"/preview?t=rmn&f=" + rmn.id}>
                                         { rmn.name }
                                     </a>
                                 </span>
@@ -192,7 +192,7 @@ function Rmn()
                                 </span>
                             </div>
                         </div>
-                        <input className="rmn-input-image" type="image" src={ red_cross } onClick={() => { deleteFileButton(rmn.uuid) }}/>
+                        <input className="rmn-input-image" type="image" src={ red_cross } onClick={() => { deleteFileButton(rmn.id) }}/>
                     </div> ))}
             </div>
         </div>

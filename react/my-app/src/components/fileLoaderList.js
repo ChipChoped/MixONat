@@ -72,7 +72,7 @@ export function FileLoaderList({sdfList,useSdfList,setSDF,setSdfIsLoading,setSpe
             ? <select className={hasFile ? "file-loader-select" : "file-loader-select-without-file"} onChange={(e) => {chooseSdfFile(e.target.value)}}>
                 <option value="">-- Please choose a sdf file --</option>
                 { sdfList.sdfList.map((sdf) => (
-                    <option value={ sdf.uuid } key={ sdf.uuid }>
+                    <option value={ sdf.id } key={ sdf.id }>
                         { sdf.name + " | " + new Date(sdf.added_at).toLocaleDateString(undefined, options)
                             + " | Author: " + sdf.author + " | Added by: " + sdf.added_by_name }
                     </option>)) }
@@ -84,7 +84,7 @@ export function FileLoaderList({sdfList,useSdfList,setSDF,setSdfIsLoading,setSpe
             ? <select className={hasFile ? "file-loader-select" : "file-loader-select-without-file"} onChange={(e) => {chooseRmnFile(e.target.value)}}>
                 <option value="">-- Please choose a rmn file --</option>
                 { rmnList.rmnList.map((rmn) => (
-                    <option value={ rmn.uuid } key={ rmn.uuid }>
+                    <option value={ rmn.id } key={ rmn.id }>
                         { rmn.name + " | " + new Date(rmn.added_at).toLocaleDateString(undefined, options)
                             + " | Author: " + rmn.author + " | Added by: " + rmn.added_by_name }
                     </option>)) }

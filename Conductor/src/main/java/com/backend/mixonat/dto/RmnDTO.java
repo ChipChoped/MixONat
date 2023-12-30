@@ -13,7 +13,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 public class RmnDTO implements JsonResponse {
-    private UUID uuid;
+    private UUID id;
     private String name;
     private String file;
     private String author;

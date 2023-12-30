@@ -58,7 +58,7 @@ public class AuthenticationService {
         responseHeaders.set("Content-Type","application/json");
 
         try {
-            UUID uuid = userRepository.findUuidByEmail(request.getEmail());
+            UUID uuid = userRepository.findIdByEmail(request.getEmail());
 
             authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(uuid, request.getPassword()));

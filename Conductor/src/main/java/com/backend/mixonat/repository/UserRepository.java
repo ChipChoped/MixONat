@@ -14,10 +14,10 @@ import java.util.UUID;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, UUID> {
-    @Query(value="SELECT uuid FROM users WHERE email = ?1", nativeQuery = true)
-    UUID findUuidByEmail(String email);
+    @Query(value="SELECT id FROM users WHERE email = ?1", nativeQuery = true)
+    UUID findIdByEmail(String email);
 
-    Optional<User> findUserByUuid(UUID uuid);
+    Optional<User> findUserById(UUID id);
     Optional<User> findUserByEmail(String email);
 
     @Modifying

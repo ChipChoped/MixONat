@@ -15,7 +15,7 @@ function Sdf()
     const [author, setAuthor] = useState('')
     const [fileIsLoading, setFileIsLoading] = useState(false)
     const [upload, setUpload] = useState(false)
-    const [deleteFileUuid, setDeleteFileUuid] = useState(undefined)
+    const [deleteFileId, setDeleteFileId] = useState(undefined)
     const [deleteFile, setDeleteFile] = useState(false)
     const navigate = useNavigate();
 
@@ -64,12 +64,12 @@ function Sdf()
         }
     }
 
-    const deleteFileButton = (deleteFileUuid) => {
+    const deleteFileButton = (deleteFileId) => {
         alertify.confirm("Confirm","Are you sure to continue ? You will delete this SDF file.",
       
                 function()
                 {
-                    setDeleteFileUuid(deleteFileUuid)
+                    setDeleteFileId(deleteFileId)
                     setDeleteFile(true)
                 },
                 function(){});
@@ -123,7 +123,7 @@ function Sdf()
                     method: 'DELETE',
                     headers: { 'Content-Type': 'application/json',
                                'Authorization': 'Bearer ' + cookies.get("authentication_token") },
-                    body: JSON.stringify({ uuid: deleteFileUuid })
+                    body: JSON.stringify({ id: deleteFileId })
                 };
 
                 // Send it to Spring server
@@ -174,10 +174,10 @@ function Sdf()
                 <span>All SDF FILES IN THE DATABASE</span>
                 { sdfList.sdfList.map((sdf) => (
                     <div className='sdf-file'>
-                        <div className='sdf-info' key={ sdf.uuid }>
+                        <div className='sdf-info' key={ sdf.id }>
                             <div className='sdf-name-date'>
                                 <span>
-                                    <a href={ "/preview?t=sdf&f=" + sdf.uuid }>
+                                    <a href={ "/preview?t=sdf&f=" + sdf.id }>
                                         { sdf.name }
                                     </a>
                                 </span>
@@ -192,7 +192,7 @@ function Sdf()
                                 </span>
                             </div>
                         </div>
-                        <input className="sdf-input-image" type="image" src={ red_cross } onClick={() => { deleteFileButton(sdf.uuid) }}/>
+                        <input className="sdf-input-image" type="image" src={ red_cross } onClick={() => { deleteFileButton(sdf.id) }}/>
                     </div>)) }
             </div>
         </div>

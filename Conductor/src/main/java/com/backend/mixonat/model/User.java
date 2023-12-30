@@ -22,11 +22,8 @@ import java.util.UUID;
 public class User implements UserDetails
 {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Integer id;
-
-    @Column(unique = true)
-    UUID uuid;
+    @Column(name = "id", unique = true)
+    UUID id;
 
     @Column(name = "first_name")
     String firstName;
@@ -55,7 +52,7 @@ public class User implements UserDetails
 
     @Override
     public String getUsername() {
-        return uuid.toString();
+        return id.toString();
     }
 
     @Override

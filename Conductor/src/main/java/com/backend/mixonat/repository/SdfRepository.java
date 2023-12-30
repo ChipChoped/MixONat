@@ -15,13 +15,13 @@ import java.util.UUID;
 
 @Repository
 public interface SdfRepository extends JpaRepository<Sdf, UUID> {
-    @Query(value="SELECT s.uuid, s.name, s.author, s.added_by, s.added_at, " +
+    @Query(value="SELECT s.id, s.name, s.author, s.added_by, s.added_at, " +
             "CONCAT(u.first_name, ' ', u.last_name) AS added_by_name " +
             "FROM sdf s " +
-            "INNER JOIN users u ON s.added_by = u.uuid", nativeQuery = true)
+            "INNER JOIN users u ON s.added_by = u.id", nativeQuery = true)
     List<SdfNoFile> findAllWithoutFile();
 
-    Optional<Sdf> findSdfByUuid(UUID uuid);
+    Optional<Sdf> findSdfById(UUID id);
 
     @Modifying
     @Transactional

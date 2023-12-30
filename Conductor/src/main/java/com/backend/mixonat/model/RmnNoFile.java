@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 public interface RmnNoFile {
-    UUID getUuid();
+    UUID getId();
     String getName();
     String getAuthor();
     UUID getAdded_by();

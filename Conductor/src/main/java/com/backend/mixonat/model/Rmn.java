@@ -16,11 +16,8 @@ import java.util.UUID;
 public class Rmn
 {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Integer id;
-
-    @Column(unique = true)
-    UUID uuid;
+    @Column(name = "id", unique = true)
+    UUID id;
 
     String name;
 

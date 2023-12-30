@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import com.backend.mixonat.model.Molecules;
 import com.backend.mixonat.model.checkRequest;
 import com.backend.mixonat.model.checkResponse;
-import com.backend.mixonat.model.MotorDTO;
+import com.backend.mixonat.dto.MotorDTO;
 import com.backend.mixonat.repository.RMNMotorRepository;
 
 @Service

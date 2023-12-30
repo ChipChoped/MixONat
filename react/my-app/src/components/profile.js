@@ -44,9 +44,9 @@ function Profile()
 export async function getUser()
 {
     const queryParams = new URLSearchParams(window.location.search)
-    let uuid = queryParams.get("u")
+    let id = queryParams.get("u")
 
-    if (uuid === null) {
+    if (id === null) {
         const cookies = new Cookies();
 
         if (cookies.get('authentication_token')) {
@@ -56,11 +56,11 @@ export async function getUser()
                            'Authorization': 'Bearer ' + cookies.get("authentication_token") }
             };
 
-            const response = await fetch("http://localhost:9000/user/uuid", requestOptions);
+            const response = await fetch("http://localhost:9000/user/id", requestOptions);
             const json = await response.json();
 
             if (response.status === 200) {
-                uuid = json.uuid
+                id = json.id
             }
             else {
                 return { user: undefined, status: response.status, message: json.message }
@@ -75,7 +75,7 @@ export async function getUser()
         method: 'GET'
     };
 
-    const response = await fetch("http://localhost:9000/user/" + uuid, requestOptions);
+    const response = await fetch("http://localhost:9000/user/" + id, requestOptions);
     const json = await response.json();
 
     if (response.status === 200) {

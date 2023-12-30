@@ -17,13 +17,13 @@ import org.springframework.data.jpa.repository.Query;
 
 @Repository
 public interface RmnRepository extends JpaRepository<Rmn, UUID> {
-    @Query(value="SELECT r.uuid, r.name, r.author, r.added_by, r.added_at, " +
+    @Query(value="SELECT r.id, r.name, r.author, r.added_by, r.added_at, " +
             "CONCAT(u.first_name, ' ', u.last_name) AS added_by_name " +
             "FROM rmn r " +
-            "INNER JOIN users u ON r.added_by = u.uuid", nativeQuery = true)
+            "INNER JOIN users u ON r.added_by = u.id", nativeQuery = true)
     List<RmnNoFile> findAllWithoutFile();
 
-    Optional<Rmn> findRmnByUuid(UUID uuid);
+    Optional<Rmn> findRmnById(UUID id);
 
     @Modifying
     @Transactional
