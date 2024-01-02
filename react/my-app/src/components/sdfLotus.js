@@ -336,7 +336,7 @@ function SdfLotus() {
         <div className="allColumn">
             <div className="column">
                 {/* Colonne 1 */}
-                <h2>Taxonomy</h2>
+                <h2>Taxonomic criteria</h2>
                 <div>
                   <h3>Family</h3>
                   <div className="list-container">
@@ -387,7 +387,7 @@ function SdfLotus() {
             </div>
             <div className="column">
                 {/* Colonne 2 */}
-                <h2>Ontology</h2>
+                <h2>Chemical ontologies</h2>
                 <div>
                   <h3>NP Pathways</h3>
                   <div className="list-container">
@@ -451,6 +451,10 @@ function SdfLotus() {
                         ))}
                       </ul>
                   </div>
+                  <div class="delete-filtre">
+                    <button onClick={() => handleDeleteFiltreClick()}>Delete</button>
+                    <button onClick={() => handleDeleteAllFiltreClick()}>Delete all</button>
+                  </div>
                   <div className="radio-btn">
                   <label>
                     <input
@@ -461,8 +465,8 @@ function SdfLotus() {
                     />
                     Get all catagories
                   </label>
-                  
-                    <label>
+                  <p><small><em>* Search for each of the critera individually and merged the result into a single file after removal of duplicates</em></small></p>
+                  <label>
                       <input
                         type="radio"
                         value="inter"
@@ -470,16 +474,19 @@ function SdfLotus() {
                         onChange={() => setSelectedOption('inter')}
                       />
                       Get chemical class in family
-                    </label>
+                  </label>
+                  <p><small><em>* Finds compounds matching the taxonomical criteria and then filter the results only retaining entries that meet the remaining criteria</em></small></p>
+                  <div class="saveDatabaseButton">
                     <label>
                       <input
-                        type="checkbox"
-                        checked={isChecked}
-                        onChange={() => setIsChecked(!isChecked)}
-                      />
-                      Save in database
+                          type="checkbox"
+                          checked={isChecked}
+                          onChange={() => setIsChecked(!isChecked)}
+                        />
+                        Save in database
                     </label>
                   </div>
+                </div>
                   
                   <input
                       type="text"
@@ -490,8 +497,7 @@ function SdfLotus() {
 
                   <p>{statusMessage}</p>
                   {upload && <p>The SDF file is available in your downloads</p>}
-                  <button onClick={() => handleDeleteFiltreClick()}>Delete</button>
-                  <button onClick={() => handleDeleteAllFiltreClick()}>Delete all</button>
+                  
               </div>            
             </div>
         </div>

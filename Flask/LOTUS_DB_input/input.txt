@@ -1,0 +1,17 @@
+Fonctionnalité issue de VersaDB :
+
+Les produits naturels sont recupérer depuis LOTUS via son API à l'aide de la fonction getlotus() du script ginfo.py. 
+(utilisation de requêtes HTTP et résultat au format JSON)
+
+L'utilisateur peut effectuer des requêtes en fonction de critères taxonomiques (clé : T) et/ou ontologie chimique (clé : C). 
+Possibilité d'ajouter la formule chimique (clé : F) et/ou l'identifiant LOTUS (clé : LTS), et le choix de la base de données
+incluse dans LOTUS. Un seul critère sélectionné est répertorié comme suit :
+"clé : nomdelabasededonnées : niveaudecritère : nomducritère".
+Selon le mode de requête, si plus d'un critère est sélectionné, les critères peuvent être ajoutés sous forme de liste de requêtes 
+individuelles ou combinées. Dans le premier cas, la fonction getlotusadd() recherche chaque critère individuellement
+et fusionne le résultat dans un seul fichier après suppression des doublons. Dans le deuxième 
+cas, la fonction getlotusor() trouve les composés correspondant aux critères taxonomiques (clé : T) puis filtre 
+les résultats en ne conservant que les entrées qui satisfont les critères restants (clés C, F ou LTS).
+La liste résultante de structures associées à leur identifiant LOTUS est stockée dans deux fichiers similaires, 
+cfmidinput.txt et structuraldb.txt. Les métadonnées associées à LOTUS (propriétés chimiques et physiques, 
+informations taxonomiques et chimiothérapeutiques) sont enregistrées dans un fichier appelé cfmidinput.tsv.

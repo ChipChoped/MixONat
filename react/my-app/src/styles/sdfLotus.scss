@@ -17,8 +17,18 @@
     border: 1px solid #ccc;
     background-color: #041f26;
     overflow-y: scroll;
+    margin-bottom: 5%;
+  }
+
+  .delete-filtre {
+    margin-bottom: 5%;
+    margin-right: 10%;
   }
   
+  .saveDatabaseButton{
+
+    margin-bottom: 5%;
+  }
   .list-item {
     cursor: pointer;
   }
