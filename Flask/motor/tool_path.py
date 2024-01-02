@@ -80,8 +80,12 @@ def deleteFileInDirectory(directory_path):
     try:
         if os.path.exists(directory_path):
             for file_name in os.listdir(directory_path):
-                file_path = os.path.join(directory_path, file_name)                
-                if os.path.isfile(file_path):
-                    os.remove(file_path)
+                print(file_name)
+                if file_name == "info.txt":
+                    pass
+                else:
+                    file_path = os.path.join(directory_path, file_name)                
+                    if os.path.isfile(file_path):
+                        os.remove(file_path)
     except OSError as e:
         print(f'Error deleting files in the directory {directory_path}: {e}')
