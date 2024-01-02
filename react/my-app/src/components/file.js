@@ -3,14 +3,15 @@ import { useLoaderData, useNavigate } from "react-router-dom";
 import alertify from 'alertifyjs';
 import ClipLoader from "react-spinners/ClipLoader";
 import 'alertifyjs/build/css/alertify.css';
-import "../styles/sdf.scss";
+import "../styles/file.scss";
 import red_cross from "../assets/img/red-cross.png";
 import Cookies from "universal-cookie";
 
 
-function Sdf()
+function File()
 {
     const [name,setName] = useState('')
+    const [type,setType] = useState('SDF')
     const [file, setFile] = useState(undefined)
     const [author, setAuthor] = useState('')
     const [fileIsLoading, setFileIsLoading] = useState(false)
@@ -21,7 +22,7 @@ function Sdf()
 
     const options = { year: 'numeric', month: '2-digit', day: '2-digit' }
 
-    const { sdfList } = useLoaderData()
+    const { fileList } = useLoaderData()
 
     const cookies = new Cookies();
 
@@ -65,7 +66,7 @@ function Sdf()
     }
 
     const deleteFileButton = (deleteFileId) => {
-        alertify.confirm("Confirm","Are you sure to continue ? You will delete this SDF file.",
+        alertify.confirm("Confirm","Are you sure to continue ? You will delete this file.",
       
                 function()
                 {
@@ -88,14 +89,14 @@ function Sdf()
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json',
                                'Authorization': 'Bearer ' + cookies.get("authentication_token") },
-                    body: JSON.stringify({ name: name, file: file, author: author })
+                    body: JSON.stringify({ name: name, type: type, file: file, author: author })
                 };
 
                 // Send it to Spring server
-                fetch("http://localhost:9000/sdf",requestOptions).then((response) => {
+                fetch("http://localhost:9000/file",requestOptions).then((response) => {
                     if(response.status === 201)
                     {
-                        navigate("/sdf")
+                        navigate("/file")
                     }
                     else
                     {
@@ -127,10 +128,10 @@ function Sdf()
                 };
 
                 // Send it to Spring server
-                fetch("http://localhost:9000/sdf",requestOptions).then((response) => {
+                fetch("http://localhost:9000/file",requestOptions).then((response) => {
                     if(response.status === 204)
                     {
-                        navigate("/sdf")
+                        navigate("/file")
                     }
                     else
                     {
@@ -146,60 +147,74 @@ function Sdf()
     },[deleteFile])
 
     return(
-        <div className='sdf-container'>
-            <div className='sdf-upload'>
-                <span>ADD SDF FILE IN THE DATABASE</span>
+        <div className='file-container'>
+            <div className='file-upload'>
+                <span>ADD FILE IN THE DATABASE</span>
                 <div>
-                    <label htmlFor='sdfFile'>SDF FILE</label>
-                    <input type="file" id="sdfFile" onChange={(e) => {setFileIsLoading(true); readFile(e.target.files[0])}}></input>
+                    <label htmlFor='fileFile'>FILE</label>
+                    <input type="file" id="fileFile" onChange={(e) => {setFileIsLoading(true); readFile(e.target.files[0])}}></input>
                 </div>
                 <div>
-                    <label htmlFor='sdfName'>FILE'S NAME</label>
-                    <input type="text" id="sdfName" value={name} placeholder="Enter the name of the SDF's file" onChange={(e) => {setName(e.target.value)}}></input>
+                    <label htmlFor='fileName'>FILE NAME</label>
+                    <input type="text" id="fileName" value={name} placeholder="Enter the name of the file" onChange={(e) => {setName(e.target.value)}}></input>
                 </div>
                 <div>
-                    <label htmlFor='sdfAuthor'>FILE'S AUTHOR</label>
-                    <input type="text" id="sdfAuthor" value={author} placeholder="Enter the author of the SDF's file" onChange={(e) => {setAuthor(e.target.value)}}></input>
+                    <label htmlFor='fileType'>FILE TYPE</label>
+                    <select id="fileType" value={type} onChange={(e) => {setType(e.target.value)}}>
+                        <option value="SDF">SDF</option>
+                        <option value="SPECTRUM">Spectrum</option>
+                        <option value="DEPT90">Dept90</option>
+                        <option value="DEPT135">Dept135</option>
+                    </select>
                 </div>
-                <div className='sdf-button'>
+                <div>
+                    <label htmlFor='fileAuthor'>FILE AUTHOR</label>
+                    <input type="text" id="fileAuthor" value={author} placeholder="Enter the author of the file" onChange={(e) => {setAuthor(e.target.value)}}></input>
+                </div>
+                <div className='file-button'>
                     {fileIsLoading 
                     ? <button>
-                        <ClipLoader className="sdf-loader" color={"#ffffff"}/>
+                        <ClipLoader className="file-loader" color={"#ffffff"}/>
                       </button>
                     : <button onClick={() => {checkFile()}}>Add to the database</button>}
                 </div>
             </div>
 
-            <div className='sdf-files'>
-                <span>All SDF FILES IN THE DATABASE</span>
-                { sdfList.sdfList.map((sdf) => (
-                    <div className='sdf-file'>
-                        <div className='sdf-info' key={ sdf.id }>
-                            <div className='sdf-name-date'>
+            <div className='file-list'>
+                <span>All FILES IN THE DATABASE</span>
+                { fileList.fileList.map((file) => (
+                    <div className='file'>
+                        <div className='file-info' key={ file.id }>
+                            <div className='file-type'>
+                                <span> { file.type } </span>
+                            </div>
+                            <div className='file-name-date'>
                                 <span>
-                                    <a href={ "/preview?t=sdf&f=" + sdf.id }>
-                                        { sdf.name }
+                                    <a href={ "/preview?f=" + file.id }>
+                                        { file.name }
                                     </a>
                                 </span>
-                                <span> { new Date(sdf.added_at).toLocaleDateString(undefined, options) } </span>
+                                <span> { new Date(file.added_at).toLocaleDateString(undefined, options) } </span>
                             </div>
-                            <div className='sdf-attribution'>
-                                <span> Author: <b> { sdf.author } </b> </span>
+                            <div className='file-attribution'>
+                                <span> Author: <b> { file.author } </b> </span>
                                 <span> Added by:&nbsp;
-                                    <a href={ "/profile?u=" + sdf.added_by } target="_blank" rel="noreferrer">
-                                        { sdf.added_by_name }
+                                    <a href={ "/profile?u=" + file.added_by } target="_blank" rel="noreferrer">
+                                        { file.added_by_name }
                                     </a>
                                 </span>
                             </div>
                         </div>
-                        <input className="sdf-input-image" type="image" src={ red_cross } onClick={() => { deleteFileButton(sdf.id) }}/>
+                        <div className='file-input-image'>
+                            <input type="image" src={ red_cross } onClick={() => { deleteFileButton(file.id) }}/>
+                        </div>
                     </div>)) }
             </div>
         </div>
     )
 }
 
-export async function getSdfFilesNames()
+export async function getFilesInfo()
 {
     const requestOptions = {
         method: 'GET'
@@ -207,11 +222,11 @@ export async function getSdfFilesNames()
 
     // Send request to Spring server
 
-    const response = await fetch("http://localhost:9000/sdf/list",requestOptions);
+    const response = await fetch("http://localhost:9000/file/list",requestOptions);
 
     const json = await response.json();
 
-    return {sdfList: json};
+    return {fileList: json};
 }
 
-export default Sdf;
+export default File;

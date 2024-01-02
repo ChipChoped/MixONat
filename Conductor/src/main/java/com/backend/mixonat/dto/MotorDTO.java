@@ -15,5 +15,7 @@ public class MotorDTO implements Serializable
     String dept90;
     Parametres params;
     Boolean useSdfDatabase;
-    Boolean useRmnDatabase;
+    Boolean useSpectrumDatabase;
+    Boolean useDept135Database;
+    Boolean useDept90Database;
 }

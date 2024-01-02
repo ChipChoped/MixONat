@@ -27,7 +27,7 @@ public class NewUserDTO implements JsonRequest {
     @NotBlank(message = "Last name cannot be blank")
     String lastName;
 
-    @Email (message = "Email is malformed")
+    @Email(message = "Email is malformed")
     @NotBlank(message = "Email cannot be blank")
     @UniqueEmail
     String email;

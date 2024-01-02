@@ -1,7 +1,7 @@
 package com.backend.mixonat.model;
 
-import lombok.*;
 import jakarta.persistence.*;
+import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -12,14 +12,17 @@ import java.util.UUID;
 @AllArgsConstructor
 @Entity
 @ToString
-@Table(name = "rmn")
-public class Rmn
+@Table(name = "files")
+public class File
 {
     @Id
     @Column(name = "id", unique = true)
     UUID id;
 
     String name;
+
+    @Enumerated(EnumType.STRING)
+    Type type;
 
     @Column(name = "file")
     String file;

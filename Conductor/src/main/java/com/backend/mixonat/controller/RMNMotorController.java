@@ -1,12 +1,15 @@
 package com.backend.mixonat.controller;
 
 import com.backend.mixonat.dto.*;
-import com.backend.mixonat.model.*;
+import com.backend.mixonat.model.File;
+import com.backend.mixonat.model.Type;
+import com.backend.mixonat.model.checkRequest;
+import com.backend.mixonat.model.checkResponse;
 import com.backend.mixonat.repository.UserRepository;
+import com.backend.mixonat.service.FileService;
 import com.backend.mixonat.service.JwtService;
 import com.backend.mixonat.service.RMNMotorService;
-import com.backend.mixonat.service.RmnService;
-import com.backend.mixonat.service.SdfService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
@@ -21,10 +24,7 @@ public class RMNMotorController
     private RMNMotorService rmnMotorService;
 
 	@Autowired
-	private SdfService sdfService;
-
-	@Autowired
-	private RmnService rmnService;
+	private FileService fileService;
 
 	@Autowired
 	private JwtService jwtService;
@@ -33,22 +33,22 @@ public class RMNMotorController
 	private UserRepository userRepository;
 
 	@CrossOrigin(origins="http://localhost:3000")
-	@GetMapping("/sdf/list")
+	@GetMapping("/file/list")
 	public ResponseEntity<JsonResponse> getSdf()
 	{
 		HttpHeaders responseHeaders = new HttpHeaders();
 		responseHeaders.set("Content-Type","application/json");
 		responseHeaders.set("Access-Control-Allow-Origin","*");
 
-		SdfListDTO sdfListDTO = SdfListDTO.builder()
-				.sdfList(sdfService.getSdfWithoutFile())
+		FileListDTO fileListDTO = FileListDTO.builder()
+				.fileList(fileService.getAllFilesWithInfoOnly())
 				.build();
 
-		return ResponseEntity.ok().headers(responseHeaders).body(sdfListDTO);
+		return ResponseEntity.ok().headers(responseHeaders).body(fileListDTO);
 	}
 
 	@CrossOrigin(origins="http://localhost:3000")
-	@GetMapping("/sdf/{id}")
+	@GetMapping("/file/{id}")
 	public ResponseEntity<JsonResponse> getSdfById(@PathVariable("id") UUID id)
 	{
 		HttpHeaders responseHeaders = new HttpHeaders();
@@ -56,40 +56,41 @@ public class RMNMotorController
 		responseHeaders.set("Access-Control-Allow-Origin","*");
 
 		try {
-			var sdf = sdfService.findSdfById(id)
-					.orElseThrow(() -> new IllegalArgumentException("The sdf doesn't exist"));
+			var file = fileService.findFileById(id)
+					.orElseThrow(() -> new IllegalArgumentException("The file doesn't exist"));
 
-			var addedBy = userRepository.findUserById(sdf.getAddedBy())
+			var addedBy = userRepository.findUserById(file.getAddedBy())
 					.orElseThrow(() -> new IllegalArgumentException("The user doesn't exist"));
 
-			SdfDTO sdfDTO = SdfDTO.builder()
-					.id(sdf.getId())
-					.name(sdf.getName())
-					.file(sdf.getFile())
-					.author(sdf.getAuthor())
-					.added_by(sdf.getAddedBy())
+			FileDTO sdfDTO = FileDTO.builder()
+					.id(file.getId())
+					.name(file.getName())
+					.type(file.getType())
+					.file(file.getFile())
+					.author(file.getAuthor())
+					.added_by(file.getAddedBy())
 					.added_by_name(addedBy.getFirstName() + " " + addedBy.getLastName())
-					.added_at(sdf.getAddedAt())
+					.added_at(file.getAddedAt())
 					.build();
 
 			return ResponseEntity.ok().headers(responseHeaders).body(sdfDTO);
 		} catch (IllegalArgumentException e) {
-			return ResponseEntity.status(404).headers(responseHeaders).body(new ExceptionDTO("The sdf doesn't exist"));
+			return ResponseEntity.status(404).headers(responseHeaders).body(new ExceptionDTO(e.getMessage()));
 		} catch (Exception e) {
 			return ResponseEntity.status(500).headers(responseHeaders).body(new ExceptionDTO("Internal server error"));
 		}
 	}
 
 	@CrossOrigin(origins="http://localhost:3000")
-	@PostMapping("/sdf")
-	public ResponseEntity<JsonResponse> saveSdf(@RequestHeader("Authorization") String token, @RequestBody NewSdfDTO newSdf)
+	@PostMapping("/file")
+	public ResponseEntity<JsonResponse> saveSdf(@RequestHeader("Authorization") String token, @RequestBody @Valid NewFileDTO newFile)
 	{
 		HttpHeaders responseHeaders = new HttpHeaders();
 		responseHeaders.set("Content-Type","application/json");
 
-		if(newSdf.getName().isEmpty())
+		if(newFile.getName().isEmpty())
 		{
-			return ResponseEntity.badRequest().body(new ExceptionDTO("The name of the sdf cannot be empty"));
+			return ResponseEntity.badRequest().body(new ExceptionDTO("File name cannot be empty"));
 		}
 		else
 		{
@@ -98,33 +99,34 @@ public class RMNMotorController
 				var user = userRepository.findUserById(id)
 						.orElseThrow(IllegalArgumentException::new);
 
-				if (newSdf.getAuthor().isEmpty())
+				if (newFile.getAuthor().isEmpty())
 				{
-					newSdf.setAuthor(user.getFirstName() + " " + user.getLastName());
+					newFile.setAuthor(user.getFirstName() + " " + user.getLastName());
 				}
 
-				var sdf = Sdf.builder()
-						.name(newSdf.getName())
-						.file(newSdf.getFile())
-						.author(newSdf.getAuthor())
+				var file = File.builder()
+						.name(newFile.getName())
+						.type(Type.valueOf(newFile.getType()))
+						.file(newFile.getFile())
+						.author(newFile.getAuthor())
 						.addedBy(id)
 						.build();
 
-				sdfService.saveSdf(sdf);
+				fileService.saveFile(file);
 
 				return ResponseEntity.status(201).headers(responseHeaders).build();
 			}
 			catch (IllegalArgumentException e) {
 				return ResponseEntity.status(404).headers(responseHeaders).body(new ExceptionDTO("The user doesn't exist"));
 			}
-//			catch (Exception e) {
-//				return ResponseEntity.status(500).headers(responseHeaders).body(new ExceptionDTO("Internal server error"));
-//			}
+			catch (Exception e) {
+				return ResponseEntity.status(500).headers(responseHeaders).body(new ExceptionDTO("Internal server error"));
+			}
 		}
 	}
 
 	@CrossOrigin(origins="http://localhost:3000")
-	@DeleteMapping("/sdf")
+	@DeleteMapping("/file")
 	public ResponseEntity<JsonResponse> deleteSdf(@RequestHeader("Authorization") String token, @RequestBody IdDTO id)
 	{
 		HttpHeaders responseHeaders = new HttpHeaders();
@@ -133,17 +135,17 @@ public class RMNMotorController
 		try {
 			UUID userId = UUID.fromString(jwtService.extractUserName(token.split(" ")[1]));
 
-			var sdf = sdfService.findSdfById(id.getId())
+			var file = fileService.findFileById(id.getId())
 					.orElseThrow(IllegalArgumentException::new);
 
-			if (!sdf.getAddedBy().equals(userId)) {
-				return ResponseEntity.status(403).headers(responseHeaders).body(new ExceptionDTO("You don't have permission to delete this sdf"));
+			if (!file.getAddedBy().equals(userId)) {
+				return ResponseEntity.status(403).headers(responseHeaders).body(new ExceptionDTO("You don't have permission to delete this file"));
 			} else {
-				sdfService.deleteSdf(sdf);
+				fileService.deleteFile(file);
 				return ResponseEntity.status(204).headers(responseHeaders).build();
 			}
 		} catch (IllegalArgumentException e) {
-			return ResponseEntity.status(404).headers(responseHeaders).body(new ExceptionDTO("The sdf doesn't exist"));
+			return ResponseEntity.status(404).headers(responseHeaders).body(new ExceptionDTO("The file doesn't exist"));
 		} catch (Exception e) {
 			return ResponseEntity.status(500).headers(responseHeaders).body(new ExceptionDTO("Internal server error"));
 		}
@@ -158,29 +160,69 @@ public class RMNMotorController
 		responseHeaders.set("Content-Type","application/json");
 
 		try {
-			if (motorDTO.getUseSdfDatabase() || motorDTO.getUseRmnDatabase()) {
+			if (motorDTO.getUseSdfDatabase() || motorDTO.getUseSpectrumDatabase()) {
 				try {
 					if (motorDTO.getUseSdfDatabase()) {
-						var sdf = sdfService.findSdfById(UUID.fromString(motorDTO.getSdf()))
+						var sdf = fileService.findFileById(UUID.fromString(motorDTO.getSdf()))
 								.orElseThrow(IllegalArgumentException::new);
+
+						if (sdf.getType() != Type.SDF) {
+							return ResponseEntity.status(400).headers(responseHeaders).body(new ExceptionDTO("The file is not of type SDF"));
+						}
 
 						motorDTO.setSdf(sdf.getFile());
 					}
 				}
 				catch (IllegalArgumentException e) {
-					return ResponseEntity.status(404).headers(responseHeaders).body(new ExceptionDTO("The sdf doesn't exist"));
+					return ResponseEntity.status(404).headers(responseHeaders).body(new ExceptionDTO("The SDF file doesn't exist"));
 				}
 
 				try {
-					if (motorDTO.getUseRmnDatabase()) {
-						var rmn = rmnService.findRmnById(UUID.fromString(motorDTO.getSpectrum()))
+					if (motorDTO.getUseSpectrumDatabase()) {
+						var spectrum = fileService.findFileById(UUID.fromString(motorDTO.getSpectrum()))
 								.orElseThrow(IllegalArgumentException::new);
 
-						motorDTO.setSpectrum(rmn.getFile());
+						if (spectrum.getType() != Type.SPECTRUM) {
+							return ResponseEntity.status(400).headers(responseHeaders).body(new ExceptionDTO("The file is not of type RMN"));
+						}
+
+						motorDTO.setSpectrum(spectrum.getFile());
 					}
 				}
 				catch (IllegalArgumentException e) {
-					return ResponseEntity.status(404).headers(responseHeaders).body(new ExceptionDTO("The rmn doesn't exist"));
+					return ResponseEntity.status(404).headers(responseHeaders).body(new ExceptionDTO("The RMN file doesn't exist"));
+				}
+
+				try {
+					if (motorDTO.getUseDept135Database()) {
+						var dept135 = fileService.findFileById(UUID.fromString(motorDTO.getDept135()))
+								.orElseThrow(IllegalArgumentException::new);
+
+						if (dept135.getType() != Type.DEPT135) {
+							return ResponseEntity.status(400).headers(responseHeaders).body(new ExceptionDTO("The file is not of type DEPT135"));
+						}
+
+						motorDTO.setDept135(dept135.getFile());
+					}
+				}
+				catch (IllegalArgumentException e) {
+					return ResponseEntity.status(404).headers(responseHeaders).body(new ExceptionDTO("The DEPT135 file doesn't exist"));
+				}
+
+				try {
+					if (motorDTO.getUseDept90Database()) {
+						var dept90 = fileService.findFileById(UUID.fromString(motorDTO.getDept90()))
+								.orElseThrow(IllegalArgumentException::new);
+
+						if (dept90.getType() != Type.DEPT90) {
+							return ResponseEntity.status(400).headers(responseHeaders).body(new ExceptionDTO("The file is not of type DEPT90"));
+						}
+
+						motorDTO.setDept90(dept90.getFile());
+					}
+				}
+				catch (IllegalArgumentException e) {
+					return ResponseEntity.status(404).headers(responseHeaders).body(new ExceptionDTO("The DEPT90 file doesn't exist"));
 				}
 			}
 
@@ -190,7 +232,6 @@ public class RMNMotorController
 		}
     }
 
-
 	// Function to handle checkFile requests from React
 	@CrossOrigin(origins="http://localhost:3000")
 	@PostMapping("/checkFile")
@@ -199,122 +240,5 @@ public class RMNMotorController
 		HttpHeaders responseHeaders = new HttpHeaders();
 		responseHeaders.set("Content-Type","application/json");
 		return ResponseEntity.ok().headers(responseHeaders).body(rmnMotorService.getCheck(request));
-	}
-
-
-	@GetMapping("/rmn/list")
-	public ResponseEntity<JsonResponse> getRmn()
-	{
-		HttpHeaders responseHeaders = new HttpHeaders();
-		responseHeaders.set("Content-Type","application/json");
-		responseHeaders.set("Access-Control-Allow-Origin","*");
-
-		RmnListDTO rmnListDTO = RmnListDTO.builder()
-				.rmnList(rmnService.getRmnWithoutFile())
-				.build();
-
-		return ResponseEntity.ok().headers(responseHeaders).body(rmnListDTO);
-	}
-
-	@CrossOrigin(origins="http://localhost:3000")
-	@PostMapping("/rmn")
-	public ResponseEntity<JsonResponse> saveRmn(@RequestHeader("Authorization") String token, @RequestBody NewRmnDTO newRmn)
-	{
-		HttpHeaders responseHeaders = new HttpHeaders();
-		responseHeaders.set("Content-Type","application/json");
-
-		if(newRmn.getName().isEmpty())
-		{
-			return ResponseEntity.badRequest().body(new ExceptionDTO("The name of the rmn cannot be empty"));
-		}
-		else
-		{
-			try {
-				UUID id = UUID.fromString(jwtService.extractUserName(token.split(" ")[1]));
-				var user = userRepository.findUserById(id)
-						.orElseThrow(IllegalArgumentException::new);
-
-				if (newRmn.getAuthor().isEmpty())
-				{
-					newRmn.setAuthor(user.getFirstName() + " " + user.getLastName());
-				}
-
-				var rmn = Rmn.builder()
-						.name(newRmn.getName())
-						.file(newRmn.getFile())
-						.author(newRmn.getAuthor())
-						.addedBy(id)
-						.build();
-
-				rmnService.saveRmn(rmn);
-
-				return ResponseEntity.status(201).headers(responseHeaders).build();
-			}
-			catch (IllegalArgumentException e) {
-				return ResponseEntity.status(404).headers(responseHeaders).body(new ExceptionDTO("The user doesn't exist"));
-			}
-//			catch (Exception e) {
-//				return ResponseEntity.status(500).headers(responseHeaders).body(new ExceptionDTO("Internal server error"));
-//			}
-		}
-	}
-
-	@CrossOrigin(origins="http://localhost:3000")
-	@GetMapping("/rmn/{id}")
-	public ResponseEntity<JsonResponse> getRmnById(@PathVariable("id") UUID id)
-	{
-		HttpHeaders responseHeaders = new HttpHeaders();
-		responseHeaders.set("Content-Type","application/json");
-		responseHeaders.set("Access-Control-Allow-Origin","*");
-
-		try {
-			var rmn = rmnService.findRmnById(id)
-					.orElseThrow(() -> new IllegalArgumentException("The rmn doesn't exist"));
-
-			var addedBy = userRepository.findUserById(rmn.getAddedBy())
-					.orElseThrow(() -> new IllegalArgumentException("The user doesn't exist"));
-
-			RmnDTO rmnDTO = RmnDTO.builder()
-					.id(rmn.getId())
-					.name(rmn.getName())
-					.file(rmn.getFile())
-					.author(rmn.getAuthor())
-					.added_by(rmn.getAddedBy())
-					.added_by_name(addedBy.getFirstName() + " " + addedBy.getLastName())
-					.added_at(rmn.getAddedAt())
-					.build();
-
-			return ResponseEntity.ok().headers(responseHeaders).body(rmnDTO);
-		} catch (IllegalArgumentException e) {
-			return ResponseEntity.status(404).headers(responseHeaders).body(new ExceptionDTO(e.getMessage()));
-		} catch (Exception e) {
-			return ResponseEntity.status(500).headers(responseHeaders).body(new ExceptionDTO("Internal server error"));
-		}
-	}
-
-	@CrossOrigin(origins="http://localhost:3000")
-	@DeleteMapping("/rmn")
-	public ResponseEntity<JsonResponse> deleteRmn(@RequestHeader("Authorization") String token, @RequestBody Rmn deleteRmn)
-	{
-		HttpHeaders responseHeaders = new HttpHeaders();
-		responseHeaders.set("Content-Type","application/json");
-
-		try {
-			UUID userId = UUID.fromString(jwtService.extractUserName(token.split(" ")[1]));
-
-			var rmn = rmnService.findRmnById(deleteRmn.getId())
-					.orElseThrow(IllegalArgumentException::new);
-
-			if (!rmn.getAddedBy().equals(userId)) {
-				return ResponseEntity.status(403).headers(responseHeaders).body(new ExceptionDTO("You don't have permission to delete this rmn"));
-			} else {
-				rmnService.deleteRmn(rmn);
-				return ResponseEntity.status(204).headers(responseHeaders).build();
-			}
-		} catch (IllegalArgumentException e) {
-			return ResponseEntity.status(404).headers(responseHeaders).body(new ExceptionDTO("The rmn doesn't exist"));
-		} catch (Exception e) {
-			return ResponseEntity.status(500).headers(responseHeaders).body(new ExceptionDTO("Internal server error"));
-		}
 	}
 }

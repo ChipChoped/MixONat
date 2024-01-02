@@ -1,4 +1,4 @@
-.rmn-container {
+.file-container {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -14,7 +14,7 @@
     }
 }
 
-.rmn-upload {
+.file-upload {
     display: flex;
     flex-direction: column;
     width: 30%;
@@ -40,9 +40,14 @@
             display: flex;
             margin: 0 0 0 1em;
         }
+
+        select {
+            display: flex;
+            margin: 0 0 0 1em;
+        }
     }
 
-    .rmn-button {
+    .file-button {
         display: flex;
         justify-content: center;
         background-color: #58b0b0;
@@ -61,7 +66,7 @@
             cursor: pointer;
             width: 50%;
 
-            .rmn-loader {
+            .file-loader {
                 background-color:transparent;
                 padding: 0;
                 margin: 0;
@@ -71,14 +76,14 @@
         button:hover {
             background-color: #a0cea2;
 
-            .rmn-loader {
+            .file-loader {
                 background-color: #a0cea2;
             }
         }
     }
 }
 
-.rmn-files {
+.file-list {
     display: flex;
     flex-direction: column;
     border: 0.2em solid #58b0b0;
@@ -86,13 +91,13 @@
     width: 30%;
     margin-bottom: 1em;
 
-    .rmn-file {
+    .file {
         display: grid;
-        grid-template-columns: 85% 15%;
+        grid-template-columns: 90% 10%;
         align-items: center;
         border: 0.2em solid #58b0b0;
 
-        .rmn-info {
+        .file-info {
             display: flex;
             justify-content: space-around;
             background-color: transparent;
@@ -101,7 +106,26 @@
             padding: 1em;
             border: none;
 
-            .rmn-name-date {
+            .file-type {
+                display: flex;
+                align-items: center;
+                justify-content: space-around;
+                background-color: transparent;
+                text-decoration: none;
+                font-weight: normal;
+                border: none;
+
+                span {
+                    color: white;
+                    padding: 0.2em;
+                    font-weight: bold;
+                    border: transparent;
+                    text-decoration: none;
+                    background-color: rgba(29,70,85,255);
+                }
+            }
+
+            .file-name-date {
                 display: flex;
                 flex-direction: column;
                 justify-content: space-around;
@@ -127,7 +151,7 @@
                 }
             }
 
-            .rmn-attribution {
+            .file-attribution {
                 display: flex;
                 flex-direction: column;
                 justify-content: space-around;
@@ -154,11 +178,17 @@
             }
         }
 
-        .rmn-input-image {
-            height: 2em;
-            width: auto;
-            justify-self: end;
-            margin-right: 0.5em;
+        .file-input-image {
+            display: flex;
+            justify-content: space-around;
+            border: transparent;
+
+            input {
+                height: 2em;
+                width: auto;
+                justify-self: end;
+                margin-right: 0.5em;
+            }
         }
     }
 }

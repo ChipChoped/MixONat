@@ -1,6 +1,6 @@
 package com.backend.mixonat.dto;
 
-import com.backend.mixonat.model.SdfNoFile;
+import com.backend.mixonat.model.FileInfoOnly;
 import lombok.*;
 
 import java.util.List;
@@ -9,6 +9,6 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class SdfListDTO implements JsonResponse {
-    List<SdfNoFile> sdfList;
+public class FileListDTO implements JsonResponse {
+    List<FileInfoOnly> fileList;
 }
