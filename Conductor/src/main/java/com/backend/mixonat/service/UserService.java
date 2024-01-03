@@ -21,7 +21,7 @@ public class UserService {
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
     }
 
-    public User save(User user) {
-        return userRepository.save(user.getFirstName(), user.getLastName(), user.getEmail(), user.getPassword(), user.getRole());
+    public void save(User user) {
+        userRepository.save(user.getFirstName(), user.getLastName(), user.getEmail(), user.getPassword(), String.valueOf(user.getRole()));
     }
 }

@@ -29,23 +29,29 @@ public class AuthenticationService {
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
 
-    public ResponseEntity<JsonResponse> signUp(NewUserDTO request) {
+    public ResponseEntity<JsonResponse> signUp(NewUserDTO newUserDTO) {
         HttpHeaders responseHeaders = new HttpHeaders();
         responseHeaders.set("Content-Type","application/json");
 
-        var user = User
+        var newUser = User
                 .builder()
-                .firstName(request.getFirstName())
-                .lastName(request.getLastName())
-                .email(request.getEmail())
-                .password(passwordEncoder.encode(request.getPassword()))
+                .firstName(newUserDTO.getFirstName())
+                .lastName(newUserDTO.getLastName())
+                .email(newUserDTO.getEmail())
+                .password(passwordEncoder.encode(newUserDTO.getPassword()))
                 .role(Role.ROLE_USER)
                 .build();
 
         try {
-            user = userService.save(user);
+            userService.save(newUser);
+            var user = userRepository.findUserByEmail(newUserDTO.getEmail())
+                    .orElseThrow(IllegalArgumentException::new);
             var jwt = jwtService.generateToken(user);
+
             return ResponseEntity.status(201).headers(responseHeaders).body(TokenDTO.builder().token(jwt).build());
+        }
+        catch (IllegalArgumentException e) {
+            return ResponseEntity.status(409).headers(responseHeaders).body(new ExceptionDTO("The user already exists"));
         }
         catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)

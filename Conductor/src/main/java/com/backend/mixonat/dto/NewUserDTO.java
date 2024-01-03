@@ -16,7 +16,7 @@ import java.util.Objects;
 @AllArgsConstructor
 public class NewUserDTO implements JsonRequest {
     @JsonProperty("first-name")
-    @Pattern(regexp = "[A-ZÉÈÀÎÏÂË][a-zéèàêîïäë]{1,29}",
+    @Pattern(regexp = "[A-ZÉÈÀÎÏÂË][a-zéèàâêîïäë]{1,29}",
             message = "The first name must start with an uppercase letter and with no special characters")
     @NotBlank(message = "First name cannot be blank")
     String firstName;
