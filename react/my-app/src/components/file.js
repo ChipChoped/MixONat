@@ -185,7 +185,7 @@ function File() {
             <div className='file-list'>
                 <span>All FILES IN THE DATABASE</span>
                 {fileList.fileList.map((file) => (
-                    <div className='file'>
+                    <div className={file.added_by === userId.id ? 'file-own-true' : 'file-own-false'}>
                         <div className='file-info' key={file.id}>
                             <div className='file-type'>
                                 <span> {file.type} </span>
@@ -207,8 +207,6 @@ function File() {
                                 </span>
                             </div>
                         </div>
-                        {console.log(file.added_by)}
-                        {console.log(userId.id)}
                         {file.added_by === userId.id
                             ? <div className='file-input-image'>
                                 <input type="image" src={red_cross} onClick={() => {

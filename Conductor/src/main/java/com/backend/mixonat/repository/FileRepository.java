@@ -2,7 +2,6 @@ package com.backend.mixonat.repository;
 
 import com.backend.mixonat.model.File;
 import com.backend.mixonat.model.FileInfoOnly;
-import com.backend.mixonat.model.Type;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -20,7 +19,14 @@ public interface FileRepository extends JpaRepository<File, UUID> {
             "CONCAT(u.first_name, ' ', u.last_name) AS added_by_name " +
             "FROM files s " +
             "INNER JOIN users u ON s.added_by = u.id", nativeQuery = true)
-    List<FileInfoOnly> findAllWithInfoOnly();
+    List<FileInfoOnly> findAllInfoOnly();
+
+    @Query(value="SELECT s.id, s.name, s.type, s.author, s.added_by, s.added_at, " +
+            "CONCAT(u.first_name, ' ', u.last_name) AS added_by_name " +
+            "FROM files s " +
+            "INNER JOIN users u ON s.added_by = u.id " +
+            "WHERE s.added_by = :#{#id}", nativeQuery = true)
+    List<FileInfoOnly> findAllInfoOnlyByUserId(@Param("id") UUID id);
 
     Optional<File> findFileById(UUID id);
 

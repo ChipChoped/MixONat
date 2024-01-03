@@ -8,12 +8,12 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import ErrorPage from './components/errorPage';
-import RmnMotor from './components/rmnMotor';
+import Motor from './components/motor';
 import File from './components/file';
 import { getFilesInfo } from './components/file';
 import SignIn from "./components/signIn";
 import SignUp from "./components/signUp";
-import Profile, {getUser} from "./components/profile";
+import Profile, {getUserInfo} from "./components/profile";
 import Preview, {getFile} from "./components/preview";
 
 const router = createBrowserRouter([
@@ -24,7 +24,7 @@ const router = createBrowserRouter([
     children: [
       {
         path:"/",
-        element:<RmnMotor/>,
+        element:<Motor/>,
         loader: async () => {
           const fileList = await getFilesInfo();
           return { fileList: fileList.fileList.fileList };
@@ -46,7 +46,7 @@ const router = createBrowserRouter([
       {
         path:"/profile",
         element:<Profile/>,
-        loader: getUser
+        loader: getUserInfo
       },
       {
         path:"/preview",

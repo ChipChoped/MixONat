@@ -11,7 +11,7 @@ import {useLoaderData} from "react-router-dom";
 import 'alertifyjs/build/css/alertify.css';
 import '../styles/rmnMotor.scss';
 
-function RmnMotor() {
+function Motor() {
     /*****************/
     /*     STATE     */
     /*****************/
@@ -408,4 +408,4 @@ function RmnMotor() {
     )
 }
 
-export default RmnMotor;
+export default Motor;

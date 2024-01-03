@@ -22,7 +22,7 @@ public class UserController {
 
     @CrossOrigin(origins="http://localhost:3000")
     @GetMapping("/user/id")
-    public ResponseEntity<JsonResponse> getUser(@RequestHeader("Authorization") String token) {
+    public ResponseEntity<JsonResponse> getUserById(@RequestHeader("Authorization") String token) {
         HttpHeaders responseHeaders = new HttpHeaders();
         responseHeaders.set("Content-Type", "application/json");
 
@@ -38,11 +38,39 @@ public class UserController {
 
     @CrossOrigin(origins="http://localhost:3000")
     @GetMapping("/user/{id}")
-    public ResponseEntity<JsonResponse> getUser(@PathVariable UUID id) {
+    public ResponseEntity<JsonResponse> getUserById(@PathVariable UUID id) {
         HttpHeaders responseHeaders = new HttpHeaders();
         responseHeaders.set("Content-Type", "application/json");
 
         try {
+            var user = userRepository.findUserById(id)
+                    .orElseThrow(IllegalArgumentException::new);
+
+            UserDTO userDTO = UserDTO.builder()
+                .id(user.getId())
+                .first_name(user.getFirstName())
+                .last_name(user.getLastName())
+                .email(user.getEmail())
+                .created_at(user.getCreatedAt())
+                .updated_at(user.getUpdatedAt())
+                .build();
+
+            return ResponseEntity.status(200).headers(responseHeaders).body(userDTO);
+        }
+        catch (IllegalArgumentException e) {
+            return ResponseEntity.status(404).headers(responseHeaders).body(new ExceptionDTO("The user doesn't exist"));
+        }
+    }
+
+    @CrossOrigin(origins="http://localhost:3000")
+    @GetMapping("/user")
+    public ResponseEntity<JsonResponse> getUserByToken(@RequestHeader("Authorization") String token) {
+        HttpHeaders responseHeaders = new HttpHeaders();
+        responseHeaders.set("Content-Type", "application/json");
+
+        try {
+            UUID id = UUID.fromString(jwtService.extractUserName(token.split(" ")[1]));
+
             var user = userRepository.findUserById(id)
                     .orElseThrow(IllegalArgumentException::new);
 

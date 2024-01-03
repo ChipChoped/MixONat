@@ -13,7 +13,7 @@ import org.springframework.web.client.RestClient;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 
 @Repository
-public class RMNMotorRepository
+public class MotorRepository
 {
     @Autowired
 	private CustomProperties props;

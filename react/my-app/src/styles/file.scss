@@ -88,107 +88,114 @@
     flex-direction: column;
     border: 0.2em solid #58b0b0;
     border-radius: 5px;
-    width: 30%;
+    width: 40%;
     margin-bottom: 1em;
 
-    .file {
+    .file-own-true {
         display: grid;
         grid-template-columns: 90% 10%;
         align-items: center;
         border: 0.2em solid #58b0b0;
+    }
 
-        .file-info {
+    .file-own-false {
+        display: grid;
+        align-items: center;
+        border: 0.2em solid #58b0b0;
+
+    }
+
+    .file-info {
+        display: flex;
+        justify-content: space-around;
+        background-color: transparent;
+        text-decoration: none;
+        font-weight: normal;
+        padding: 1em;
+        border: none;
+
+        .file-type {
             display: flex;
+            align-items: center;
             justify-content: space-around;
             background-color: transparent;
             text-decoration: none;
             font-weight: normal;
-            padding: 1em;
             border: none;
 
-            .file-type {
-                display: flex;
-                align-items: center;
-                justify-content: space-around;
-                background-color: transparent;
+            span {
+                color: white;
+                padding: 0.2em;
+                font-weight: bold;
+                border: transparent;
                 text-decoration: none;
+                background-color: rgba(29,70,85,255);
+            }
+        }
+
+        .file-name-date {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            border: transparent;
+
+            span {
+                color: white;
+                padding: 0.2em;
                 font-weight: normal;
-                border: none;
+                border: transparent;
+                text-decoration: none;
+                background-color: rgba(29,70,85,255);
 
-                span {
+                a {
                     color: white;
-                    padding: 0.2em;
                     font-weight: bold;
-                    border: transparent;
                     text-decoration: none;
-                    background-color: rgba(29,70,85,255);
                 }
-            }
 
-            .file-name-date {
-                display: flex;
-                flex-direction: column;
-                justify-content: space-around;
-                border: transparent;
-
-                span {
-                    color: white;
-                    padding: 0.2em;
-                    font-weight: normal;
-                    border: transparent;
-                    text-decoration: none;
-                    background-color: rgba(29,70,85,255);
-
-                    a {
-                        color: white;
-                        font-weight: bold;
-                        text-decoration: none;
-                    }
-
-                    a:hover {
-                        text-decoration: underline;
-                    }
-                }
-            }
-
-            .file-attribution {
-                display: flex;
-                flex-direction: column;
-                justify-content: space-around;
-                border: transparent;
-
-                span {
-                    color: white;
-                    padding: 0.2em;
-                    font-weight: normal;
-                    border: transparent;
-                    text-decoration: none;
-                    background-color: rgba(29,70,85,255);
-
-                    a {
-                        color: white;
-                        font-weight: bold;
-                        text-decoration: none;
-                    }
-
-                    a:hover {
-                        text-decoration: underline;
-                    }
+                a:hover {
+                    text-decoration: underline;
                 }
             }
         }
 
-        .file-input-image {
+        .file-attribution {
             display: flex;
+            flex-direction: column;
             justify-content: space-around;
             border: transparent;
 
-            input {
-                height: 2em;
-                width: auto;
-                justify-self: end;
-                margin-right: 0.5em;
+            span {
+                color: white;
+                padding: 0.2em;
+                font-weight: normal;
+                border: transparent;
+                text-decoration: none;
+                background-color: rgba(29,70,85,255);
+
+                a {
+                    color: white;
+                    font-weight: bold;
+                    text-decoration: none;
+                }
+
+                a:hover {
+                    text-decoration: underline;
+                }
             }
+        }
+    }
+
+    .file-input-image {
+        display: flex;
+        justify-content: space-around;
+        border: transparent;
+
+        input {
+            height: 2em;
+            width: auto;
+            justify-self: end;
+            margin-right: 0.5em;
         }
     }
 }

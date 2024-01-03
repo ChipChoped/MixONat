@@ -17,9 +17,14 @@ public class FileService {
     @Autowired
     FileRepository fileRepository;
 
-    public List<FileInfoOnly> getAllFilesWithInfoOnly()
+    public List<FileInfoOnly> getAllFilesInfoOnly()
     {
-        return fileRepository.findAllWithInfoOnly();
+        return fileRepository.findAllInfoOnly();
+    }
+
+    public List<FileInfoOnly> getAllFilesInfoOnlyByUserId(UUID id)
+    {
+        return fileRepository.findAllInfoOnlyByUserId(id);
     }
 
     public Optional<File> findFileById(UUID id)
