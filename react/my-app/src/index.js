@@ -13,7 +13,11 @@ import Sdf from './components/sdf';
 import Rmn from './components/rmn';
 import SdfLotus from './components/sdfLotus';
 import { getSdfFilesNames } from './components/sdf';
+import SignIn from "./components/signIn";
+import SignUp from "./components/signUp";
 import { getRmnFilesNames } from './components/rmn';
+import Profile, {getUser} from "./components/profile";
+import Preview, {getFile} from "./components/preview";
 
 const router = createBrowserRouter([
   {
@@ -36,7 +40,7 @@ const router = createBrowserRouter([
         loader: getSdfFilesNames
       },
       {
-        path:"/rmnDB",
+        path:"/rmn",
         element:<Rmn/>,
         loader: getRmnFilesNames
       },
@@ -44,6 +48,24 @@ const router = createBrowserRouter([
         path:"/sdfLotus",
         element:<SdfLotus/>,
         loader: getSdfFilesNames
+      },
+      {
+        path:"/sign-in",
+        element:<SignIn/>
+      },
+      {
+        path:"/sign-up",
+        element:<SignUp/>
+      },
+      {
+        path:"/profile",
+        element:<Profile/>,
+        loader: getUser
+      },
+      {
+        path:"/preview",
+        element:<Preview/>,
+        loader: getFile
       }
     ]
   },

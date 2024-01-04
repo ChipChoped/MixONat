@@ -5,19 +5,25 @@ import ClipLoader from "react-spinners/ClipLoader";
 import 'alertifyjs/build/css/alertify.css';
 import "../styles/rmn.scss";
 import red_cross from "../assets/img/red-cross.png";
+import Cookies from "universal-cookie";
 
 
 function Rmn()
 {
-    const [rmnName,setRMNName] = useState('')
-    const [file,setFile] = useState(undefined)
-    const [fileIsLoading,setFileIsLoading] = useState(false)
-    const [upload,setUpload] = useState(false)
-    const [deleteFileName,setDeleteFileName] = useState(undefined)
-    const [deleteFile,setDeleteFile] = useState(false)
+    const [name, setName] = useState('')
+    const [file, setFile] = useState(undefined)
+    const [author, setAuthor] = useState('')
+    const [fileIsLoading, setFileIsLoading] = useState(false)
+    const [upload, setUpload] = useState(false)
+    const [deleteFileUuid, setDeleteFileUuid] = useState(undefined)
+    const [deleteFile, setDeleteFile] = useState(false)
     const navigate = useNavigate();
 
+    const options = { year: 'numeric', month: '2-digit', day: '2-digit' }
+
     const { rmnList } = useLoaderData()
+
+    const cookies = new Cookies();
 
     const readFile = (file) => {
         if (file===undefined)
@@ -44,22 +50,9 @@ function Rmn()
     }
 
     const checkFile = () => {
-        if(file !== undefined && rmnName !== '')
+        if(file !== undefined && name !== '')
         {
-            if(rmnList.includes(rmnName))
-            {
-                alertify.confirm("Confirm","Are you sure to continue ? You will overwrite a RMN file.",
-      
-                function()
-                {
-                    setUpload(true)
-                },
-                function(){});
-            }
-            else
-            {
-                setUpload(true)
-            }
+            setUpload(true)
         }
         else if(file !== undefined)
         {
@@ -71,12 +64,12 @@ function Rmn()
         }
     }
 
-    const deleteFileButton = (deleteFileName) => {
+    const deleteFileButton = (deleteFileUuid) => {
         alertify.confirm("Confirm","Are you sure to continue ? You will delete this RMN file.",
       
                 function()
                 {
-                    setDeleteFileName(deleteFileName)
+                    setDeleteFileUuid(deleteFileUuid)
                     setDeleteFile(true)
                 },
                 function(){});
@@ -93,13 +86,14 @@ function Rmn()
 
                 const requestOptions = {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ name: rmnName, rmn_file: file})
+                    headers: { 'Content-Type': 'application/json',
+                               'Authorization': 'Bearer ' + cookies.get("authentication_token") },
+                    body: JSON.stringify({ name: name, file: file, author: author })
                 };
 
                 // Send it to Spring server
-                fetch("http://localhost:9000/rmn/rmnDB",requestOptions).then((response) => {
-                    if(response.status === 200)
+                fetch("http://localhost:9000/rmn",requestOptions).then((response) => {
+                    if(response.status === 201)
                     {
                         navigate("/rmnDB")
                     }
@@ -127,13 +121,14 @@ function Rmn()
 
                 const requestOptions = {
                     method: 'DELETE',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ name: deleteFileName })
+                    headers: { 'Content-Type': 'application/json',
+                               'Authorization': 'Bearer ' + cookies.get("authentication_token") },
+                    body: JSON.stringify({ uuid: deleteFileUuid })
                 };
 
                 // Send it to Spring server
-                fetch("http://localhost:9000/rmn/rmnDB",requestOptions).then((response) => {
-                    if(response.status === 200)
+                fetch("http://localhost:9000/rmn",requestOptions).then((response) => {
+                    if(response.status === 204)
                     {
                         navigate("/rmnDB")
                     }
@@ -160,7 +155,11 @@ function Rmn()
                 </div>
                 <div>
                     <label htmlFor='rmnName'>FILE'S NAME</label>
-                    <input type="text" id="rmnName" value={rmnName} placeholder="Enter the name of the RMN's file" onChange={(e) => {setRMNName(e.target.value)}}></input>
+                    <input type="text" id="rmnName" value={name} placeholder="Enter the name of the RMN's file" onChange={(e) => {setName(e.target.value)}}></input>
+                </div>
+                <div>
+                    <label htmlFor='rmnAuthor'>FILE'S AUTHOR</label>
+                    <input type="text" id="rmnAuthor" value={author} placeholder="Enter the author of the RMN's file" onChange={(e) => {setAuthor(e.target.value)}}></input>
                 </div>
                 <div className='rmn-button'>
                     {fileIsLoading 
@@ -173,11 +172,28 @@ function Rmn()
 
             <div className='rmn-files'>
                 <span>All RMN FILES IN THE DATABASE</span>
-                {rmnList.map((file) => (
-                    <div key={file}>
-                        <span>{file}</span>
-                        <input className="rmn-input-image" type="image" src={red_cross} onClick={() => {deleteFileButton(file)}}/>
-                    </div>))}
+                { rmnList.rmnList.map((rmn) => (
+                    <div className='rmn-file'>
+                        <div className='rmn-info' key={ rmn.uuid }>
+                            <div className='rmn-name-date'>
+                                <span>
+                                    <a href={"/preview?t=rmn&f=" + rmn.uuid}>
+                                        { rmn.name }
+                                    </a>
+                                </span>
+                                <span> { new Date(rmn.added_at).toLocaleDateString(undefined, options) } </span>
+                            </div>
+                            <div className='rmn-attribution'>
+                                <span> Author: <b> { rmn.author } </b> </span>
+                                <span> Added by:&nbsp;
+                                    <a href={"/profile?u=" + rmn.added_by}>
+                                        <b> { rmn.added_by_name } </b>
+                                    </a>
+                                </span>
+                            </div>
+                        </div>
+                        <input className="rmn-input-image" type="image" src={ red_cross } onClick={() => { deleteFileButton(rmn.uuid) }}/>
+                    </div> ))}
             </div>
         </div>
     )
@@ -191,7 +207,7 @@ export async function getRmnFilesNames()
 
     // Send request to Spring server
 
-    const response = await fetch("http://localhost:9000/rmn/rmnDB/names",requestOptions);
+    const response = await fetch("http://localhost:9000/rmn/list",requestOptions);
 
     const json = await response.json();
 

@@ -10,7 +10,6 @@ import motor.ginfo
 import motor.tool_path
 import subprocess
 import os
-import json
 import requests
 
 app = Flask(__name__)
@@ -135,7 +134,7 @@ def createSdf():
     msg = "There are "+str(nb_mol) +" molecules."
     # Chemin complet vers process.py
     if nb_mol == 0:
-        msg += " No SDF created"
+        msg += " No SDF created."
         
     else:
         original_working_directory = motor.tool_path.get_current_path()[0]
@@ -161,30 +160,32 @@ def createSdf():
         errorlog_size = os.path.getsize(errorlog_path)
         
         if motor.tool_path.is_file_exist(original_working_directory+'/Your_NMR_DataBase','c_type_13C_NMR_Database.sdf') and errorlog_size == 0:
-            msg += " SDF created"
+            msg += " SDF created."
             sdfName = 'c_type_13C_NMR_Database'
             if fileName != "":
                 sdfName = fileName
                 os.rename(original_working_directory+'/Your_NMR_DataBase/c_type_13C_NMR_Database.sdf',original_working_directory+'/Your_NMR_DataBase/'+fileName+'.sdf')
             
             #default_directory = motor.tool_path.get_default_directory()
-            #print(f"Le répertoire par défaut est : {default_directory}")
             motor.tool_path.copy_file_to_default_directory(original_working_directory+'/Your_NMR_DataBase/'+sdfName+'.sdf')
             if isSave:
+                author = request.json.get('author')
+                authorization = request.json.get('authorization')
                 sdfDirectory = original_working_directory+'/Your_NMR_DataBase/'+sdfName+".sdf"           
-                url = 'http://localhost:9000/rmn/sdf'
+                url = 'http://localhost:9000/sdf'
+                file_content = ''
                 with open(sdfDirectory, 'r') as file:
                     file_content = file.read()
-                data = {'name': sdfName, 'sdf_file': file_content}
+                data = {'name': sdfName, 'file': file_content, 'author': author}
                 json_data = json.dumps(data)
-                response = requests.post(url, data=json_data, headers={'Content-Type': 'application/json'})
-                if response.status_code == 200:
+                response = requests.post(url, data=json_data, headers={'Content-Type': 'application/json','Authorization': authorization})
+                if response.status_code == 200 or response.status_code == 201:
                     msg += " Save in database."
                 else:
-                    msg += " Error to save SDF in database"
+                    msg += " Error to save SDF in database."
                 
         else:
-            msg += " Error: No SDF created"
+            msg += " Error: No SDF created."
         
 
     return msg,200

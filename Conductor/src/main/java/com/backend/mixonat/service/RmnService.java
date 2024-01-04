@@ -2,7 +2,10 @@ package com.backend.mixonat.service;
 
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
+import com.backend.mixonat.model.RmnNoFile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,24 +17,19 @@ public class RmnService {
     @Autowired
     RmnRepository rmnRepository;
 
-    public List<String> getRmnWithoutFile()
+    public List<RmnNoFile> getRmnWithoutFile()
     {
         return rmnRepository.findAllWithoutFile();
     }
 
-    public List<Integer> findRmnIdByName(String name)
+    public Optional<Rmn> findRmnByUuid(UUID uuid)
     {
-        return rmnRepository.findRmnIdByName(name);
+        return rmnRepository.findRmnByUuid(uuid);
     }
 
-    public Rmn findOneByName(String name)
+    public void saveRmn(Rmn newRmn)
     {
-        return rmnRepository.findOneByName(name);
-    }
-
-    public Rmn saveRmn(Rmn newRmn)
-    {
-        return rmnRepository.save(newRmn);
+        rmnRepository.save(newRmn.getName(), newRmn.getFile(), newRmn.getAuthor(), newRmn.getAddedBy());
     }
 
     public Boolean deleteRmn(Rmn deleteRmn)

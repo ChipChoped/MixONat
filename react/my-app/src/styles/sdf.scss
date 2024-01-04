@@ -15,7 +15,6 @@
 }
 
 .sdf-upload {
-
     display: flex;
     flex-direction: column;
     width: 30%;
@@ -87,18 +86,72 @@
     width: 30%;
     margin-bottom: 1em;
 
-    div {
+    .sdf-file {
         display: grid;
-        grid-template-columns: 90% 10%;
+        grid-template-columns: 85% 15%;
         align-items: center;
         border: 0.2em solid #58b0b0;
 
-        span {
+        .sdf-info {
+            display: flex;
+            justify-content: space-around;
             background-color: transparent;
-            padding: 1em;
-            border: none;
             text-decoration: none;
             font-weight: normal;
+            padding: 1em;
+            border: none;
+
+            .sdf-name-date {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-around;
+                border: transparent;
+
+                span {
+                    color: white;
+                    padding: 0.2em;
+                    font-weight: normal;
+                    border: transparent;
+                    text-decoration: none;
+                    background-color: rgba(29,70,85,255);
+
+                    a {
+                        color: white;
+                        font-weight: bold;
+                        text-decoration: none;
+                    }
+
+                    a:hover {
+                        text-decoration: underline;
+                    }
+                }
+            }
+
+            .sdf-attribution {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-around;
+                border: transparent;
+
+                span {
+                    color: white;
+                    padding: 0.2em;
+                    font-weight: normal;
+                    border: transparent;
+                    text-decoration: none;
+                    background-color: rgba(29,70,85,255);
+
+                    a {
+                        color: white;
+                        font-weight: bold;
+                        text-decoration: none;
+                    }
+
+                    a:hover {
+                        text-decoration: underline;
+                    }
+                }
+            }
         }
 
         .sdf-input-image {

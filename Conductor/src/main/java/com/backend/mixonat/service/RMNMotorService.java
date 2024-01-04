@@ -1,7 +1,5 @@
 package com.backend.mixonat.service;
 
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -9,7 +7,7 @@ import org.springframework.stereotype.Service;
 import com.backend.mixonat.model.Molecules;
 import com.backend.mixonat.model.checkRequest;
 import com.backend.mixonat.model.checkResponse;
-import com.backend.mixonat.model.FrontRequest;
+import com.backend.mixonat.model.MotorDTO;
 import com.backend.mixonat.repository.RMNMotorRepository;
 
 @Service
@@ -20,7 +18,7 @@ public class RMNMotorService
 
     // Cache data for 2 days with 500MBS 
     @Cacheable(value = "moleculesCache")
-    public Molecules getMolecules(FrontRequest request)
+    public Molecules getMolecules(MotorDTO request)
     {
         return rmnMotorRepository.getMolecules(request);
     }

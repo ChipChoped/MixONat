@@ -1,0 +1,90 @@
+.file-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 2em;
+
+  .file-card {
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    border: 0.2em solid #58b0b0;
+    border-radius: 5px;
+    margin-bottom: 2em;
+
+    span {
+      text-align: center;
+      text-decoration: underline;
+      font-weight: bold;
+      padding: 1.5em;
+      border: 0.2em solid #58b0b0;
+      background-color: #58b0b0;
+    }
+
+    .file-info {
+      display: flex;
+      justify-content: space-around;
+      background-color: transparent;
+      text-decoration: none;
+      font-weight: normal;
+      padding: 1em;
+      border: none;
+
+      .file-date {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        border: transparent;
+
+        span {
+          color: white;
+          padding: 0.2em;
+          font-weight: normal;
+          border: transparent;
+          text-decoration: none;
+          background-color: rgba(29, 70, 85, 255);
+        }
+      }
+
+      .file-attribution {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        border: transparent;
+
+        span {
+          color: white;
+          padding: 0.2em;
+          font-weight: normal;
+          border: transparent;
+          text-decoration: none;
+          background-color: rgba(29, 70, 85, 255);
+
+          a {
+            color: white;
+            font-weight: bold;
+            text-decoration: none;
+          }
+
+          a:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+  }
+
+  .file-content {
+    width: 30%;
+    border: 0.2em solid #58b0b0;
+    border-radius: 5px;
+    margin-bottom: 2em;
+    padding: 10px;
+    font-size: 14px;
+    line-height: 1.5;
+    word-break: break-all;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+    overflow: auto;
+  }
+}

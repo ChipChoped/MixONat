@@ -1,20 +1,7 @@
 #import libraries
 import os
-import string
-import glob
-import subprocess
-from subprocess import Popen
 import shutil
-import time
-import datetime
-from datetime import datetime
-import pandas as pd
-import requests
-import tkinter as tk
 from tkinter import *
-from tkinter import ttk
-from tkinter import messagebox
-from PIL import ImageTk, Image
 
 #get the current path 	
 def get_current_path():
@@ -80,7 +67,6 @@ def deleteFileInDirectory(directory_path):
     try:
         if os.path.exists(directory_path):
             for file_name in os.listdir(directory_path):
-                print(file_name)
                 if file_name == "info.txt":
                     pass
                 else:

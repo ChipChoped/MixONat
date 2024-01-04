@@ -6,6 +6,7 @@ import React, {useEffect, useState } from 'react';
 import "../styles/sdfLotus.scss";
 import axios from 'axios';
 import alertify from 'alertifyjs';
+import Cookies from "universal-cookie";
 
 function SdfLotus() {
 
@@ -29,6 +30,8 @@ function SdfLotus() {
   const [selectedItem, setSelectedItem] = useState(null);
 
   const [upload, setUpload] = useState(false);
+  const [author, setAuthor] = useState('')
+
 
   const [statusMessage, setStatusMessage] = useState('');
   const [selectedOption, setSelectedOption] = useState('union'); 
@@ -43,6 +46,7 @@ function SdfLotus() {
 
   const [fileName, setFileName] = useState("");
   const { sdfList } = useLoaderData()
+  const cookies = new Cookies();
 
   const handleFamilyClick = (family) => {
     setSelectedGenus(undefined);
@@ -129,11 +133,25 @@ function SdfLotus() {
   const handleCreateSdfClick = async () => {
     setUpload(false)
     let uploadValue = true;
+    console.log(sdfList);
 
+    /*
+    let exist = false;
+
+    // Utilisation de forEach pour itérer à travers le tableau
+    sdfList.sdfList.forEach((sdfFile) => {
+      if (sdfFile.name === fileName) {
+          exist = true;
+      }
+    });*/
     if (fileName === "" && isChecked) {
       uploadValue = false;
       setStatusMessage('Choose a name before saving in the database');
-    } else if (isChecked && sdfList.includes(fileName)) {
+    }else if (author === "" && isChecked) {
+      uploadValue = false;
+      setStatusMessage('Enter the author of the SDF before saving in the database');
+    }/*
+    else if (isChecked && exist) {
       // Utiliser une promesse pour attendre la réponse du confirm
       const confirmResult = await new Promise((resolve) => {
         alertify.confirm(
@@ -149,8 +167,10 @@ function SdfLotus() {
       });
   
       uploadValue = confirmResult;
+    }*/else{
+      uploadValue = true;
     }
-    
+
     if (uploadValue) {
       try {
         setStatusMessage('is running...'); 
@@ -158,7 +178,9 @@ function SdfLotus() {
           array: filtreList,
           fileName: fileName,
           type: selectedOption,
-          isSave: isChecked
+          isSave: isChecked,
+          author: author,
+          authorization: 'Bearer ' + cookies.get("authentication_token")
         });  
         const serverMessage = response.data;
         if (!serverMessage.includes("No SDF created")) {
@@ -481,23 +503,29 @@ function SdfLotus() {
                       <input
                           type="checkbox"
                           checked={isChecked}
-                          onChange={() => setIsChecked(!isChecked)}
+                          onChange={() => {setIsChecked(!isChecked); setAuthor("")}}
                         />
                         Save in database
                     </label>
                   </div>
                 </div>
-                  
+                  <label htmlFor='sdfName'>File's name &nbsp;&nbsp;&nbsp;</label>
                   <input
+                      id="sdfName"
                       type="text"
                       onChange={(e) => setFileName(e.target.value)}
                       placeholder="sdf name"
                     />
+                  {isChecked && 
+                    <div>
+                      <label htmlFor='sdfAuthor'>File's author &nbsp;</label>
+                      <input type="text" id="sdfAuthor" value={author} placeholder="Enter the author of the SDF's file" onChange={(e) => {setAuthor(e.target.value)}}></input>
+                    </div>
+                  }
                   <button onClick={() => handleCreateSdfClick()}>Create SDF</button>
 
-                  <p>{statusMessage}</p>
-                  {upload && <p>The SDF file is available in your downloads</p>}
-                  
+                  <p><small><em>{statusMessage}</em></small></p>
+                  {upload && <p><small><em>The SDF file is available in your downloads</em></small></p>}
               </div>            
             </div>
         </div>

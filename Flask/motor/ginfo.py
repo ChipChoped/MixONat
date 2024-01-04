@@ -1,21 +1,10 @@
 #import libraries
 
-import os
-import string
-import glob
-import subprocess
-from subprocess import Popen
-import shutil
-import time
 import datetime
 from datetime import datetime
 import pandas as pd
 import requests
-import tkinter as tk
 from tkinter import *
-from tkinter import ttk
-from tkinter import messagebox
-from PIL import ImageTk, Image
 import motor.tool_path
 #import packages
 
