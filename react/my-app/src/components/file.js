@@ -234,7 +234,7 @@ function File() {
 export async function getFilesInfo() {
     let cookies = new Cookies();
 
-    if (!cookies.get('authentication_token')) {
+    if (!cookies.get('authentication_token') && window.location.pathname === "/file") {
         return { userId: undefined, status: 401, message: "Unauthorized access. You need to be signed in to see this page" };
     }
 
