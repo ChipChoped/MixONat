@@ -4,6 +4,7 @@ import alertify from 'alertifyjs';
 import ClipLoader from "react-spinners/ClipLoader";
 import 'alertifyjs/build/css/alertify.css';
 import "../styles/file.scss";
+import "../styles/error.scss";
 import red_cross from "../assets/img/red-cross.png";
 import Cookies from "universal-cookie";
 
@@ -21,7 +22,7 @@ function File() {
 
     const options = {year: 'numeric', month: '2-digit', day: '2-digit'}
 
-    const { fileList, userId } = useLoaderData()
+    const { fileList, userId, status, message } = useLoaderData()
 
     const cookies = new Cookies();
 
@@ -135,103 +136,114 @@ function File() {
         }
     }, [deleteFile])
 
-    return (
-        <div className='file-container'>
-            <div className='file-upload'>
-                <span>ADD FILE IN THE DATABASE</span>
-                <div>
-                    <label htmlFor='fileFile'>FILE</label>
-                    <input type="file" id="fileFile" onChange={(e) => {
-                        setFileIsLoading(true);
-                        readFile(e.target.files[0])
-                    }}></input>
+    if (userId !== undefined) {
+        return (
+            <div className='file-container'>
+                <div className='file-upload'>
+                    <span>ADD FILE IN THE DATABASE</span>
+                    <div>
+                        <label htmlFor='fileFile'>FILE</label>
+                        <input type="file" id="fileFile" onChange={(e) => {
+                            setFileIsLoading(true);
+                            readFile(e.target.files[0])
+                        }}></input>
+                    </div>
+                    <div>
+                        <label htmlFor='fileName'>FILE NAME</label>
+                        <input type="text" id="fileName" value={name} placeholder="Enter the name of the file"
+                               onChange={(e) => {
+                                   setName(e.target.value)
+                               }}></input>
+                    </div>
+                    <div>
+                        <label htmlFor='fileType'>FILE TYPE</label>
+                        <select id="fileType" value={type} onChange={(e) => {
+                            setType(e.target.value)
+                        }}>
+                            <option value="SDF">SDF</option>
+                            <option value="SPECTRUM">Spectrum</option>
+                            <option value="DEPT90">Dept90</option>
+                            <option value="DEPT135">Dept135</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label htmlFor='fileAuthor'>FILE AUTHOR</label>
+                        <input type="text" id="fileAuthor" value={author} placeholder="Enter the author of the file"
+                               onChange={(e) => {
+                                   setAuthor(e.target.value)
+                               }}></input>
+                    </div>
+                    <div className='file-button'>
+                        {fileIsLoading
+                            ? <button>
+                                <ClipLoader className="file-loader" color={"#ffffff"}/>
+                            </button>
+                            : <button onClick={() => {
+                                checkFile()
+                            }}>Add to the database</button>}
+                    </div>
                 </div>
-                <div>
-                    <label htmlFor='fileName'>FILE NAME</label>
-                    <input type="text" id="fileName" value={name} placeholder="Enter the name of the file"
-                           onChange={(e) => {
-                               setName(e.target.value)
-                           }}></input>
-                </div>
-                <div>
-                    <label htmlFor='fileType'>FILE TYPE</label>
-                    <select id="fileType" value={type} onChange={(e) => {
-                        setType(e.target.value)
-                    }}>
-                        <option value="SDF">SDF</option>
-                        <option value="SPECTRUM">Spectrum</option>
-                        <option value="DEPT90">Dept90</option>
-                        <option value="DEPT135">Dept135</option>
-                    </select>
-                </div>
-                <div>
-                    <label htmlFor='fileAuthor'>FILE AUTHOR</label>
-                    <input type="text" id="fileAuthor" value={author} placeholder="Enter the author of the file"
-                           onChange={(e) => {
-                               setAuthor(e.target.value)
-                           }}></input>
-                </div>
-                <div className='file-button'>
-                    {fileIsLoading
-                        ? <button>
-                            <ClipLoader className="file-loader" color={"#ffffff"}/>
-                        </button>
-                        : <button onClick={() => {
-                            checkFile()
-                        }}>Add to the database</button>}
-                </div>
-            </div>
 
-            <div className='file-list'>
-                <span>All FILES IN THE DATABASE</span>
-                {fileList.fileList.map((file) => (
-                    <div className={file.added_by === userId.id ? 'file-own-true' : 'file-own-false'}>
-                        <div className='file-info' key={file.id}>
-                            <div className='file-type'>
-                                <span> {file.type} </span>
+                <div className='file-list'>
+                    <span>All FILES IN THE DATABASE</span>
+                    {fileList.fileList.map((file) => (
+                        <div className={file.added_by === userId.id ? 'file-own-true' : 'file-own-false'}>
+                            <div className='file-info' key={file.id}>
+                                <div className='file-type'>
+                                    <span> {file.type} </span>
+                                </div>
+                                <div className='file-name-date'>
+                                    <span>
+                                        <a href={"/preview?f=" + file.id}>
+                                            {file.name}
+                                        </a>
+                                    </span>
+                                    <span> {new Date(file.added_at).toLocaleDateString(undefined, options)} </span>
+                                </div>
+                                <div className='file-attribution'>
+                                    <span> Author: <b> {file.author} </b> </span>
+                                    <span> Added by:&nbsp;
+                                        <a href={"/profile?u=" + file.added_by} target="_blank" rel="noreferrer">
+                                            {file.added_by_name}
+                                        </a>
+                                    </span>
+                                </div>
                             </div>
-                            <div className='file-name-date'>
-                                <span>
-                                    <a href={"/preview?f=" + file.id}>
-                                        {file.name}
-                                    </a>
-                                </span>
-                                <span> {new Date(file.added_at).toLocaleDateString(undefined, options)} </span>
-                            </div>
-                            <div className='file-attribution'>
-                                <span> Author: <b> {file.author} </b> </span>
-                                <span> Added by:&nbsp;
-                                    <a href={"/profile?u=" + file.added_by} target="_blank" rel="noreferrer">
-                                        {file.added_by_name}
-                                    </a>
-                                </span>
-                            </div>
-                        </div>
-                        {file.added_by === userId.id
-                            ? <div className='file-input-image'>
-                                <input type="image" src={red_cross} onClick={() => {
-                                    deleteFileButton(file.id)
-                                }}/>
-                            </div>
-                            : null
-                        }
-                    </div>))}
+                            {file.added_by === userId.id
+                                ? <div className='file-input-image'>
+                                    <input type="image" src={red_cross} onClick={() => {
+                                        deleteFileButton(file.id)
+                                    }}/>
+                                </div>
+                                : null
+                            }
+                        </div>))}
+                </div>
             </div>
-        </div>
-    )
+        )
+    } else {
+        return (
+            <div className='error-container'>
+                <h1> Error {status} </h1>
+                <h2> {message} </h2>
+            </div>
+        )
+    }
 }
 
 export async function getFilesInfo() {
+    let cookies = new Cookies();
+
+    if (!cookies.get('authentication_token')) {
+        return { userId: undefined, status: 401, message: "Unauthorized access. You need to be signed in to see this page" };
+    }
+
     const requestOptions = {
         method: 'GET'
     };
 
-    // Send request to Spring server
-
     const response = await fetch("http://localhost:9000/file/list", requestOptions);
     const fileList = await response.json();
-
-    let cookies = new Cookies();
 
     const requestOptions_ = {
         method: 'GET',
@@ -241,7 +253,13 @@ export async function getFilesInfo() {
     const response_ = await fetch("http://localhost:9000/user/id", requestOptions_);
     const userId = await response_.json();
 
-    return { fileList: fileList, userId: userId };
+    if (response.status === 200) {
+        return { fileList: fileList, userId: userId };
+    }
+    else {
+        return { status: response.status, message: fileList.message };
+    }
+
 }
 
 export default File;

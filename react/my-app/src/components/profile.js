@@ -121,7 +121,7 @@ function Profile()
         return (
             <div className='error-container'>
                 <h1> Error { status } </h1>
-                <p> { message } </p>
+                <h2> { message } </h2>
             </div>
         )
     }
