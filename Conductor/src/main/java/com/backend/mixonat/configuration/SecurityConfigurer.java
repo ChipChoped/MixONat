@@ -68,34 +68,30 @@ public class SecurityConfigurer {
                 )
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(
-                                antMatcher(HttpMethod.GET, "/user/{uuid}"),
+                                antMatcher(HttpMethod.GET, "/user/{id}"),
                                 antMatcher(HttpMethod.PUT, "/user/sign-up"),
                                 antMatcher(HttpMethod.POST, "/user/sign-in"),
                                 antMatcher(HttpMethod.DELETE, "/user/delete-account"),
                                 antMatcher(HttpMethod.OPTIONS, "/user"),
-                                antMatcher(HttpMethod.OPTIONS, "/user/uuid"),
+                                antMatcher(HttpMethod.OPTIONS, "/user/id"),
                                 antMatcher(HttpMethod.OPTIONS, "/user/sign-up"),
                                 antMatcher(HttpMethod.OPTIONS, "/user/sign-in"),
                                 antMatcher(HttpMethod.OPTIONS, "/user/delete-account")).permitAll()
                         .requestMatchers(
                                 antMatcher(HttpMethod.GET, "/user"),
-                                antMatcher(HttpMethod.GET, "/user/uuid")).hasAnyRole("ADMIN", "USER")
+                                antMatcher(HttpMethod.GET, "/user/id")).hasAnyRole("ADMIN", "USER")
                         .requestMatchers(
-                                antMatcher(HttpMethod.GET, "/sdf/list"),
-                                antMatcher(HttpMethod.GET, "/rmn/list"),
-                                antMatcher(HttpMethod.GET, "/sdf/{uuid}"),
-                                antMatcher(HttpMethod.GET, "/rmn/{uuid}"),
+                                antMatcher(HttpMethod.GET, "/file/{id}"),
+                                antMatcher(HttpMethod.GET, "/file/list"),
+                                antMatcher(HttpMethod.GET, "/file/list/user/{id}"),
                                 antMatcher(HttpMethod.POST, "/motor"),
                                 antMatcher(HttpMethod.POST, "/checkFile"),
                                 antMatcher(HttpMethod.OPTIONS, "/motor"),
-                                antMatcher(HttpMethod.OPTIONS, "/sdf"),
-                                antMatcher(HttpMethod.OPTIONS, "/rmn"),
+                                antMatcher(HttpMethod.OPTIONS, "/file"),
                                 antMatcher(HttpMethod.OPTIONS, "/checkFile")).permitAll()
                         .requestMatchers(
-                                antMatcher(HttpMethod.POST, "/sdf"),
-                                antMatcher(HttpMethod.POST, "/rmn"),
-                                antMatcher(HttpMethod.DELETE, "/sdf"),
-                                antMatcher(HttpMethod.DELETE, "/rmn")).hasAnyRole("ADMIN", "USER")
+                                antMatcher(HttpMethod.POST, "/file"),
+                                antMatcher(HttpMethod.DELETE, "/file")).hasAnyRole("ADMIN", "USER")
                         .anyRequest()
                         .authenticated()
                 )

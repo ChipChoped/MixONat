@@ -7,14 +7,14 @@ import org.springframework.stereotype.Service;
 import com.backend.mixonat.model.Molecules;
 import com.backend.mixonat.model.checkRequest;
 import com.backend.mixonat.model.checkResponse;
-import com.backend.mixonat.model.MotorDTO;
-import com.backend.mixonat.repository.RMNMotorRepository;
+import com.backend.mixonat.dto.MotorDTO;
+import com.backend.mixonat.repository.MotorRepository;
 
 @Service
-public class RMNMotorService
+public class MotorService
 {
     @Autowired
-    private RMNMotorRepository rmnMotorRepository;
+    private MotorRepository rmnMotorRepository;
 
     // Cache data for 2 days with 500MBS 
     @Cacheable(value = "moleculesCache")

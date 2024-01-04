@@ -12,17 +12,17 @@ import java.util.UUID;
 @AllArgsConstructor
 @Entity
 @ToString
-@Table(name = "sdf")
-public class Sdf
+@Table(name = "files")
+public class File
 {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Integer id;
-
-    @Column(unique = true)
-    UUID uuid;
+    @Column(name = "id", unique = true)
+    UUID id;
 
     String name;
+
+    @Enumerated(EnumType.STRING)
+    Type type;
 
     @Column(name = "file")
     String file;

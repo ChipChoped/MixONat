@@ -5,12 +5,12 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.UUID;
+
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class NewSdfDTO implements JsonRequest {
-    String name;
-    String file;
-    String author;
+public class IdDTO implements JsonResponse, JsonRequest {
+    private UUID id;
 }

@@ -1,5 +1,6 @@
 package com.backend.mixonat.dto;
 
+import com.backend.mixonat.model.Type;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,9 +13,10 @@ import java.util.UUID;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class RmnDTO implements JsonResponse {
-    private UUID uuid;
+public class FileDTO implements JsonResponse {
+    private UUID id;
     private String name;
+    private Type type;
     private String file;
     private String author;
     private UUID added_by;
