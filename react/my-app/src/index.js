@@ -17,6 +17,7 @@ import SignUp from "./components/signUp";
 import { getRmnFilesNames } from './components/rmn';
 import Profile, {getUser} from "./components/profile";
 import Preview, {getFile} from "./components/preview";
+import LegalNotice from "./components/legalNotice";
 
 const router = createBrowserRouter([
   {
@@ -60,6 +61,10 @@ const router = createBrowserRouter([
         path:"/preview",
         element:<Preview/>,
         loader: getFile
+      },
+      {
+        path:"/legal",
+        element:<LegalNotice/>
       }
     ]
   },
