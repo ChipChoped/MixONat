@@ -51,10 +51,9 @@ function Preview()
 
 export async function getFile() {
     const queryParams = new URLSearchParams(window.location.search)
-    let type = queryParams.get("t")
-    let uuid = queryParams.get("f")
+    let id = queryParams.get("f")
 
-    if (uuid === null || type === null) {
+    if (id === null) {
         return {file: undefined, status: 400, message: "Bad request"}
     }
 
@@ -62,7 +61,7 @@ export async function getFile() {
         method: 'GET'
     };
 
-    const response = await fetch("http://localhost:9000/" + type + "/" + uuid, requestOptions);
+    const response = await fetch("http://localhost:9000/file/" + id, requestOptions);
     const json = await response.json();
 
     if (response.status === 200) {

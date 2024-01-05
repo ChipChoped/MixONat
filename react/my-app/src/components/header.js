@@ -1,5 +1,4 @@
 import { Logo } from "./logo"
-import { Link } from "react-router-dom"
 import "../styles/header.scss"
 import Cookies from 'universal-cookie';
 
@@ -22,15 +21,8 @@ export function Header()
                     </li>
                     {cookies.get("authentication_token")
                         ? <li>
-                            <a href={"/sdf"} className="header-link">
-                                <span>SDF Database</span>
-                            </a>
-                        </li>
-                        : null}
-                    {cookies.get("authentication_token")
-                        ? <li>
-                            <a href={"/rmn"} className="header-link">
-                                <span>RMN Database</span>
+                            <a href={"/file"} className="header-link">
+                                <span>File Database</span>
                             </a>
                         </li>
                         : null}
@@ -54,11 +46,13 @@ export function Header()
                             </a>
                         )}
                     </li>
-                    <li>
-                        <Link to={"/sdfLotus"} className="header-link">
-                            <span>Lotus Database</span>
-                        </Link>
-                    </li>
+                    {cookies.get("authentication_token")
+                        ? <li>
+                            <a href={"/sdfLotus"} className="header-link">
+                                <span>Lotus Database</span>
+                            </a>
+                        </li>
+                        : null}
                 </ul>
             </div>
         </>

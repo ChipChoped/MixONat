@@ -1,7 +1,8 @@
-package com.backend.mixonat.model;
+package com.backend.mixonat.dto;
 
 import java.io.Serializable;
 
+import com.backend.mixonat.model.Parametres;
 import lombok.Data;
 
 @Data
@@ -14,5 +15,7 @@ public class MotorDTO implements Serializable
     String dept90;
     Parametres params;
     Boolean useSdfDatabase;
-    Boolean useRmnDatabase;
+    Boolean useSpectrumDatabase;
+    Boolean useDept135Database;
+    Boolean useDept90Database;
 }

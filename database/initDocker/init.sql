@@ -9,6 +9,7 @@ BEGIN
     BEGIN
         CREATE USER mixo WITH PASSWORD 'mixo';
         GRANT ALL PRIVILEGES ON DATABASE Mixonat TO mixo;
+        GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO mixo;
     EXCEPTION
         WHEN duplicate_object THEN
             RAISE NOTICE '%, skipping', SQLERRM USING ERRCODE = SQLSTATE;
@@ -33,8 +34,7 @@ DROP TABLE IF EXISTS rmn;
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
 CREATE TABLE users (
-    id SERIAL,
-    uuid UUID PRIMARY KEY NOT NULL UNIQUE DEFAULT uuid_generate_v4(),
+    id UUID PRIMARY KEY NOT NULL UNIQUE DEFAULT uuid_generate_v4(),
     first_name VARCHAR(30) NOT NULL,
     last_name VARCHAR(30) NOT NULL,
     email VARCHAR(50) NOT NULL UNIQUE,
@@ -43,25 +43,17 @@ CREATE TABLE users (
     created_at TIMESTAMPTZ DEFAULT NOW(),
     updated_at TIMESTAMPTZ DEFAULT NOW());
 
-CREATE TABLE sdf (
-    id SERIAL,
-    uuid UUID PRIMARY KEY NOT NULL UNIQUE DEFAULT uuid_generate_v4(),
+CREATE TABLE files (
+    id UUID PRIMARY KEY NOT NULL UNIQUE DEFAULT uuid_generate_v4(),
     name TEXT,
+    type TEXT,
     file TEXT,
     author TEXT NOT NULL,
-    added_by UUID REFERENCES users(uuid),
-    added_at TIMESTAMPTZ DEFAULT NOW());
-
-CREATE TABLE IF NOT EXISTS rmn (
-    id SERIAL,
-    uuid UUID PRIMARY KEY NOT NULL UNIQUE DEFAULT uuid_generate_v4(),
-    name TEXT,
-    file TEXT,
-    author TEXT NOT NULL,
-    added_by UUID REFERENCES users(uuid),
-    added_at TIMESTAMPTZ DEFAULT NOW());
+    added_by UUID REFERENCES users(id),
+    added_at TIMESTAMPTZ DEFAULT NOW(),
+    CONSTRAINT type_check CHECK (type IN ('SDF', 'SPECTRUM', 'DEPT90', 'DEPT135')));
 
 INSERT INTO users (first_name, last_name, email, password, role)
-VALUES ('Admin', 'Admin', 'admin@mixonat.fr',
+VALUES ('Admin', 'Mixonat', 'admin@mixonat.fr',
         '$2a$06$hxJgB9phgXE1N0PzFJGcHeFrMjHzcYouIAgifa/AKlHemKgr9cr1q', -- 1pwdAdmin
         'ROLE_ADMIN');

@@ -14,16 +14,16 @@ import java.util.UUID;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, UUID> {
-    @Query(value="SELECT uuid FROM users WHERE email = ?1", nativeQuery = true)
-    UUID findUuidByEmail(String email);
+    @Query(value="SELECT id FROM users WHERE email = ?1", nativeQuery = true)
+    UUID findIdByEmail(String email);
 
-    Optional<User> findUserByUuid(UUID uuid);
+    Optional<User> findUserById(UUID id);
     Optional<User> findUserByEmail(String email);
 
     @Modifying
     @Transactional
     @Query(value = "insert into users (first_name, last_name, email, password, role)" +
             "values (:#{#first_name}, :#{#last_name}, :#{#email}, :#{#password}, :#{#role});", nativeQuery = true)
-    User save(@Param("first_name") String first_name, @Param("last_name") String last_name, @Param("email") String email, @Param("password") String password, @Param("role") Role role);
+    void save(@Param("first_name") String first_name, @Param("last_name") String last_name, @Param("email") String email, @Param("password") String password, @Param("role") String role);
 }
 

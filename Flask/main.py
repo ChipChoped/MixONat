@@ -172,11 +172,11 @@ def createSdf():
                 author = request.json.get('author')
                 authorization = request.json.get('authorization')
                 sdfDirectory = original_working_directory+'/Your_NMR_DataBase/'+sdfName+".sdf"           
-                url = 'http://localhost:9000/sdf'
+                url = 'http://localhost:9000/file'
                 file_content = ''
                 with open(sdfDirectory, 'r') as file:
                     file_content = file.read()
-                data = {'name': sdfName, 'file': file_content, 'author': author}
+                data = {'name': sdfName, 'type': 'SDF', 'file': file_content, 'author': author}
                 json_data = json.dumps(data)
                 response = requests.post(url, data=json_data, headers={'Content-Type': 'application/json','Authorization': authorization})
                 if response.status_code == 200 or response.status_code == 201:

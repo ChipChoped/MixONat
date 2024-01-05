@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import 'alertifyjs/build/css/alertify.css';
 import "../styles/signUp.scss";
+import Cookies from "universal-cookie";
+import {jwtDecode} from "jwt-decode";
 
 
 function SignUp() {
@@ -21,9 +23,10 @@ function SignUp() {
     const [passwordConfirmationError, setPasswordConfirmationError] = useState('')
     const [consentError, setConsentError] = useState('')
 
-    const [token, setToken] = useState('')
     const [errorMessage, setErrorMessage] = useState('')
     const [signingUp, setSigningUp] = useState(false)
+
+    const cookies = new Cookies();
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -49,9 +52,13 @@ function SignUp() {
                 fetch("http://localhost:9000/user/sign-up", requestOptions).then((response) => {
                     response.json().then((json) => {
                         if (response.status === 201) {
-                            console.log("User signed up: " + json)
-                            setToken(json.token)
-                            console.log("Token: " + token)
+                            const decodedToken = jwtDecode(json.token)
+
+                            cookies.set('authentication_token', json.token, {
+                                expires: new Date(decodedToken.exp * 1000)
+                            });
+
+                            window.location.href = "/"
                         }
                         else if (response.status === 400) {
                             setErrorMessage("Please complete correctly the form")

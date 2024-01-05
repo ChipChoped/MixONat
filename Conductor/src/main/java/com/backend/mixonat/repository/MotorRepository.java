@@ -1,7 +1,7 @@
 package com.backend.mixonat.repository;
 
 import com.backend.mixonat.configuration.CustomProperties;
-import com.backend.mixonat.model.MotorDTO;
+import com.backend.mixonat.dto.MotorDTO;
 import com.backend.mixonat.model.Molecules;
 import com.backend.mixonat.model.checkRequest;
 import com.backend.mixonat.model.checkResponse;
@@ -13,7 +13,7 @@ import org.springframework.web.client.RestClient;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 
 @Repository
-public class RMNMotorRepository
+public class MotorRepository
 {
     @Autowired
 	private CustomProperties props;

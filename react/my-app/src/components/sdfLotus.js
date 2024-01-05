@@ -1,6 +1,5 @@
 
 import 'alertifyjs/build/css/alertify.css';
-import "../styles/rmn.scss";
 import { useLoaderData } from "react-router-dom";
 import React, {useEffect, useState } from 'react';
 import "../styles/sdfLotus.scss";
