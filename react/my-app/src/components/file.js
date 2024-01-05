@@ -250,16 +250,22 @@ export async function getFilesInfo() {
         headers: { 'Authorization': 'Bearer ' + cookies.get("authentication_token") }
     };
 
-    const response_ = await fetch("http://localhost:9000/user/id", requestOptions_);
-    const userId = await response_.json();
+    if (window.location.pathname === "/file") {
+        const response_ = await fetch("http://localhost:9000/user/id", requestOptions_);
+        const userId = await response_.json();
 
-    if (response.status === 200) {
-        return { fileList: fileList, userId: userId };
+        if (response.status === 200) {
+            return {fileList: fileList, userId: userId};
+        } else {
+            return {status: response.status, message: fileList.message};
+        }
+    } else {
+        if (response.status === 200) {
+            return {fileList: fileList};
+        } else {
+            return {status: response.status, message: fileList.message};
+        }
     }
-    else {
-        return { status: response.status, message: fileList.message };
-    }
-
 }
 
 export default File;
