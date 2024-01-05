@@ -154,11 +154,12 @@ def createSdf():
         subprocess.run(command, shell=True)
         # Reviens au répertoire initial (si nécessaire)
         os.chdir(original_working_directory)
-        errorlog_path = "Your_NMR_DataBase/errorlog.txt"
-
-        # Vérifier la taille du fichier
-        errorlog_size = os.path.getsize(errorlog_path)
-        
+        errorlog_size=1
+        if motor.tool_path.is_file_exist(original_working_directory+'/Your_NMR_DataBase',"errorlog.txt"):
+            errorlog_path = "Your_NMR_DataBase/errorlog.txt"
+            # Vérifier la taille du fichier
+            errorlog_size = os.path.getsize(errorlog_path)
+            
         if motor.tool_path.is_file_exist(original_working_directory+'/Your_NMR_DataBase','c_type_13C_NMR_Database.sdf') and errorlog_size == 0:
             msg += " SDF created."
             sdfName = 'c_type_13C_NMR_Database'
@@ -167,18 +168,23 @@ def createSdf():
                 os.rename(original_working_directory+'/Your_NMR_DataBase/c_type_13C_NMR_Database.sdf',original_working_directory+'/Your_NMR_DataBase/'+fileName+'.sdf')
             
             #default_directory = motor.tool_path.get_default_directory()
-            motor.tool_path.copy_file_to_default_directory(original_working_directory+'/Your_NMR_DataBase/'+sdfName+'.sdf')
+            urlConductor = ""
+            if "app" in original_working_directory:
+                urlConductor = 'http://conductor-mixonat:9000/file'
+                motor.tool_path.copy_file_from_container(sdfName)
+            else:
+                urlConductor = 'http://localhost:9000/file'
+                motor.tool_path.copy_file_to_default_directory(original_working_directory+'/Your_NMR_DataBase/'+sdfName+'.sdf')
             if isSave:
                 author = request.json.get('author')
                 authorization = request.json.get('authorization')
                 sdfDirectory = original_working_directory+'/Your_NMR_DataBase/'+sdfName+".sdf"           
-                url = 'http://localhost:9000/file'
                 file_content = ''
                 with open(sdfDirectory, 'r') as file:
                     file_content = file.read()
                 data = {'name': sdfName, 'type': 'SDF', 'file': file_content, 'author': author}
                 json_data = json.dumps(data)
-                response = requests.post(url, data=json_data, headers={'Content-Type': 'application/json','Authorization': authorization})
+                response = requests.post(urlConductor, data=json_data, headers={'Content-Type': 'application/json','Authorization': authorization})
                 if response.status_code == 200 or response.status_code == 201:
                     msg += " Save in database."
                 else:

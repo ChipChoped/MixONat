@@ -14,9 +14,12 @@ except:
 path_id = os.getcwd()
 path_id_1 = str('/'.join(path_id.split('\\')[:-1]) + '/')
 
+if "app" in path_id:
+    path_id_1 = "/app/flask"
 # define input and output files
 inputfilename =  path_id_1 + '/LOTUS_DB_input/cfmid_input.txt'
 outputfilename = path_id +'/cfmid_input_2D.sdf'
+
 
 # get data for the whole set of compounds
 with open(inputfilename, "r") as fpin, open(outputfilename, 'w') as sdfile:

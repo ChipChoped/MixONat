@@ -2,6 +2,7 @@
 import os
 import shutil
 from tkinter import *
+import subprocess
 
 #get the current path 	
 def get_current_path():
@@ -75,3 +76,8 @@ def deleteFileInDirectory(directory_path):
                         os.remove(file_path)
     except OSError as e:
         print(f'Error deleting files in the directory {directory_path}: {e}')
+        
+def copy_file_from_container(file_name):
+    container_path = "/app/flask/Your_NMR_DataBase/"+file_name+".sdf"
+    host_path =  "/app/flask/downloads/"+file_name+".sdf"
+    subprocess.run(["cp", container_path, host_path], check=True)

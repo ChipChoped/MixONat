@@ -31,7 +31,9 @@ def run_command(command):
 if "NMRshift" in path_idg:
     
 	errorlog_path = "errorlog.txt"
-	
+	command = "python " + path_idg + "/NMRShift_setup.py" 
+	run_command(command)
+ 
 	command = "python " + path_idg + "/dependencies/l2sdf.py 2>errorlog.txt" 
 	run_command(command)
 	"""
@@ -42,7 +44,7 @@ if "NMRshift" in path_idg:
 
 	errorlog_size = os.path.getsize(errorlog_path)
 	if errorlog_size == 0 :
-		command = path_idg +'/predictSdf cfmid_input_2D.sdf 4 3d 1>cfmid_input_2D_nmr.txt 2>errorlog.txt'
+		command = path_idg +'/predictSdf.bat cfmid_input_2D.sdf 4 3d 1>cfmid_input_2D_nmr.txt 2>errorlog.txt'
 		run_command(command)
 	"""
 	predict_sdf.bat:

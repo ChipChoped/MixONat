@@ -9,13 +9,15 @@ path_id = os.getcwd()
 path_id_1 = str('/'.join(path_id.split('\\')[:-1]) + '/')
 path_id_2 = str('/'.join(path_id.split('\\')) + '/')
 
+if "app" in path_id:
+    path_id_1 = "/app/flask/"
+    
 sdfnamein = path_id_2 + 'fake_acd_LOTUS_DB_predict.sdf'
 sdfnameout = path_id_2 + '13C_NMR_Database.sdf'
 tag_file = pd.read_csv(path_id_1 + 'LOTUS_DB_input/cfmid_input.tsv', sep = '\t')
 
 reader = Chem.SDMolSupplier(sdfnamein)
 writer = Chem.SDWriter(sdfnameout)
-
 
 for molindex, m in enumerate(reader, start=1):
     NOM = m.GetProp('_Name')
