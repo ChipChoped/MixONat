@@ -100,6 +100,8 @@ function SignIn()
                 </div>
                 <p className='sign-up'> No account yet? Sign up <button onClick={() => {setSignUp(true)}}><b><em>here</em></b></button>!</p>
             </div>
+            <!-- <script src="./orcid-widget.js"></script> -->
+            <!-- <div id="orcidWidget" data-size='lg' data-clientid='APP-34IBF14LOTOGDJZZ' data-env='production' data-scopes='/activities/update' data-redirecturi='https://orcid.github.io/orcid-auth-widget/widget.html'></div> -->
         </div>
     )
 }
