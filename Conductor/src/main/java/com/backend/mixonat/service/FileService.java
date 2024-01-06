@@ -41,4 +41,9 @@ public class FileService {
     {
         fileRepository.delete(deleteFile);
     }
+
+    public void deleteAllFilesByUserId(UUID id)
+    {
+        fileRepository.deleteAllByUserId(id);
+    }
 }

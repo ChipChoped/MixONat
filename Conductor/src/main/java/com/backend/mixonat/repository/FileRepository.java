@@ -35,4 +35,9 @@ public interface FileRepository extends JpaRepository<File, UUID> {
     @Query(value = "insert into files (name, type, file, author, added_by) " +
             "values (:#{#name}, :#{#type}, :#{#file}, :#{#author}, :#{#added_by});", nativeQuery = true)
     void save(@Param("name") String name, @Param("type") String type, @Param("file") String file, @Param("author") String author, @Param("added_by") UUID added_by);
+
+    @Modifying
+    @Transactional
+    @Query(value = "delete from files where added_by = :#{#id}", nativeQuery = true)
+    void deleteAllByUserId(@Param("id") UUID id);
 }
