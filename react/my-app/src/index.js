@@ -16,6 +16,7 @@ import SignUp from "./components/signUp";
 import SdfLotus from "./components/sdfLotus";
 import Profile, {getUserInfo} from "./components/profile";
 import Preview, {getFile} from "./components/preview";
+import LegalNotice from "./components/legalNotice";
 
 const router = createBrowserRouter([
   {
@@ -58,6 +59,10 @@ const router = createBrowserRouter([
         path:"/preview",
         element:<Preview/>,
         loader: getFile
+      },
+      {
+        path:"/legal",
+        element:<LegalNotice/>
       }
     ]
   },
