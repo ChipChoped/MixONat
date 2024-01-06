@@ -171,7 +171,7 @@ def createSdf():
             urlConductor = ""
             if "app" in original_working_directory:
                 urlConductor = 'http://conductor-mixonat:9000/file'
-                motor.tool_path.copy_file_from_container(sdfName)
+                #motor.tool_path.copy_file_from_container(sdfName)
             else:
                 urlConductor = 'http://localhost:9000/file'
                 motor.tool_path.copy_file_to_default_directory(original_working_directory+'/Your_NMR_DataBase/'+sdfName+'.sdf')
