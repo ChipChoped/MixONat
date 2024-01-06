@@ -2,28 +2,12 @@ DROP DATABASE IF EXISTS mixonat;
 CREATE DATABASE mixonat;
 
 DO $$
-DECLARE 
-    seq_name RECORD;
-BEGIN
-    -- Créer l'utilisateur mixo et accorder des privilèges sur la base de données
     BEGIN
         CREATE USER mixo WITH PASSWORD 'mixo';
         GRANT ALL PRIVILEGES ON DATABASE Mixonat TO mixo;
-        GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO mixo;
-    EXCEPTION
-        WHEN duplicate_object THEN
-            RAISE NOTICE '%, skipping', SQLERRM USING ERRCODE = SQLSTATE;
-    END;
-
-    -- Accorder des droits sur toutes les séquences du schéma public à l'utilisateur mixo
-    FOR seq_name IN (SELECT sequencename FROM pg_sequences WHERE schemaname = 'public') 
-    LOOP
-        EXECUTE 'GRANT USAGE, SELECT ON SEQUENCE public.' || seq_name.sequencename || ' TO mixo';
-    END LOOP;
-END $$;
-
-
-
+        EXCEPTION WHEN duplicate_object THEN RAISE NOTICE '%, skipping', SQLERRM USING ERRCODE = SQLSTATE;
+    END
+$$;
 
 \connect mixonat
 
