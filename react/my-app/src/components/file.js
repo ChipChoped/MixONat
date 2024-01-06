@@ -235,7 +235,7 @@ export async function getFilesInfo() {
     let cookies = new Cookies();
 
     if (!cookies.get('authentication_token') && window.location.pathname === "/file") {
-        return { userId: undefined, status: 401, message: "Unauthorized access. You need to be signed in to see this page" };
+        window.location.href = "/sign-in";
     }
 
     const requestOptions = {
@@ -243,28 +243,28 @@ export async function getFilesInfo() {
     };
 
     const response = await fetch("http://localhost:9000/file/list", requestOptions);
-    const fileList = await response.json();
+    const json = await response.json();
 
     const requestOptions_ = {
         method: 'GET',
         headers: { 'Authorization': 'Bearer ' + cookies.get("authentication_token") }
     };
 
-    if (window.location.pathname === "/file") {
-        const response_ = await fetch("http://localhost:9000/user/id", requestOptions_);
-        const userId = await response_.json();
+    if (response.status === 200) {
+        if (window.location.pathname === "/file") {
+            const response_ = await fetch("http://localhost:9000/user/id", requestOptions_);
+            const json_ = await response_.json();
 
-        if (response.status === 200) {
-            return {fileList: fileList, userId: userId};
+            if (response.status === 200) {
+                return {fileList: json, userId: json_};
+            } else {
+                return {status: response.status, message: json.message};
+            }
         } else {
-            return {status: response.status, message: fileList.message};
+            return {fileList: json};
         }
     } else {
-        if (response.status === 200) {
-            return {fileList: fileList};
-        } else {
-            return {status: response.status, message: fileList.message};
-        }
+        return {status: json.status, message: json.message};
     }
 }
 
