@@ -1,0 +1,730 @@
+	chemicalTaxonomyNPclassifierPathway	chemicalTaxonomyNPclassifierSuperclass	chemicalTaxonomyNPclassifierClass
+0	Fatty acids	Fatty Acids and Conjugates	Hydroxy fatty acids
+1	Fatty acids	Fatty Acids and Conjugates	Oxo fatty acids
+2	Fatty acids	Fatty Acids and Conjugates	Branched fatty acids
+3	Fatty acids	Fatty Acids and Conjugates	Unsaturated fatty acids
+4	Fatty acids	Fatty Acids and Conjugates	Hydroperoxy fatty acids
+5	Fatty acids	Fatty Acids and Conjugates	Epoxy fatty acids
+6	Fatty acids	Fatty Acids and Conjugates	Methoxy fatty acids
+7	Fatty acids	Fatty Acids and Conjugates	Amino fatty acids
+8	Fatty acids	Fatty Acids and Conjugates	Nitro fatty acids
+9	Fatty acids	Fatty Acids and Conjugates	Thia fatty acids
+10	Fatty acids	Fatty Acids and Conjugates	Carbocyclic fatty acids
+11	Fatty acids	Fatty Acids and Conjugates	Heterocyclic fatty acids
+12	Fatty acids	Fatty Acids and Conjugates	Mycolic acids
+13	Fatty acids	Fatty Acids and Conjugates	Dicarboxylic acids
+14	Fatty acids	Octadecanoids	12-oxophytodienoic acid metabolites
+15	Fatty acids	Octadecanoids	Jasmonic acids
+16	Fatty acids	Octadecanoids	Phytoprostanes
+17	Fatty acids	Octadecanoids	Phytofurans
+18	Fatty acids	Octadecanoids	Other Octadecanoids
+19	Fatty acids	Eicosanoids	Prostaglandins
+20	Fatty acids	Eicosanoids	Leukotrienes
+21	Fatty acids	Eicosanoids	Thromboxanes
+22	Fatty acids	Eicosanoids	Lipoxins
+23	Fatty acids	Eicosanoids	Hydroxy-hydroperoxyeicosatrienoic acids
+24	Fatty acids	Eicosanoids	Hydroxy-hydroperoxyeicosatetraenoic acids
+25	Fatty acids	Eicosanoids	Hydroxy-hydroperoxyeicosapentaenoic acids
+26	Fatty acids	Eicosanoids	Epoxyeicosatrienoic acids
+27	Fatty acids	Eicosanoids	Hepoxilins
+28	Fatty acids	Eicosanoids	Levuglandins
+29	Fatty acids	Eicosanoids	Isoprostanes
+30	Fatty acids	Eicosanoids	Isofurans
+31	Fatty acids	Eicosanoids	"Eicosa-1,2-dioxolanes"
+32	Fatty acids	Eicosanoids	Resolvin Es
+33	Fatty acids	Eicosanoids	Clavulones
+34	Fatty acids	Eicosanoids	Other Eicosanoids
+35	Fatty acids	Docosanoids	Neuroprostanes
+36	Fatty acids	Docosanoids	Neurofurans
+37	Fatty acids	Docosanoids	"Docosa-1,2-dioxolanes"
+38	Fatty acids	Docosanoids	Resolvin Ds
+39	Fatty acids	Docosanoids	Maresins
+40	Fatty acids	Docosanoids	Other Docosanoids
+41	Fatty acids	Fatty acyls	Fatty alcohols
+42	Fatty acids	Fatty acyls	Fatty aldehydes
+43	Fatty acids	Fatty esters	Wax monoesters
+44	Fatty acids	Fatty esters	Wax diesters
+45	Fatty acids	Fatty esters	Cyano esters
+46	Fatty acids	Fatty esters	Lactones
+47	Fatty acids	Fatty esters	Fatty acyl CoAs
+48	Fatty acids	Fatty esters	Fatty acyl carnitines
+49	Fatty acids	Fatty esters	Fatty acid estolides
+50	Fatty acids	Fatty amides	Primary amides
+51	Fatty acids	Fatty amides	N-acyl amines
+52	Fatty acids	Fatty amides	Fatty acyl homoserine lactones
+53	Fatty acids	Fatty amides	N-acyl ethanolamines (endocannabinoids)
+54	Fatty acids	Fatty acyls	Fatty nitriles
+55	Fatty acids	Fatty acyls	Fatty ethers
+56	Fatty acids	Fatty acyls	Hydrocarbons
+57	Fatty acids	Fatty acyls	Oxygenated hydrocarbons
+58	Fatty acids	Fatty acyl glycosides	Fatty acyl glycosides of mono- and disaccharides
+59	Fatty acids	Fatty acyl glycosides	Sophorolipids
+60	Fatty acids	Fatty acyl glycosides	Rhamnolipids
+61	Fatty acids	Fatty acyl glycosides	Ascarosides
+62	Fatty acids	Glycerolipids	Monoacylglycerols
+63	Fatty acids	Glycerolipids	Diacylglycerols
+64	Fatty acids	Glycerolipids	Triacylglycerols
+65	Fatty acids	Glycerolipids	Glycosylmonoacylglycerols
+66	Fatty acids	Glycerolipids	Glycosyldiacylglycerols
+67	Fatty acids	Glycerophospholipids	Glycerophosphocholines
+68	Fatty acids	Glycerophospholipids	Glycerophosphoethanolamines
+69	Fatty acids	Glycerophospholipids	Glycerophosphoserines
+70	Fatty acids	Glycerophospholipids	Glycerophosphoglycerols
+71	Fatty acids	Glycerophospholipids	Glycerophosphoglycerophosphates
+72	Fatty acids	Glycerophospholipids	Glycerophosphoinositols
+73	Fatty acids	Glycerophospholipids	Glycerophosphoinositol phosphates
+74	Fatty acids	Glycerophospholipids	Glycerophosphates
+75	Fatty acids	Glycerophospholipids	Glycerophosphoglycerophosphoglycerols
+76	Fatty acids	Glycerophospholipids	CDP-Glycerols
+77	Fatty acids	Glycerophospholipids	Glycosylglycerophospholipids
+78	Fatty acids	Glycerophospholipids	Glycerophosphoinositolglycans
+79	Fatty acids	Glycerophospholipids	Oxidized glycerophospholipids
+80	Fatty acids	Glycerophospholipids	Long-Chain Bicyclic Phosphotriester
+81	Fatty acids	Sphingolipids	Sphingoid bases
+82	Fatty acids	Sphingolipids	Ceramides
+83	Fatty acids	Sphingolipids	Phosphosphingolipids
+84	Fatty acids	Sphingolipids	Neutral glycosphingolipids
+85	Fatty acids	Sphingolipids	Acidic glycosphingolipids
+86	Fatty acids	Fatty acyls	Resin glycosides
+87	Fatty acids	Fatty acyls	Paraconic acids and derivatives
+88	Polyketides	Macrolides	Erythromycins
+89	Polyketides	Macrolides	Tylosins
+90	Polyketides	Macrolides	Avermectins
+91	Polyketides	Macrolides	Polyene macrolides
+92	Polyketides	Macrolides	Ascomycins and Rapamycins
+93	Polyketides	Macrolides	Oligomycins
+94	Polyketides	Macrolides	Ansa macrolides
+95	Polyketides	Macrolides	Zearalenones
+96	Polyketides	Macrolides	Bafilomycins
+97	Polyketides	Macrolides	Macrolide lactones
+98	Polyketides	Macrolides	Enediynes
+99	Polyketides	Macrolides	Spirotetronate macrolides
+100	Polyketides	Macrolides	Bryostatins
+101	Polyketides	Macrolides	Oxa-Bridged Macrolides
+102	Polyketides	Linear polyketides	Linear tetronates
+103	Polyketides	Linear polyketides	Open-chain polyketides
+104	Polyketides	Linear polyketides	3-oligoenoyltetramic acids
+105	Polyketides	Linear polyketides	Acetogenins
+106	Polyketides	Linear polyketides	Linear polyenes
+107	Polyketides	Linear polyketides	Polyesters
+108	Polyketides	Cyclic polyketides	Simple cyclic polyketides
+109	Polyketides	Cyclic polyketides	2-pyrone derivatives
+110	Polyketides	Cyclic polyketides	4-pyrone derivatives
+111	Polyketides	Chromanes	Cytosporins
+112	Polyketides	Cyclic polyketides	Oblogolides
+113	Polyketides	Cyclic polyketides	Monacolins and Monacolin derivatives
+114	Polyketides	Cyclic polyketides	Decalins with side chains
+115	Polyketides	Cyclic polyketides	Decalins with 2-pyrones
+116	Polyketides	Cyclic polyketides	Nonadrides
+117	Terpenoids	Diterpenoids	Platensimycin and Platencins
+118	Polyketides	Aromatic polyketides	Sorbicilinoids
+119	Polyketides	Alkylresorcinols	Monoalkylresorcinols
+120	Polyketides	Alkylresorcinols	Dialkylresorcinols
+121	Polyketides	Polycyclic aromatic polyketides	Anthraquinones and anthrones
+122	Polyketides	Chromanes	Chromones
+123	Polyketides	Chromanes	Aflatoxins
+124	Polyketides	Cyclic polyketides	Phthalide derivatives
+125	Polyketides	Aromatic polyketides	Griseofulvins
+126	Polyketides	Aromatic polyketides	Catechols with side chains
+127	Polyketides	Aromatic polyketides	Aromatic polyketides with side chains
+128	Polyketides	Aromatic polyketides	Simple aromatic polyketides
+129	Polyketides	Aromatic polyketides	Luminacins and derivatives
+130	Polyketides	Polycyclic aromatic polyketides	Tetracyclines
+131	Polyketides	Polycyclic aromatic polyketides	Anthracyclines
+132	Polyketides	Polycyclic aromatic polyketides	Angucyclines
+133	Polyketides	Polycyclic aromatic polyketides	Pradimicins
+134	Polyketides	Polycyclic aromatic polyketides	Fasamycins and derivatives
+135	Polyketides	Polycyclic aromatic polyketides	Benastatins and derivatives
+136	Polyketides	Phloroglucinols	Acyl phloroglucinols
+137	Polyketides	Phloroglucinols	"Prenylated,geranylated phloroglucinols"
+138	Polyketides	Phloroglucinols	Dimeric phloroglucinols
+139	Polyketides	Phloroglucinols	Oligomeric phloroglucinols (phlorotannins)
+140	Polyketides	Xanthones	Methyl xanthones
+141	Polyketides	Naphthalenes	Naphthoquinones
+142	Polyketides	Naphthalenes	Spirodioxynaphthalenes
+143	Polyketides	Naphthalenes	Bisnaphthalenes
+144	Polyketides	Naphthalenes	Naphthalenes and derivatives
+145	Polyketides	Chromanes	Azaphilones
+146	Polyketides	Polyethers	Ladder polyethers
+147	Polyketides	Polyethers	Polyether ionophores
+148	Polyketides	Polyethers	Macrotetrolides
+149	Polyketides	Tropolones	Tropolones and derivatives (PKS)
+150	Shikimates and Phenylpropanoids	Phenolic acids (C6-C1)	Shikimic acids and derivatives
+151	Shikimates and Phenylpropanoids	Phenolic acids (C6-C1)	Simple phenolic acids
+152	Shikimates and Phenylpropanoids	Phenolic acids (C6-C1)	Gallotannins
+153	Shikimates and Phenylpropanoids	Phenolic acids (C6-C1)	Bagremycins
+154	Polyketides	Diphenyl ethers (DPEs)	Fungal DPEs
+155	Shikimates and Phenylpropanoids	Diphenyl ethers (DPEs)	Marine-bacterial DPEs
+156	Shikimates and Phenylpropanoids	Phenylpropanoids (C6-C3)	Cinnamic acids and derivatives
+157	Shikimates and Phenylpropanoids	Phenylpropanoids (C6-C3)	Cinnamoyl phenols
+158	Shikimates and Phenylpropanoids	Phenylethanoids (C6-C2)	Phenylethanoids
+159	Shikimates and Phenylpropanoids	Tropolones	Tropolones and derivatives (Shikimate)
+160	Polyketides	Aromatic polyketides	Strobilurins and derivatives
+161	Shikimates and Phenylpropanoids	Lignans	Dibenzylbutane lignans
+162	Shikimates and Phenylpropanoids	Lignans	Dibenzylbutyrolactone lignans
+163	Shikimates and Phenylpropanoids	Lignans	Furanoid lignans
+164	Shikimates and Phenylpropanoids	Lignans	Furofuranoid lignans
+165	Shikimates and Phenylpropanoids	Lignans	Arylnaphthalene and aryltetralin lignans
+166	Shikimates and Phenylpropanoids	Lignans	Dibenzocyclooctadienes lignans
+167	Shikimates and Phenylpropanoids	Lignans	Neolignans
+168	Shikimates and Phenylpropanoids	Lignans	Minor lignans
+169	Shikimates and Phenylpropanoids	Coumarins	Simple coumarins
+170	Shikimates and Phenylpropanoids	Coumarins	Furocoumarins
+171	Shikimates and Phenylpropanoids	Coumarins	Pyranocoumarins
+172	Shikimates and Phenylpropanoids	Coumarins	Isocoumarins
+173	Shikimates and Phenylpropanoids	Styrylpyrones	Kavalactones and derivatives
+174	Shikimates and Phenylpropanoids	Diarylheptanoids	Linear diarylheptanoids
+175	Shikimates and Phenylpropanoids	Diarylheptanoids	Diarylether type diarylheptanoids
+176	Shikimates and Phenylpropanoids	Diarylheptanoids	Biaryl type diarylheptanoids
+177	Shikimates and Phenylpropanoids	Terphenyls	p-Terphenyls
+178	Shikimates and Phenylpropanoids	Terphenyls	m-Terphenyls
+179	Shikimates and Phenylpropanoids	Diazotetronic acids and derivatives	Pulvinones
+180	Shikimates and Phenylpropanoids	Fluorenes	Selaginellins
+181	Shikimates and Phenylpropanoids	Xanthones	Plant xanthones
+182	Shikimates and Phenylpropanoids	Flavonoids	Chalcones
+183	Shikimates and Phenylpropanoids	Flavonoids	Flavanones
+184	Shikimates and Phenylpropanoids	Flavonoids	Dihydroflavonols
+185	Shikimates and Phenylpropanoids	Flavonoids	Flavonols
+186	Shikimates and Phenylpropanoids	Flavonoids	Flavones
+187	Shikimates and Phenylpropanoids	Flavonoids	Flavandiols (Leucoanthocyanidins)
+188	Shikimates and Phenylpropanoids	Flavonoids	Flavans
+189	Shikimates and Phenylpropanoids	Flavonoids	Flavan-3-ols
+190	Shikimates and Phenylpropanoids	Flavonoids	Proanthocyanins
+191	Shikimates and Phenylpropanoids	Flavonoids	Anthocyanidins
+192	Shikimates and Phenylpropanoids	Flavonoids	Aurones
+193	Shikimates and Phenylpropanoids	Flavonoids	Isoaurones
+194	Shikimates and Phenylpropanoids	Stilbenoids	Monomeric stilbenes
+195	Shikimates and Phenylpropanoids	Stilbenoids	Oligomeric stibenes
+196	Shikimates and Phenylpropanoids	Isoflavonoids	Isoflavones
+197	Shikimates and Phenylpropanoids	Isoflavonoids	Rotenoids
+198	Shikimates and Phenylpropanoids	Isoflavonoids	Coumestan
+199	Shikimates and Phenylpropanoids	Isoflavonoids	Pterocarpan
+200	Shikimates and Phenylpropanoids	Isoflavonoids	Isoflavanones
+201	Shikimates and Phenylpropanoids	Isoflavonoids	Coumaronochromones
+202	Shikimates and Phenylpropanoids	Isoflavonoids	2-arylbenzofurans
+203	Shikimates and Phenylpropanoids	Flavonoids	Neoflavonoids
+204	Shikimates and Phenylpropanoids	Flavonoids	Open-chained neoflavonoids
+205	Terpenoids	Polyethers	Oxasqualenoids
+206	Terpenoids	Monoterpenoids	Acyclic monoterpenoids
+207	Terpenoids	Monoterpenoids	Monocyclic monoterpenoids
+208	Terpenoids	Monoterpenoids	Irregular monoterpenoids
+209	Terpenoids	Monoterpenoids	Iridoids monoterpenoids
+210	Terpenoids	Monoterpenoids	Secoiridoid monoterpenoids
+211	Terpenoids	Sesquiterpenoids	Acorane sesquiterpenoids
+212	Terpenoids	Sesquiterpenoids	Africanane sesquiterpenoids
+213	Terpenoids	Sesquiterpenoids	Agarofuran sesquiterpenoids
+214	Terpenoids	Sesquiterpenoids	Alliacane sesquiterpenoids
+215	Terpenoids	Sesquiterpenoids	Allohimachalane sesquiterpenoids
+216	Terpenoids	Sesquiterpenoids	Aristolane sesquiterpenoids
+217	Terpenoids	Sesquiterpenoids	Aromadendrane sesquiterpenoids
+218	Terpenoids	Sesquiterpenoids	Asteriscane sesquiterpenoids
+219	Terpenoids	Sesquiterpenoids	Bergamotane sesquiterpenoids
+220	Terpenoids	Sesquiterpenoids	Bicyclogermacrane sesquiterpenoids
+221	Terpenoids	Sesquiterpenoids	Bicyclohumulane sesquiterpenoids
+222	Terpenoids	Sesquiterpenoids	Bisabolane sesquiterpenoids
+223	Terpenoids	Sesquiterpenoids	Botryane sesquiterpenoids
+224	Terpenoids	Sesquiterpenoids	Bourbonane sesquiterpenoids
+225	Terpenoids	Sesquiterpenoids	Brasilane sesquiterpenoids
+226	Terpenoids	Sesquiterpenoids	Cadinane sesquiterpenoids
+227	Terpenoids	Monoterpenoids	Camphane monoterpenoids
+228	Terpenoids	Sesquiterpenoids	Campherenane sesquiterpenoids
+229	Terpenoids	Sesquiterpenoids	Capnellane sesquiterpenoids
+230	Terpenoids	Sesquiterpenoids	Carabrane sesquiterpenoids
+231	Terpenoids	Monoterpenoids	Carane monoterpenoids
+232	Terpenoids	Sesquiterpenoids	Caryolane sesquiterpenoids
+233	Terpenoids	Sesquiterpenoids	Caryophyllane sesquiterpenoids
+234	Terpenoids	Sesquiterpenoids	Cedrane and Isocedrane sesquiterpenoids
+235	Terpenoids	Sesquiterpenoids	Chamigrane sesquiterpenoids
+236	Terpenoids	Sesquiterpenoids	Chiloscyphane sesquiterpenoids
+237	Terpenoids	Sesquiterpenoids	Clovane sesquiterpenoids
+238	Terpenoids	Sesquiterpenoids	Coloratane sesquiterpenoids
+239	Terpenoids	Sesquiterpenoids	Copaane sesquiterpenoids
+240	Terpenoids	Sesquiterpenoids	Copacamphane sesquiterpenoids
+241	Terpenoids	Sesquiterpenoids	Cubebane sesquiterpenoids
+242	Terpenoids	Sesquiterpenoids	Cuparane sesquiterpenoids
+243	Terpenoids	Sesquiterpenoids	Cyclobisabolane sesquiterpenoids
+244	Terpenoids	Sesquiterpenoids	Cycloeudesmane sesquiterpenoids
+245	Terpenoids	Sesquiterpenoids	Cyclofarnesane sesquiterpenoids
+246	Terpenoids	Sesquiterpenoids	Cyclogermacrane sesquiterpenoids
+247	Terpenoids	Sesquiterpenoids	Cyclolaurane sesquiterpenoids
+248	Terpenoids	Sesquiterpenoids	Cyclonerane sesquiterpenoids
+249	Terpenoids	Sesquiterpenoids	Daucane sesquiterpenoids
+250	Terpenoids	Sesquiterpenoids	Drimane sesquiterpenoids
+251	Terpenoids	Sesquiterpenoids	Dunniane sesquiterpenoids
+252	Terpenoids	Sesquiterpenoids	Elemane sesquiterpenoids
+253	Terpenoids	Sesquiterpenoids	Eremophilane sesquiterpenoids
+254	Terpenoids	Sesquiterpenoids	Eudesmane sesquiterpenoids
+255	Terpenoids	Sesquiterpenoids	Farnesane sesquiterpenoids
+256	Terpenoids	Monoterpenoids	Fenchane monoterpenoids
+257	Terpenoids	Sesquiterpenoids	Fukinane sesquiterpenoids
+258	Terpenoids	Sesquiterpenoids	Germacrane sesquiterpenoids
+259	Terpenoids	Sesquiterpenoids	Gorgonane sesquiterpenoids
+260	Terpenoids	Sesquiterpenoids	Guaiane sesquiterpenoids
+261	Terpenoids	Sesquiterpenoids	Gymnomitrane sesquiterpenoids
+262	Terpenoids	Sesquiterpenoids	Herbertane sesquiterpenoids
+263	Terpenoids	Sesquiterpenoids	Himachalane sesquiterpenoids
+264	Terpenoids	Sesquiterpenoids	Hirsutane sesquiterpenoids
+265	Terpenoids	Sesquiterpenoids	Homofarnesane sesquiterpenoids
+266	Terpenoids	Sesquiterpenoids	Humbertiane sesquiterpenoids
+267	Terpenoids	Sesquiterpenoids	Humulane sesquiterpenoids
+268	Terpenoids	Sesquiterpenoids	Illudalane sesquiterpenoids
+269	Terpenoids	Sesquiterpenoids	Illudane sesquiterpenoids
+270	Terpenoids	Sesquiterpenoids	Iphionane sesquiterpenoids
+271	Terpenoids	Sesquiterpenoids	Ishwarane sesquiterpenoids
+272	Terpenoids	Sesquiterpenoids	Isocomane sesquiterpenoids
+273	Terpenoids	Sesquiterpenoids	Isodaucane sesquiterpenoids
+274	Terpenoids	Sesquiterpenoids	Isolactarane sesquiterpenoids
+275	Terpenoids	Sesquiterpenoids	Ivaxillarane sesquiterpenoids
+276	Terpenoids	Sesquiterpenoids	Lactarane sesquiterpenoids
+277	Terpenoids	Sesquiterpenoids	Laurane sesquiterpenoids
+278	Terpenoids	Sesquiterpenoids	Lippifoliane sesquiterpenoids
+279	Terpenoids	Sesquiterpenoids	Longibornane sesquiterpenoids
+280	Terpenoids	Sesquiterpenoids	Longifolane sesquiterpenoids
+281	Terpenoids	Sesquiterpenoids	Longipinane sesquiterpenoids
+282	Terpenoids	Sesquiterpenoids	Marasmane sesquiterpenoids
+283	Terpenoids	Monoterpenoids	Menthane monoterpenoids
+284	Terpenoids	Sesquiterpenoids	Nardosinane sesquiterpenoids
+285	Terpenoids	Sesquiterpenoids	Noreremophilane sesquiterpenoids
+286	Terpenoids	Sesquiterpenoids	Noreudesmane sesquiterpenoids
+287	Terpenoids	Sesquiterpenoids	Oplopane sesquiterpenoids
+288	Terpenoids	Sesquiterpenoids	Oppositane sesquiterpenoids
+289	Terpenoids	Sesquiterpenoids	Pacifigorgiane sesquiterpenoids
+290	Terpenoids	Sesquiterpenoids	Panasinsane sesquiterpenoids
+291	Terpenoids	Sesquiterpenoids	Patchoulane sesquiterpenoids
+292	Terpenoids	Sesquiterpenoids	Perforane sesquiterpenoids
+293	Terpenoids	Sesquiterpenoids	Picrotoxane sesquiterpenoids
+294	Terpenoids	Monoterpenoids	Pinane monoterpenoids
+295	Terpenoids	Sesquiterpenoids	Pinguisane sesquiterpenoids
+296	Terpenoids	Sesquiterpenoids	Presilphiperfolane and Probotryane sesquiterpenoids
+297	Terpenoids	Sesquiterpenoids	Prezizaane sesquiterpenoids
+298	Terpenoids	Sesquiterpenoids	Protoilludane sesquiterpenoids
+299	Terpenoids	Sesquiterpenoids	Pseudoguaiane sesquiterpenoids
+300	Terpenoids	Sesquiterpenoids	Quadrane sesquiterpenoids
+301	Terpenoids	Sesquiterpenoids	Rotundane sesquiterpenoids
+302	Terpenoids	Sesquiterpenoids	Santalane sesquiterpenoids
+303	Terpenoids	Sesquiterpenoids	Sativane sesquiterpenoids
+304	Terpenoids	Sesquiterpenoids	Secochamigrane sesquiterpenoids
+305	Terpenoids	Sesquiterpenoids	Secoeudesmane sesquiterpenoids
+306	Terpenoids	Sesquiterpenoids	Secogermacrane sesquiterpenoids
+307	Terpenoids	Sesquiterpenoids	Silphinane sesquiterpenoids
+308	Terpenoids	Sesquiterpenoids	Silphiperfolane sesquiterpenoids
+309	Terpenoids	Sesquiterpenoids	Sinularane sesquiterpenoids
+310	Terpenoids	Sesquiterpenoids	Spiroaxane sesquiterpenoids
+311	Terpenoids	Sesquiterpenoids	Spirovetivane sesquiterpenoids
+312	Terpenoids	Sesquiterpenoids	Sterpurane sesquiterpenoids
+313	Terpenoids	Sesquiterpenoids	Thapsane sesquiterpenoids
+314	Terpenoids	Monoterpenoids	Thujane monoterpenoids
+315	Terpenoids	Sesquiterpenoids	Thujopsane sesquiterpenoids
+316	Terpenoids	Sesquiterpenoids	Tremulane sesquiterpenoids
+317	Terpenoids	Sesquiterpenoids	Trichothecane sesquiterpenoids
+318	Terpenoids	Sesquiterpenoids	Valerane sesquiterpenoids
+319	Terpenoids	Sesquiterpenoids	Valerenane sesquiterpenoids
+320	Terpenoids	Sesquiterpenoids	Zizaane sesquiterpenoids
+321	Terpenoids	Sesquiterpenoids	Arteminisin
+322	Terpenoids	Sesquiterpenoids	Hamigerane sesquiterpenoids
+323	Terpenoids	Sesquiterpenoids	Pentalenane sesquiterpenoids
+324	Terpenoids	Diterpenoids	Phytane diterpenoids
+325	Terpenoids	Diterpenoids	Prenylbisabolane diterpenoids
+326	Terpenoids	Diterpenoids	Cyclophytane diterpenoids
+327	Terpenoids	Diterpenoids	Dactylomelane diterpenoids
+328	Terpenoids	Diterpenoids	Labdane diterpenoids
+329	Terpenoids	Diterpenoids	Secolabdane diterpenoids
+330	Terpenoids	Diterpenoids	Norlabdane diterpenoids
+331	Terpenoids	Diterpenoids	Halimane diterpenoids
+332	Terpenoids	Diterpenoids	Colensane and Clerodane diterpenoids
+333	Terpenoids	Diterpenoids	Abietane diterpenoids
+334	Terpenoids	Diterpenoids	Furanoabietane diterpenoids
+335	Terpenoids	Diterpenoids	Icetexane diterpenoids
+336	Terpenoids	Diterpenoids	Secoabietane diterpenoids
+337	Terpenoids	Diterpenoids	Abeoabietane diterpenoids
+338	Terpenoids	Diterpenoids	Cycloabietane diterpenoids
+339	Terpenoids	Diterpenoids	Totarane diterpenoids
+340	Terpenoids	Diterpenoids	Nagilactone diterpenoids
+341	Terpenoids	Diterpenoids	Pimarane and Isopimarane diterpenoids
+342	Terpenoids	Diterpenoids	Erythroxylane diterpenoids
+343	Terpenoids	Diterpenoids	Parguerane diterpenoids
+344	Terpenoids	Diterpenoids	Devadarane diterpenoids
+345	Terpenoids	Diterpenoids	Norpimarane and Norisopimarane diterpenoids
+346	Terpenoids	Diterpenoids	Cassane diterpenoids
+347	Terpenoids	Diterpenoids	Cleistanthane diterpenoids
+348	Terpenoids	Diterpenoids	Spongiane diterpenoids
+349	Terpenoids	Diterpenoids	Podocarpane diterpenoids
+350	Terpenoids	Diterpenoids	Kaurane and Phyllocladane diterpenoids
+351	Terpenoids	Diterpenoids	Norkaurane diterpenoids
+352	Terpenoids	Diterpenoids	Secokaurane diterpenoids
+353	Terpenoids	Diterpenoids	Beyerane diterpenoids
+354	Terpenoids	Diterpenoids	Villanovane diterpenoids
+355	Terpenoids	Diterpenoids	Atisane diterpenoids
+356	Terpenoids	Diterpenoids	Trachylobane diterpenoids
+357	Terpenoids	Diterpenoids	Aphidicolane diterpenoids
+358	Terpenoids	Diterpenoids	Gibberellins
+359	Terpenoids	Diterpenoids	Grayanotoxane diterpenoids
+360	Terpenoids	Diterpenoids	Cembrane diterpenoids
+361	Terpenoids	Diterpenoids	Norcembrane diterpenoids
+362	Terpenoids	Diterpenoids	Pseudopterane diterpenoids
+363	Terpenoids	Diterpenoids	Eunicellane diterpenoids
+364	Terpenoids	Diterpenoids	Gersemiane diterpenoids
+365	Terpenoids	Diterpenoids	Asbestinane diterpenoids
+366	Terpenoids	Diterpenoids	Sphaerane diterpenoids
+367	Terpenoids	Diterpenoids	Briarane diterpenoids
+368	Terpenoids	Diterpenoids	Dolabellane diterpenoids
+369	Terpenoids	Diterpenoids	Dolastane diterpenoids
+370	Terpenoids	Diterpenoids	Cyathane diterpenoids
+371	Terpenoids	Diterpenoids	Guanacastane diterpenoids
+372	Terpenoids	Diterpenoids	Sphaeroane diterpenoids
+373	Terpenoids	Diterpenoids	Verrucosane diterpenoids
+374	Terpenoids	Diterpenoids	Casbane diterpenoids
+375	Terpenoids	Diterpenoids	Jatrophane diterpenoids
+376	Terpenoids	Diterpenoids	Segetane diterpenoids
+377	Terpenoids	Diterpenoids	Pepluane diterpenoids
+378	Terpenoids	Diterpenoids	Paraliane diterpenoids
+379	Terpenoids	Diterpenoids	Lathyrane diterpenoids
+380	Terpenoids	Diterpenoids	Rhamnofolane diterpenoids
+381	Terpenoids	Diterpenoids	Daphnane diterpenoids
+382	Terpenoids	Diterpenoids	Premyrsinane diterpenoids
+383	Terpenoids	Diterpenoids	Myrsinane diterpenoids
+384	Terpenoids	Diterpenoids	Tigliane diterpenoids
+385	Terpenoids	Diterpenoids	Ingenane diterpenoids
+386	Terpenoids	Diterpenoids	Jatropholane diterpenoids
+387	Terpenoids	Diterpenoids	Fusicoccane diterpenoids
+388	Terpenoids	Diterpenoids	Valparane diterpenoids
+389	Terpenoids	Diterpenoids	Mulinane diterpenoids
+390	Terpenoids	Diterpenoids	Verticillane diterpenoids
+391	Terpenoids	Diterpenoids	Taxane diterpenoids
+392	Terpenoids	Diterpenoids	Abeotaxane diterpenoids
+393	Terpenoids	Diterpenoids	Trinervitane diterpenoids
+394	Terpenoids	Diterpenoids	Kempane diterpenoids
+395	Terpenoids	Diterpenoids	Amphilectane diterpenoids
+396	Terpenoids	Diterpenoids	Cycloamphilectane diterpenoids
+397	Terpenoids	Diterpenoids	Xenicane diterpenoids
+398	Terpenoids	Diterpenoids	Xeniaphyllane diterpenoids
+399	Terpenoids	Diterpenoids	Viscidane diterpenoids
+400	Terpenoids	Diterpenoids	Eremane diterpenoids
+401	Terpenoids	Diterpenoids	Prenyleudesmane diterpenoids
+402	Terpenoids	Diterpenoids	Lobane diterpenoids
+403	Terpenoids	Diterpenoids	Pachydictyane diterpenoids
+404	Terpenoids	Diterpenoids	Serrulatane and Biflorane diterpenoids
+405	Terpenoids	Diterpenoids	Decipiane diterpenoids
+406	Terpenoids	Diterpenoids	Sacculatane diterpenoids
+407	Terpenoids	Diterpenoids	Obtusane diterpenoids
+408	Terpenoids	Diterpenoids	Sphenolobane diterpenoids
+409	Terpenoids	Diterpenoids	Tetracyclic diterpenoids
+410	Terpenoids	Diterpenoids	Breviane diterpenoids
+411	Terpenoids	Diterpenoids	Cyclopiane diterpenoids
+412	Terpenoids	Sesterterpenoids	Norsesterterpenoids
+413	Terpenoids	Sesterterpenoids	Asperane sesterterpenoids
+414	Terpenoids	Sesterterpenoids	Linear sesterterpenoids
+415	Terpenoids	Sesterterpenoids	Monocarbocyclic sesterterpenoids
+416	Terpenoids	Sesterterpenoids	Cericerane sesterterpenoids
+417	Terpenoids	Sesterterpenoids	Cheilanthane sesterterpenoids
+418	Terpenoids	Sesterterpenoids	Ophiobolane sesterterpenoids
+419	Terpenoids	Sesterterpenoids	Scalarane sesterterpenoids
+420	Terpenoids	Sesterterpenoids	Betaestacin-type sesterterpenoids
+421	Terpenoids	Sesterterpenoids	Mangicol-type sesterterpenoids
+422	Terpenoids	Triterpenoids	Fusidane triterpenoids
+423	Terpenoids	Triterpenoids	Cycloartane triterpenoids
+424	Terpenoids	Triterpenoids	Cucurbitane triterpenoids
+425	Terpenoids	Triterpenoids	Dammarane and Protostane triterpenoids
+426	Terpenoids	Triterpenoids	"Lanostane, Tirucallane and Euphane triterpenoids"
+427	Terpenoids	Triterpenoids	Apotirucallane triterpenoids
+428	Terpenoids	Triterpenoids	Cycloapotirucallane triterpenoids
+429	Terpenoids	Triterpenoids	Quassinoids
+430	Terpenoids	Triterpenoids	Limonoids
+431	Terpenoids	Triterpenoids	Baccharane triterpenoids
+432	Terpenoids	Triterpenoids	Shionane triterpenoids
+433	Terpenoids	Triterpenoids	Lupane triterpenoids
+434	Terpenoids	Triterpenoids	Abeolupane triterpenoids
+435	Terpenoids	Triterpenoids	Oleanane triterpenoids
+436	Terpenoids	Triterpenoids	Taraxerane triterpenoids
+437	Terpenoids	Triterpenoids	Multiflorane triterpenoids
+438	Terpenoids	Triterpenoids	Glutinane triterpenoids
+439	Terpenoids	Triterpenoids	Friedelane triterpenoids
+440	Terpenoids	Triterpenoids	Pachysanane triterpenoids
+441	Terpenoids	Triterpenoids	Ursane and Taraxastane triterpenoids
+442	Terpenoids	Triterpenoids	Bauerane triterpenoids
+443	Terpenoids	Triterpenoids	Hopane and Moretane triterpenoids
+444	Terpenoids	Triterpenoids	Neohopane triterpenoids
+445	Terpenoids	Triterpenoids	Fernane and Arborinane triterpenoids
+446	Terpenoids	Triterpenoids	Adianane triterpenoids
+447	Terpenoids	Triterpenoids	Filicane triterpenoids
+448	Terpenoids	Triterpenoids	Stictane triterpenoids
+449	Terpenoids	Triterpenoids	Gammacerane triterpenoids
+450	Terpenoids	Triterpenoids	Serratane triterpenoids
+451	Terpenoids	Triterpenoids	Onocerane triterpenoids
+452	Terpenoids	Triterpenoids	Polypodane triterpenoids
+453	Terpenoids	Triterpenoids	Malabaricane triterpenoids
+454	Terpenoids	Triterpenoids	Saponaceolide triterpenoids
+455	Terpenoids	Triterpenoids	Acyclic triterpenoids
+456	Terpenoids	Steroids	Estrane steroids
+457	Terpenoids	Steroids	Androstane steroids
+458	Terpenoids	Steroids	Pregnane steroids
+459	Terpenoids	Steroids	Cholane steroids
+460	Terpenoids	Steroids	Cholestane steroids
+461	Terpenoids	Steroids	Ecdysteroids
+462	Terpenoids	Steroids	Ergostane steroids
+463	Terpenoids	Steroids	Stigmastane steroids
+464	Terpenoids	Steroids	Cardenolides
+465	Terpenoids	Steroids	Bufadienolides
+466	Terpenoids	Steroids	Spirostane steroids
+467	Terpenoids	Steroids	Furostane steroids
+468	Terpenoids	Steroids	Vitamin D2 and derivatives
+469	Terpenoids	Steroids	Vitamin D3 and derivatives
+470	Terpenoids	Carotenoids (C40)	"Carotenoids (C40, Ψ-Ψ)"
+471	Terpenoids	Carotenoids (C40)	"Carotenoids (C40, β-Ψ)"
+472	Terpenoids	Carotenoids (C40)	"Carotenoids (C40, ε-Ψ)"
+473	Terpenoids	Carotenoids (C40)	"Carotenoids (C40, γ-Ψ)"
+474	Terpenoids	Carotenoids (C40)	"Carotenoids (C40, π-Ψ)"
+475	Terpenoids	Carotenoids (C40)	"Carotenoids (C40, Χ-Ψ)"
+476	Terpenoids	Carotenoids (C40)	"Carotenoids (C40, β-β)"
+477	Terpenoids	Carotenoids (C40)	"Carotenoids (C40, β-ε)"
+478	Terpenoids	Carotenoids (C40)	"Carotenoids (C40, β-γ)"
+479	Terpenoids	Carotenoids (C40)	"Carotenoids (C40, ε-ε)"
+480	Terpenoids	Carotenoids (C40)	"Carotenoids (C40, γ-ε)"
+481	Terpenoids	Carotenoids (C40)	"Carotenoids (C40, β-π)"
+482	Terpenoids	Carotenoids (C40)	"Carotenoids (C40, β-Χ)"
+483	Terpenoids	Carotenoids (C40)	"Carotenoids (C40, β-κ)"
+484	Terpenoids	Carotenoids (C40)	"Carotenoids (C40, κ-Χ)"
+485	Terpenoids	Carotenoids (C40)	"Carotenoids (C40, κ-κ)"
+486	Terpenoids	Carotenoids (C40)	"Carotenoids (C40, π-π)"
+487	Terpenoids	Carotenoids (C40)	"Carotenoids (C40, Χ-Χ)"
+488	Terpenoids	Carotenoids (C40)	"Carotenoids (C40, π-Χ)"
+489	Terpenoids	Carotenoids (C45)	"Carotenoids (C45, Ψ-Ψ)"
+490	Terpenoids	Carotenoids (C45)	"Carotenoids (C45, β-Ψ)"
+491	Terpenoids	Carotenoids (C45)	"Carotenoids (C45, ε-Ψ)"
+492	Terpenoids	Carotenoids (C50)	"Carotenoids (C50, β-β)"
+493	Terpenoids	Carotenoids (C50)	"Carotenoids (C50, Ψ-Ψ)"
+494	Terpenoids	Carotenoids (C50)	"Carotenoids (C50, β-Ψ)"
+495	Terpenoids	Carotenoids (C50)	"Carotenoids (C50, ε-ε)"
+496	Terpenoids	Carotenoids (C50)	"Carotenoids (C50, γ-γ)"
+497	Terpenoids	Apocarotenoids	"Apocarotenoids (C30, Ψ-Ψ)"
+498	Terpenoids	Apocarotenoids	Apocarotenoids (β-)
+499	Terpenoids	Apocarotenoids	Apocarotenoids (Ψ-)
+500	Terpenoids	Apocarotenoids	Apocarotenoids(ε-)
+501	Terpenoids	Apocarotenoids	Miscellaneous apocarotenoids
+502	Terpenoids	Apocarotenoids	Megastigmanes
+503	Terpenoids	Polyprenols	Bactoprenols
+504	Terpenoids	Polyprenols	Dolichols
+505	Terpenoids	Polyprenols	Polyprenol derivatives
+506	Terpenoids	Meroterpenoids	Prenyl quinone meroterpenoids
+507	Terpenoids	Meroterpenoids	Meromonoterpenoids
+508	Terpenoids	Meroterpenoids	Merosesquiterpenoids
+509	Terpenoids	Meroterpenoids	Meroterpenoids with 5- or 6-membered ring
+510	Terpenoids	Meroterpenoids	Meroterpenoids with bridged ring
+511	Terpenoids	Meroterpenoids	Spriromeroterpenoids
+512	Terpenoids	Meroterpenoids	Miscellaneous meroterpenoids
+513	Alkaloids	Ornithine alkaloids	Polyamines
+514	Alkaloids	Ornithine alkaloids	Pyrrolidine alkaloids
+515	Alkaloids	Ornithine alkaloids	Tropane alkaloids
+516	Alkaloids	Ornithine alkaloids	Pyrrolizidine alkaloids
+517	Alkaloids	Ornithine alkaloids	Stemona alkaloids
+518	Alkaloids	Lysine alkaloids	Piperidine alkaloids
+519	Alkaloids	Lysine alkaloids	Quinolizidine alkaloids
+520	Alkaloids	Lysine alkaloids	Indolizidine alkaloids
+521	Alkaloids	Nicotinic acid alkaloids	Pyridine alkaloids
+522	Alkaloids	Tyrosine alkaloids	Phenylethylamines
+523	Alkaloids	Tyrosine alkaloids	Tetrahydroisoquinoline alkaloids
+524	Alkaloids	Tyrosine alkaloids	Morphinan alkaloids
+525	Alkaloids	Tyrosine alkaloids	Hasubanan alkaloids
+526	Alkaloids	Tyrosine alkaloids	Acutumine alkaloids
+527	Alkaloids	Tyrosine alkaloids	Aporphine alkaloids
+528	Alkaloids	Tyrosine alkaloids	Protoberberine alkaloids
+529	Alkaloids	Tyrosine alkaloids	Protopine alkaloids
+530	Alkaloids	Tyrosine alkaloids	Phenethylisoquinoline alkaloids
+531	Alkaloids	Tyrosine alkaloids	Terpenoid tetrahydroisoquinoline alkaloids
+532	Alkaloids	Tyrosine alkaloids	Amarylidaceae alkaloids
+533	Alkaloids	Tyrosine alkaloids	Oxazole alkaloids
+534	Alkaloids	Tyrosine alkaloids	Pimprinine alkaloids
+535	Alkaloids	Tyrosine alkaloids	Isoquinoline alkaloids
+536	Alkaloids	Tyrosine alkaloids	Betalain alkaloids
+537	Alkaloids	Tyrosine alkaloids	Cephalotaxus alkaloids
+538	Alkaloids	Tyrosine alkaloids	Homoerythrina alkaloids
+539	Alkaloids	Tryptophan alkaloids	Simple indole alkaloids
+540	Alkaloids	Tryptophan alkaloids	Simple oxindole alkaloids
+541	Alkaloids	Tryptophan alkaloids	Hapalindole alkaloids
+542	Alkaloids	Tryptophan alkaloids	Carboline alkaloids
+543	Alkaloids	Tryptophan alkaloids	Carbazole alkaloids
+544	Alkaloids	Tryptophan alkaloids	Corynanthe type
+545	Alkaloids	Tryptophan alkaloids	Aspidosperma type
+546	Alkaloids	Tryptophan alkaloids	Iboga type
+547	Alkaloids	Tryptophan alkaloids	Yohimbine-like alkaloids
+548	Alkaloids	Tryptophan alkaloids	Strychnos type
+549	Alkaloids	Tryptophan alkaloids	Aspidosperma-Iboga hybrid type (Vinca alkaloids)
+550	Alkaloids	Tryptophan alkaloids	Pyrroloquinoline alkaloids
+551	Alkaloids	Tryptophan alkaloids	Pyrroloindole alkaloids
+552	Alkaloids	Tryptophan alkaloids	Ergot alkaloids
+553	Alkaloids	Proline alkaloids	Pyrrole alkaloids
+554	Alkaloids	Anthranilic acid alkaloids	Anthranillic acid derivatives
+555	Alkaloids	Anthranilic acid alkaloids	Quinazoline alkaloids
+556	Alkaloids	Anthranilic acid alkaloids	Acridone alkaloids
+557	Alkaloids	Anthranilic acid alkaloids	Phenazine alkaloids
+558	Alkaloids	Anthranilic acid alkaloids	Phenoxazine alkaloids
+559	Alkaloids	Anthranilic acid alkaloids	Benzodiazepine alkaloids
+560	Alkaloids	Histidine alkaloids	Imidazole alkaloids
+561	Alkaloids	Guanidine alkaloids	Saxitoxins
+562	Alkaloids	Guanidine alkaloids	Tetrodotoxins
+563	Alkaloids	Guanidine alkaloids	Pentacyclic guanidine alkaloids
+564	Alkaloids	Guanidine alkaloids	Tricyclic guanidine alkaloids
+565	Alkaloids	Guanidine alkaloids	Acyclic guanidine alkaloids
+566	Alkaloids	Guanidine alkaloids	Bicyclic guanidine alkaloids
+567	Alkaloids	Guanidine alkaloids	Monocyclic guanidine alkaloids
+568	Alkaloids	Pseudoalkaloids	Acetate-derived alkaloids
+569	Alkaloids	Pseudoalkaloids	Phenylalanine-derived alkaloids
+570	Alkaloids	Pseudoalkaloids	Purine alkaloids
+571	Alkaloids	Pseudoalkaloids	Isoindole alkaloids
+572	Alkaloids	Pseudoalkaloids	Cytochalasan alkaloids
+573	Alkaloids	Pseudoalkaloids	Capsaicins and Capsaicinoids
+574	Alkaloids	Pseudoalkaloids	Isariotin alkaloids
+575	Amino acids and Peptides	Oligopeptides	Linear peptides
+576	Amino acids and Peptides	Small peptides	Dipeptides
+577	Amino acids and Peptides	Small peptides	Tripeptides
+578	Amino acids and Peptides	Oligopeptides	Cyclic peptides
+579	Amino acids and Peptides	Oligopeptides	Lipopeptides
+580	Amino acids and Peptides	Oligopeptides	Aeruginosins
+581	Amino acids and Peptides	Oligopeptides	Microginins
+582	Amino acids and Peptides	Oligopeptides	Anabaenopeptins
+583	Amino acids and Peptides	Oligopeptides	Ahp-containing cyclodepsipeptides
+584	Amino acids and Peptides	Oligopeptides	Microcystins
+585	Amino acids and Peptides	Oligopeptides	Cryptophycins
+586	Amino acids and Peptides	Oligopeptides	Microcolins and mirabimids
+587	Amino acids and Peptides	Oligopeptides	Tantazoles and mirabazoles
+588	Amino acids and Peptides	Oligopeptides	Vancomycins and Teicoplanins
+589	Amino acids and Peptides	Oligopeptides	Bleomycins
+590	Amino acids and Peptides	Oligopeptides	Streptogramins
+591	Amino acids and Peptides	Oligopeptides	Actinomycins
+592	Amino acids and Peptides	β-lactams	Penicillins
+593	Amino acids and Peptides	β-lactams	Cephalosporins
+594	Amino acids and Peptides	β-lactams	Cephamycins
+595	Amino acids and Peptides	β-lactams	Clavams
+596	Amino acids and Peptides	β-lactams	Carbapenems
+597	Amino acids and Peptides	β-lactams	Monocyclic β-lactams
+598	Amino acids and Peptides	γ-lactam-β-lactones	Salinosporamides
+599	Amino acids and Peptides	Amino acid glycosides	Cyanogenic glycosides
+600	Amino acids and Peptides	Amino acid glycosides	Glucosinolates
+601	Carbohydrates	Saccharides	Monosaccharides
+602	Carbohydrates	Saccharides	Disaccharides
+603	Carbohydrates	Saccharides	Polysaccharides
+604	Carbohydrates	Saccharides	Paulomycins and derivatives
+605	Carbohydrates	Polyols	Cyclitols
+606	Carbohydrates	Polyols	Amino cyclitols
+607	Carbohydrates	Aminosugars and aminoglycosides	Aminosugars
+608	Carbohydrates	Aminosugars and aminoglycosides	Aminoglycosides
+609	Carbohydrates	Nucleosides	Purine nucleos(t)ides
+610	Carbohydrates	Nucleosides	Pyrimidine nucleos(t)ides
+611	Carbohydrates	Nucleosides	Streptothricins and derivatives
+612	Amino acids and Peptides	Oligopeptides	RiPPs-Amatoxins and Phallotoxins
+613	Amino acids and Peptides	Oligopeptides	RiPPs-Bottromycins
+614	Amino acids and Peptides	Oligopeptides	RiPPs-Cyanobactins
+615	Amino acids and Peptides	Oligopeptides	RiPPs-Lanthipeptides
+616	Amino acids and Peptides	Oligopeptides	RiPPs-Lasso peptides
+617	Amino acids and Peptides	Oligopeptides	RiPPs-Microcins
+618	Amino acids and Peptides	Oligopeptides	RiPPs-Thiopeptides
+619	Fatty acids	Fatty acyls	Halogenated hydrocarbons
+620	Amino acids and Peptides	Oligopeptides	Peptaibols
+621	Alkaloids	Miscellaneous alkaloids	Miscellaneous alkaloids
+622	Alkaloids	Peptide alkaloids	Simple amide alkaloids
+623	Polyketides	Miscellaneous polyketides	Miscellaneous polyketides
+624	Alkaloids	Tetramate alkaloids	Simple tetramate alkaloids
+625	Alkaloids	Mitomycin derivatives	Mitomycins
+626	Carbohydrates	Saccharides	Orthosomycins
+627	Polyketides	Linear polyketides	Phoslactomycins or Phosphazomycins
+628	Alkaloids	Pseudoalkaloids	pteridine alkaloids
+629	Polyketides	Polycyclic aromatic polyketides	Phenalens
+630	Polyketides	Naphthalenes	Naphthalenones
+631	Alkaloids	Proline alkaloids	Prodigiosins
+632	Polyketides	Polycyclic aromatic polyketides	Ericamycins
+633	Alkaloids	Serine alkaloids	Thiazole alkaloids
+634	Alkaloids	Pseudoalkaloids	Azo and Azoxy alkaloids
+635	Polyketides	Aromatic polyketides	Benzoquinones
+636	Polyketides	Aromatic polyketides	Benzophenones
+637	Polyketides	Macrolides	Boromycins
+638	Terpenoids	Meroterpenoids	Merohemiterpenoids
+639	Polyketides	Macrolides	Aplysiatoxins
+640	Polyketides	Cyclic polyketides	Fungal cyclic polyketides (Miscellaneous)
+641	Polyketides	Aromatic polyketides	Depsides
+642	Polyketides	Aromatic polyketides	Depsidones
+643	Polyketides	Aromatic polyketides	Usnic acid and derivatives
+644	Polyketides	Polycyclic aromatic polyketides	Duclauxin and derivatives
+645	Polyketides	Cyclic polyketides	Furans
+646	Shikimates and Phenylpropanoids	Phenanthrenoids	Phenanthrenes
+647	Amino acids and Peptides	Macrolides	Epothilones
+648	Polyketides	Macrolides	Epothilones
+649	Amino acids and Peptides	Macrolides	Rhizoxins
+650	Polyketides	Macrolides	Rhizoxins
+651	Amino acids and Peptides	Macrolides	Macrolide lactams
+652	Polyketides	Macrolides	Macrolide lactams
+653	Amino acids and Peptides	Macrolides	Lactam bearing macrolide lactones
+654	Polyketides	Macrolides	Lactam bearing macrolide lactones
+655	Amino acids and Peptides	Macrolides	Antimycins
+656	Polyketides	Macrolides	Antimycins
+657	Amino acids and Peptides	Macrolides	Macrocyclic tetramic acids
+658	Polyketides	Macrolides	Macrocyclic tetramic acids
+659	Amino acids and Peptides	Linear polyketides	Elfamycins
+660	Polyketides	Linear polyketides	Elfamycins
+661	Amino acids and Peptides	Linear polyketides	3-acyl tetramic acids
+662	Polyketides	Linear polyketides	3-acyl tetramic acids
+663	Amino acids and Peptides	Linear polyketides	Melithiazole and Myxothiazole derivatives
+664	Polyketides	Linear polyketides	Melithiazole and Myxothiazole derivatives
+665	Amino acids and Peptides	Linear polyketides	DKXanthenes and derivatives
+666	Polyketides	Linear polyketides	DKXanthenes and derivatives
+667	Amino acids and Peptides	Cyclic polyketides	3-Decalinoyltetramic acids
+668	Polyketides	Cyclic polyketides	3-Decalinoyltetramic acids
+669	Amino acids and Peptides	Cyclic polyketides	3-Spirotetramic acids
+670	Polyketides	Cyclic polyketides	3-Spirotetramic acids
+671	Polyketides	Meroterpenoids	Polyprenylated cyclic polyketides (Hop meroterpenoids)
+672	Terpenoids	Meroterpenoids	Polyprenylated cyclic polyketides (Hop meroterpenoids)
+673	Polyketides	Meroterpenoids	Cannabinoids
+674	Terpenoids	Meroterpenoids	Cannabinoids
+675	Polyketides	Phloroglucinols	Phloroglucinol-terpene hybrids
+676	Terpenoids	Phloroglucinols	Phloroglucinol-terpene hybrids
+677	Amino acids and Peptides	Phenylpropanoids (C6-C3)	Cinnamic acid amides
+678	Shikimates and Phenylpropanoids	Phenylpropanoids (C6-C3)	Cinnamic acid amides
+679	Amino acids and Peptides	Mycosporine derivatives	Mycosporine and Mycosporine-like amino acids
+680	Shikimates and Phenylpropanoids	Mycosporine derivatives	Mycosporine and Mycosporine-like amino acids
+681	Polyketides	Meroterpenoids	Triketide meroterpenoids
+682	Terpenoids	Meroterpenoids	Triketide meroterpenoids
+683	Polyketides	Meroterpenoids	Tetraketide meroterpenoids
+684	Terpenoids	Meroterpenoids	Tetraketide meroterpenoids
+685	Polyketides	Meroterpenoids	Other polyketide meroterpenoids
+686	Terpenoids	Meroterpenoids	Other polyketide meroterpenoids
+687	Alkaloids	Tryptophan alkaloids	Indole-Diterpenoid alkaloids (Penitrems)
+688	Terpenoids	Tryptophan alkaloids	Indole-Diterpenoid alkaloids (Penitrems)
+689	Alkaloids	Pseudoalkaloids	Terpenoid alkaloids
+690	Terpenoids	Pseudoalkaloids	Terpenoid alkaloids
+691	Alkaloids	Pseudoalkaloids	Steroidal alkaloids
+692	Terpenoids	Pseudoalkaloids	Steroidal alkaloids
+693	Alkaloids	Peptide alkaloids	Ansa peptide alkaloids
+694	Amino acids and Peptides	Peptide alkaloids	Ansa peptide alkaloids
+695	Alkaloids	Peptide alkaloids	"Indole diketopiperazine alkaloids (L-Trp, L-Pro)"
+696	Amino acids and Peptides	Peptide alkaloids	"Indole diketopiperazine alkaloids (L-Trp, L-Pro)"
+697	Alkaloids	Peptide alkaloids	"Indole diketopiperazine alkaloids (L-Trp, L-Ala)"
+698	Amino acids and Peptides	Peptide alkaloids	"Indole diketopiperazine alkaloids (L-Trp, L-Ala)"
+699	Alkaloids	Peptide alkaloids	"Indole diketopiperazine alkaloids (L-Trp, L-Trp)"
+700	Amino acids and Peptides	Peptide alkaloids	"Indole diketopiperazine alkaloids (L-Trp, L-Trp)"
+701	Alkaloids	Peptide alkaloids	Other indole diketopiperazine alkaloids
+702	Amino acids and Peptides	Peptide alkaloids	Other indole diketopiperazine alkaloids
+703	Alkaloids	Peptide alkaloids	Simple diketopiperazine alkaloids
+704	Amino acids and Peptides	Peptide alkaloids	Simple diketopiperazine alkaloids
+705	Alkaloids	Peptide alkaloids	Thiodiketopiperazine alkaloids
+706	Amino acids and Peptides	Peptide alkaloids	Thiodiketopiperazine alkaloids
+707	Alkaloids	Tetramate alkaloids	Pyrrocidine tetramate alkaloids
+708	Amino acids and Peptides	Tetramate alkaloids	Pyrrocidine tetramate alkaloids
+709	Alkaloids	Tetramate alkaloids	Cyclopiazonic acid-tpye tetramate alkaloids
+710	Amino acids and Peptides	Tetramate alkaloids	Cyclopiazonic acid-tpye tetramate alkaloids
+711	Amino acids and Peptides	Small peptides	Aminoacids
+712	Shikimates and Phenylpropanoids	Small peptides	Aminoacids
+713	Amino acids and Peptides	Oligopeptides	Depsipeptides
+714	Polyketides	Oligopeptides	Depsipeptides
+715	Shikimates and Phenylpropanoids	Coumarins	Coumarinolignans
+716	Shikimates and Phenylpropanoids	Lignans	Coumarinolignans
+717	Shikimates and Phenylpropanoids	Lignans	Flavonolignans
+718	Shikimates and Phenylpropanoids	Flavonoids	Flavonolignans
+719	Shikimates and Phenylpropanoids	Stilbenoids	Flavonostilbenes
+720	Shikimates and Phenylpropanoids	Flavonoids	Flavonostilbenes
+721	Shikimates and Phenylpropanoids	Stilbenoids	Stilbenolignans
+722	Shikimates and Phenylpropanoids	Lignans	Stilbenolignans
+723	Alkaloids	Tryptophan alkaloids	Quinoline alkaloids
+724	Alkaloids	Anthranilic acid alkaloids	Quinoline alkaloids
+725	Alkaloids	Tetramate alkaloids	Pyrazine and Piperazine alkaloids
+726	Alkaloids	Peptide alkaloids	Pyrazine and Piperazine alkaloids
+727	Amino acids and Peptides	Tetramate alkaloids	Pyrazine and Piperazine alkaloids
+728	Amino acids and Peptides	Peptide alkaloids	Pyrazine and Piperazine alkaloids

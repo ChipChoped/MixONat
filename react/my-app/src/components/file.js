@@ -241,10 +241,10 @@ export async function getFilesInfo() {
     const requestOptions = {
         method: 'GET'
     };
-
+    
     const response = await fetch("http://localhost:9000/file/list", requestOptions);
     const fileList = await response.json();
-
+    /*
     const requestOptions_ = {
         method: 'GET',
         headers: { 'Authorization': 'Bearer ' + cookies.get("authentication_token") }
@@ -252,9 +252,9 @@ export async function getFilesInfo() {
 
     const response_ = await fetch("http://localhost:9000/user/id", requestOptions_);
     const userId = await response_.json();
-
+    */
     if (response.status === 200) {
-        return { fileList: fileList, userId: userId };
+        return { fileList: fileList, userId: 0 };
     }
     else {
         return { status: response.status, message: fileList.message };
