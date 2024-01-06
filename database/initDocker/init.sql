@@ -39,5 +39,5 @@ CREATE TABLE files (
 
 INSERT INTO users (first_name, last_name, email, password, role)
 VALUES ('Admin', 'Mixonat', 'admin@mixonat.fr',
-        '$2a$06$hxJgB9phgXE1N0PzFJGcHeFrMjHzcYouIAgifa/AKlHemKgr9cr1q', -- 1pwdAdmin
+        '$2a$06$hxJgB9phgXE1N0PzFJGcHeFrMjHzcYouIAgifa/AKlHemKgr9cr1q', -- 1pwdAdmin?
         'ROLE_ADMIN');
