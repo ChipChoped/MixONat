@@ -48,6 +48,13 @@ export function Header()
                             </a>
                         )}
                     </li>
+                    {cookies.get("authentication_token")
+                        ? <li>
+                            <a href={"/sdfLotus"} className="header-link">
+                                <span>Lotus Database</span>
+                            </a>
+                        </li>
+                        : null}
                 </ul>
             </div>
         </>

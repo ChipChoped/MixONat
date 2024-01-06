@@ -31,7 +31,6 @@ public class FileController {
     {
         HttpHeaders responseHeaders = new HttpHeaders();
         responseHeaders.set("Content-Type","application/json");
-        responseHeaders.set("Access-Control-Allow-Origin","*");
 
         FileListDTO fileListDTO = FileListDTO.builder()
                 .fileList(fileService.getAllFilesInfoOnly())
@@ -45,7 +44,6 @@ public class FileController {
     {
         HttpHeaders responseHeaders = new HttpHeaders();
         responseHeaders.set("Content-Type","application/json");
-        responseHeaders.set("Access-Control-Allow-Origin","*");
 
         try {
             userRepository.findUserById(id)
@@ -69,7 +67,6 @@ public class FileController {
     {
         HttpHeaders responseHeaders = new HttpHeaders();
         responseHeaders.set("Content-Type","application/json");
-        responseHeaders.set("Access-Control-Allow-Origin","*");
 
         try {
             var file = fileService.findFileById(id)

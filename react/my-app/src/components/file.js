@@ -241,7 +241,7 @@ export async function getFilesInfo() {
     const requestOptions = {
         method: 'GET'
     };
-
+    
     const response = await fetch("http://localhost:9000/file/list", requestOptions);
     const json = await response.json();
 

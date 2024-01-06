@@ -16,6 +16,8 @@ import SignUp from "./components/signUp";
 import Profile, {getUserInfoAndFiles} from "./components/profile";
 import Preview, {getFile} from "./components/preview";
 import Settings, {getUserInfo} from "./components/settings";
+import SdfLotus from "./components/sdfLotus";
+import LegalNotice from "./components/legalNotice";
 
 const router = createBrowserRouter([
   {
@@ -34,6 +36,11 @@ const router = createBrowserRouter([
       {
         path:"/file",
         element:<File/>,
+        loader: getFilesInfo
+      },
+      {
+        path:"/sdfLotus",
+        element:<SdfLotus/>,
         loader: getFilesInfo
       },
       {
@@ -60,6 +67,10 @@ const router = createBrowserRouter([
         path:"/preview",
         element:<Preview/>,
         loader: getFile
+      },
+      {
+        path:"/legal",
+        element:<LegalNotice/>
       }
     ]
   },
