@@ -104,4 +104,14 @@ function SignIn()
     )
 }
 
+export async function checkToken() {
+    const cookies = new Cookies();
+
+    if (cookies.get("authentication_token")) {
+        window.location.href = "/";
+    }
+
+    return {};
+}
+
 export default SignIn;

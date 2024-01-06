@@ -19,11 +19,27 @@ public interface UserRepository extends JpaRepository<User, UUID> {
 
     Optional<User> findUserById(UUID id);
     Optional<User> findUserByEmail(String email);
+    Optional<User> findUserByIdAndPassword(UUID id, String password);
 
     @Modifying
     @Transactional
     @Query(value = "insert into users (first_name, last_name, email, password, role)" +
             "values (:#{#first_name}, :#{#last_name}, :#{#email}, :#{#password}, :#{#role});", nativeQuery = true)
     void save(@Param("first_name") String first_name, @Param("last_name") String last_name, @Param("email") String email, @Param("password") String password, @Param("role") String role);
+
+    @Modifying
+    @Transactional
+    @Query(value = "update users set first_name = :#{#first_name}, last_name = :#{#last_name} where id = :#{#id}", nativeQuery = true)
+    void updateIdentity(@Param("id") UUID id, @Param("first_name") String first_name, @Param("last_name") String last_name);
+
+    @Modifying
+    @Transactional
+    @Query(value = "update users set email = :#{#email} where id = :#{#id}", nativeQuery = true)
+    void updateEmail(@Param("id") UUID id, @Param("email") String email);
+
+    @Modifying
+    @Transactional
+    @Query(value = "update users set password = :#{#password} where id = :#{#id}", nativeQuery = true)
+    void updatePassword(@Param("id") UUID id, @Param("password") String password);
 }
 

@@ -71,15 +71,20 @@ public class SecurityConfigurer {
                                 antMatcher(HttpMethod.GET, "/user/{id}"),
                                 antMatcher(HttpMethod.PUT, "/user/sign-up"),
                                 antMatcher(HttpMethod.POST, "/user/sign-in"),
-                                antMatcher(HttpMethod.DELETE, "/user/delete-account"),
                                 antMatcher(HttpMethod.OPTIONS, "/user"),
                                 antMatcher(HttpMethod.OPTIONS, "/user/id"),
                                 antMatcher(HttpMethod.OPTIONS, "/user/sign-up"),
                                 antMatcher(HttpMethod.OPTIONS, "/user/sign-in"),
-                                antMatcher(HttpMethod.OPTIONS, "/user/delete-account")).permitAll()
+                                antMatcher(HttpMethod.OPTIONS, "/user/update/identity"),
+                                antMatcher(HttpMethod.OPTIONS, "/user/update/email"),
+                                antMatcher(HttpMethod.OPTIONS, "/user/update/password")).permitAll()
                         .requestMatchers(
                                 antMatcher(HttpMethod.GET, "/user"),
-                                antMatcher(HttpMethod.GET, "/user/id")).hasAnyRole("ADMIN", "USER")
+                                antMatcher(HttpMethod.GET, "/user/id"),
+                                antMatcher(HttpMethod.PUT, "/user/update/identity"),
+                                antMatcher(HttpMethod.PUT, "/user/update/email"),
+                                antMatcher(HttpMethod.PUT, "/user/update/password"),
+                                antMatcher(HttpMethod.DELETE, "/user")).hasAnyRole("ADMIN", "USER")
                         .requestMatchers(
                                 antMatcher(HttpMethod.GET, "/file/{id}"),
                                 antMatcher(HttpMethod.GET, "/file/list"),

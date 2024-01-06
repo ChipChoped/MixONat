@@ -36,8 +36,10 @@ export function Header()
                     <li>
                         {cookies.get("authentication_token") ? (
                             <a href={"/"} className="header-link">
-                                <span onClick={() =>
-                                    cookies.remove("authentication_token")}
+                                <span onClick={() => {
+                                    cookies.remove("authentication_token");
+                                    window.location.href = "/"
+                                }}
                                 >Sign Out</span>
                             </a>
                         ) : (
