@@ -2,8 +2,8 @@ package com.backend.mixonat.controller;
 
 import com.backend.mixonat.dto.*;
 import com.backend.mixonat.model.Type;
-import com.backend.mixonat.model.checkRequest;
-import com.backend.mixonat.model.checkResponse;
+import com.backend.mixonat.dto.CheckFileInDTO;
+import com.backend.mixonat.dto.CheckFileOutDTO;
 import com.backend.mixonat.service.FileService;
 import com.backend.mixonat.service.MotorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,14 +54,14 @@ public class MotorController
 								.orElseThrow(IllegalArgumentException::new);
 
 						if (spectrum.getType() != Type.SPECTRUM) {
-							return ResponseEntity.status(400).headers(responseHeaders).body(new ExceptionDTO("The file is not of type RMN"));
+							return ResponseEntity.status(400).headers(responseHeaders).body(new ExceptionDTO("The file is not of type SPECTRUM"));
 						}
 
 						motorDTO.setSpectrum(spectrum.getFile());
 					}
 				}
 				catch (IllegalArgumentException e) {
-					return ResponseEntity.status(404).headers(responseHeaders).body(new ExceptionDTO("The RMN file doesn't exist"));
+					return ResponseEntity.status(404).headers(responseHeaders).body(new ExceptionDTO("The SPECTRUM file doesn't exist"));
 				}
 
 				try {
@@ -106,7 +106,7 @@ public class MotorController
 	// Function to handle checkFile requests from React
 	@CrossOrigin(origins="http://localhost:3000")
 	@PostMapping("/checkFile")
-	public ResponseEntity <checkResponse> checkFile (@RequestBody checkRequest request)
+	public ResponseEntity <CheckFileOutDTO> checkFile (@RequestBody CheckFileInDTO request)
 	{
 		HttpHeaders responseHeaders = new HttpHeaders();
 		responseHeaders.set("Content-Type","application/json");

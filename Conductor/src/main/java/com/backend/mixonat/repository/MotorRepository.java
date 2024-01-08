@@ -3,8 +3,8 @@ package com.backend.mixonat.repository;
 import com.backend.mixonat.configuration.CustomProperties;
 import com.backend.mixonat.dto.MotorDTO;
 import com.backend.mixonat.model.Molecules;
-import com.backend.mixonat.model.checkRequest;
-import com.backend.mixonat.model.checkResponse;
+import com.backend.mixonat.dto.CheckFileInDTO;
+import com.backend.mixonat.dto.CheckFileOutDTO;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -45,7 +45,7 @@ public class MotorRepository
 	}
 
 	// Function to request response from the python motor for the file checking 
-	public checkResponse getCheck(checkRequest request)
+	public CheckFileOutDTO getCheck(CheckFileInDTO request)
     {
 		RestClient restClient = RestClient.create();
 
@@ -55,15 +55,15 @@ public class MotorRepository
 				.body(request)
 				.accept(APPLICATION_JSON)
 				.exchange((request_, response) -> {
-					checkResponse checkResponse;
+					CheckFileOutDTO checkResponse;
 
 					if (response.getStatusCode().is4xxClientError() || response.getStatusCode().is5xxServerError()) {
 						System.out.println("Exception in getCheck");
-						checkResponse = new checkResponse();
+						checkResponse = new CheckFileOutDTO();
 					}
 					else {
 						ObjectMapper mapper = new ObjectMapper();
-						checkResponse = mapper.readValue(response.getBody(), checkResponse.class);
+						checkResponse = mapper.readValue(response.getBody(), CheckFileOutDTO.class);
 					}
 
 					return checkResponse;

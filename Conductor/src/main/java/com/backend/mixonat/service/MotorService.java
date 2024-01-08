@@ -5,8 +5,8 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.backend.mixonat.model.Molecules;
-import com.backend.mixonat.model.checkRequest;
-import com.backend.mixonat.model.checkResponse;
+import com.backend.mixonat.dto.CheckFileInDTO;
+import com.backend.mixonat.dto.CheckFileOutDTO;
 import com.backend.mixonat.dto.MotorDTO;
 import com.backend.mixonat.repository.MotorRepository;
 
@@ -23,7 +23,7 @@ public class MotorService
         return rmnMotorRepository.getMolecules(request);
     }
 
-    public checkResponse getCheck(checkRequest request)
+    public CheckFileOutDTO getCheck(CheckFileInDTO request)
     {
         return rmnMotorRepository.getCheck(request);
     }
