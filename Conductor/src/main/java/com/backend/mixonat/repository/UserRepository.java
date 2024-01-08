@@ -1,6 +1,5 @@
 package com.backend.mixonat.repository;
 
-import com.backend.mixonat.model.Role;
 import com.backend.mixonat.model.User;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -9,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -19,7 +19,6 @@ public interface UserRepository extends JpaRepository<User, UUID> {
 
     Optional<User> findUserById(UUID id);
     Optional<User> findUserByEmail(String email);
-    Optional<User> findUserByIdAndPassword(UUID id, String password);
 
     @Modifying
     @Transactional
@@ -29,17 +28,17 @@ public interface UserRepository extends JpaRepository<User, UUID> {
 
     @Modifying
     @Transactional
-    @Query(value = "update users set first_name = :#{#first_name}, last_name = :#{#last_name} where id = :#{#id}", nativeQuery = true)
-    void updateIdentity(@Param("id") UUID id, @Param("first_name") String first_name, @Param("last_name") String last_name);
+    @Query(value = "update users set first_name = :#{#first_name}, last_name = :#{#last_name}, updated_at = :#{#updated_at} where id = :#{#id}", nativeQuery = true)
+    void updateIdentity(@Param("id") UUID id, @Param("first_name") String first_name, @Param("last_name") String last_name, @Param("updated_at") LocalDateTime updated_at);
 
     @Modifying
     @Transactional
-    @Query(value = "update users set email = :#{#email} where id = :#{#id}", nativeQuery = true)
-    void updateEmail(@Param("id") UUID id, @Param("email") String email);
+    @Query(value = "update users set email = :#{#email}, updated_at = :#{#updated_at} where id = :#{#id}", nativeQuery = true)
+    void updateEmail(@Param("id") UUID id, @Param("email") String email, @Param("updated_at") LocalDateTime updated_at);
 
     @Modifying
     @Transactional
-    @Query(value = "update users set password = :#{#password} where id = :#{#id}", nativeQuery = true)
-    void updatePassword(@Param("id") UUID id, @Param("password") String password);
+    @Query(value = "update users set password = :#{#password}, updated_at = :#{#updated_at} where id = :#{#id}", nativeQuery = true)
+    void updatePassword(@Param("id") UUID id, @Param("password") String password, @Param("updated_at") LocalDateTime updated_at);
 }
 
