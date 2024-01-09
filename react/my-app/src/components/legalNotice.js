@@ -14,6 +14,8 @@ function LegalNotice()
             <p>Raison sociale : {raisonSociale}</p>
             <p>Adresse : {adress}</p>
             <p>Téléphone : {phone}</p>
+            <br/> <br/> <br/>
+            <p> Settings icon by <a href="https://www.freepik.com/"> Freepik </a></p>
         </div>
     )
 }

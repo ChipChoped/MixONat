@@ -11,11 +11,12 @@ import ErrorPage from './components/errorPage';
 import Motor from './components/motor';
 import File from './components/file';
 import { getFilesInfo } from './components/file';
-import SignIn from "./components/signIn";
+import SignIn, {checkToken} from "./components/signIn";
 import SignUp from "./components/signUp";
-import SdfLotus from "./components/sdfLotus";
-import Profile, {getUserInfo} from "./components/profile";
+import Profile, {getUserInfoAndFiles} from "./components/profile";
 import Preview, {getFile} from "./components/preview";
+import Settings, {getUserInfo} from "./components/settings";
+import SdfLotus from "./components/sdfLotus";
 import LegalNotice from "./components/legalNotice";
 
 const router = createBrowserRouter([
@@ -44,15 +45,22 @@ const router = createBrowserRouter([
       },
       {
         path:"/sign-in",
-        element:<SignIn/>
+        element:<SignIn/>,
+        loader: checkToken
       },
       {
         path:"/sign-up",
-        element:<SignUp/>
+        element:<SignUp/>,
+        loader: checkToken
       },
       {
         path:"/profile",
         element:<Profile/>,
+        loader: getUserInfoAndFiles
+      },
+      {
+        path:"/profile/settings",
+        element:<Settings/>,
         loader: getUserInfo
       },
       {

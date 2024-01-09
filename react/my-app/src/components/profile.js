@@ -5,6 +5,7 @@ import "../styles/file.scss";
 import "../styles/error.scss";
 import Cookies from 'universal-cookie';
 import red_cross from "../assets/img/red-cross.png";
+import settings from "../assets/img/settings.png";
 import alertify from "alertifyjs";
 import {useEffect, useState} from "react";
 
@@ -73,6 +74,10 @@ function Profile()
         return (
             <div className='profile-container'>
                 <div className='profile-card'>
+                    {ownProfile
+                        ? <input type='image' className='settings' src={settings} onClick={() => {
+                            window.location.href = "/profile/settings"; }} alt='Settings'/>
+                        : null}
                     <span> Profile </span>
                     <div>
                         <h3> { user.first_name } { user.last_name } </h3>
@@ -127,7 +132,7 @@ function Profile()
     }
 }
 
-export async function getUserInfo()
+export async function getUserInfoAndFiles()
 {
     const queryParams = new URLSearchParams(window.location.search)
     let id = queryParams.get("u")
@@ -135,7 +140,6 @@ export async function getUserInfo()
     const cookies = new Cookies();
 
     if (id === null) {
-
         if (cookies.get('authentication_token')) {
             const requestOptions = {
                 method: 'GET',
@@ -168,55 +172,52 @@ export async function getUserInfo()
             }
         }
         else {
-            return { user: undefined, status: 401, message: "Unauthorized access. You need to be signed in to view your profile." }
+            window.location.href = "/sign-in";
         }
-    }
-
-    const requestOptions = {
-        method: 'GET'
-    };
-
-    const response = await fetch("http://localhost:9000/user/" + id, requestOptions);
-    const json = await response.json();
-
-    if (response.status === 200) {
-        id = json.id
-
+    } else {
         const requestOptions = {
             method: 'GET'
         };
 
-        const response_ = await fetch("http://localhost:9000/file/list/user/" + id, requestOptions);
-        const json_ = await response_.json();
+        const response = await fetch("http://localhost:9000/user/" + id, requestOptions);
+        const json = await response.json();
 
-        if (response_.status === 200) {
-            if (cookies.get('authentication_token')) {
-                const requestOptions = {
-                    method: 'GET',
-                    headers: { 'Authorization': 'Bearer ' + cookies.get("authentication_token") }
+        if (response.status === 200) {
+            id = json.id
+
+            const requestOptions = {
+                method: 'GET'
+            };
+
+            const response_ = await fetch("http://localhost:9000/file/list/user/" + id, requestOptions);
+            const json_ = await response_.json();
+
+            if (response_.status === 200) {
+                if (cookies.get('authentication_token')) {
+                    const requestOptions = {
+                        method: 'GET',
+                        headers: {'Authorization': 'Bearer ' + cookies.get("authentication_token")}
+                    }
+
+                    const response__ = await fetch("http://localhost:9000/user/id", requestOptions);
+                    const json__ = await response__.json();
+
+                    if (response__.status === 200) {
+                        if (json__.id === json.id) {
+                            return {user: json, fileList: json_.fileList, ownProfile: true}
+                        } else {
+                            return {user: json, fileList: json_.fileList, ownProfile: false}
+                        }
+                    }
                 }
 
-                const response__ = await fetch("http://localhost:9000/user/id", requestOptions);
-                const json__ = await response__.json();
-
-                if (response__.status === 200) {
-                    if (json__.id === json.id) {
-                        return { user: json, fileList: json_.fileList, ownProfile: true }
-                    }
-                    else {
-                        return { user: json, fileList: json_.fileList, ownProfile: false }
-                    }
-                }
+                return {user: json, fileList: json_.fileList, ownProfile: false}
+            } else {
+                return {user: undefined, fileList: undefined, status: response_.status, message: json_.message}
             }
-
-            return { user: json, fileList: json_.fileList, ownProfile: false }
+        } else {
+            return {user: undefined, fileList: undefined, status: response.status, message: json.message}
         }
-        else {
-            return { user: undefined, fileList: undefined, status: response_.status, message: json_.message }
-        }
-    }
-    else {
-        return { user: undefined, fileList: undefined, status: response.status, message: json.message }
     }
 }
 

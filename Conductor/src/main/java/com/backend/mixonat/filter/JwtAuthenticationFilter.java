@@ -16,6 +16,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
@@ -63,9 +64,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
             filterChain.doFilter(request, response);
         } catch (MalformedJwtException e) {
-            HttpHeaders responseHeaders = new HttpHeaders();
-            responseHeaders.set("Content-Type","application/json");
-
+            response.setHeader("Content-Type", "application/json");
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
 
             if (!e.getMessage().isEmpty()) {
@@ -77,11 +76,24 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             response.getWriter().flush();
             response.getWriter().close();
         } catch (ExpiredJwtException e) {
-            HttpHeaders responseHeaders = new HttpHeaders();
-            responseHeaders.set("Content-Type","application/json");
-
+            response.setHeader("Content-Type", "application/json");
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+
             response.getWriter().write("{\"message\":\"Authentication token expired\"}");
+            response.getWriter().flush();
+            response.getWriter().close();
+        } catch (UsernameNotFoundException e) {
+            response.setHeader("Content-Type", "application/json");
+            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+
+            response.getWriter().write("{\"message\":\"" + e.getMessage() + "\"}");
+            response.getWriter().flush();
+            response.getWriter().close();
+        } catch (Exception e) {
+            response.setHeader("Content-Type", "application/json");
+            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+
+            response.getWriter().write("{\"message\":\"" + e.getMessage() + "\"}");
             response.getWriter().flush();
             response.getWriter().close();
         }

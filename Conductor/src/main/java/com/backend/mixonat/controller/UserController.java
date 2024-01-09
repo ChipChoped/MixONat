@@ -1,12 +1,16 @@
 package com.backend.mixonat.controller;
 
 import com.backend.mixonat.dto.*;
-import com.backend.mixonat.repository.UserRepository;
 import com.backend.mixonat.service.JwtService;
+import com.backend.mixonat.service.UserService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,9 +20,16 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class UserController {
     @Autowired
-    private final UserRepository userRepository;
-    private final PasswordEncoder passwordEncoder;
+    private final UserService userService;
+
+    @Autowired
     private final JwtService jwtService;
+
+    @Autowired
+    private final PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private final AuthenticationManager authenticationManager;
 
     @CrossOrigin(origins="http://localhost:3000")
     @GetMapping("/user/id")
@@ -43,7 +54,7 @@ public class UserController {
         responseHeaders.set("Content-Type", "application/json");
 
         try {
-            var user = userRepository.findUserById(id)
+            var user = userService.findUserById(id)
                     .orElseThrow(IllegalArgumentException::new);
 
             UserDTO userDTO = UserDTO.builder()
@@ -71,7 +82,7 @@ public class UserController {
         try {
             UUID id = UUID.fromString(jwtService.extractUserName(token.split(" ")[1]));
 
-            var user = userRepository.findUserById(id)
+            var user = userService.findUserById(id)
                     .orElseThrow(IllegalArgumentException::new);
 
             UserDTO userDTO = UserDTO.builder()
@@ -91,24 +102,87 @@ public class UserController {
     }
 
     @CrossOrigin(origins="http://localhost:3000")
-    @DeleteMapping("/user/delete-account")
-    public ResponseEntity<JsonResponse> deleteAccount(@RequestBody LoginsDTO request) {
+    @PutMapping("/user/update/identity")
+    public ResponseEntity<JsonResponse> updateIdentity(@RequestBody @Valid IdentityDTO identityDTO, @RequestHeader("Authorization") String token) {
         HttpHeaders responseHeaders = new HttpHeaders();
         responseHeaders.set("Content-Type", "application/json");
 
         try {
-            var user = userRepository.findUserByEmail(request.getEmail())
-                    .orElseThrow(IllegalArgumentException::new);
+            System.out.println(identityDTO.getFirstName() + " " + identityDTO.getLastName());
+            UUID id = UUID.fromString(jwtService.extractUserName(token.split(" ")[1]));
+            userService.updateIdentity(id, identityDTO.getFirstName(), identityDTO.getLastName());
 
-            if (passwordEncoder.matches(request.getPassword(), user.getPassword())) {
-                userRepository.delete(user);
-                return ResponseEntity.status(204).headers(responseHeaders).build();
-            }
-            else
-                return ResponseEntity.status(403).headers(responseHeaders).body(new ExceptionDTO("Incorrect password"));
+            return ResponseEntity.status(204).headers(responseHeaders).build();
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(404).headers(responseHeaders).body(new ExceptionDTO(e.getMessage()));
+        } catch (Exception e) {
+            return ResponseEntity.status(500).headers(responseHeaders).body(new ExceptionDTO("Internal server error"));
         }
-        catch (IllegalArgumentException e) {
-            return ResponseEntity.status(403).headers(responseHeaders).body(new ExceptionDTO("The email doesn't match the current account"));
+    }
+
+    @CrossOrigin(origins="http://localhost:3000")
+    @PutMapping("/user/update/email")
+    public ResponseEntity<JsonResponse> updateEmail(@RequestBody @Valid EmailDTO emailDTO, @RequestHeader("Authorization") String token) {
+        HttpHeaders responseHeaders = new HttpHeaders();
+        responseHeaders.set("Content-Type", "application/json");
+
+        try {
+            UUID id = UUID.fromString(jwtService.extractUserName(token.split(" ")[1]));
+            userService.updateEmail(id, emailDTO.getEmail());
+
+            return ResponseEntity.status(204).headers(responseHeaders).build();
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(404).headers(responseHeaders).body(new ExceptionDTO(e.getMessage()));
+        } catch (Exception e) {
+            return ResponseEntity.status(500).headers(responseHeaders).body(new ExceptionDTO("Internal server error"));
+        }
+    }
+
+    @CrossOrigin(origins="http://localhost:3000")
+    @PutMapping("/user/update/password")
+    public ResponseEntity<JsonResponse> updatePassword(@RequestBody @Valid PasswordDTO passwordDTO, @RequestHeader("Authorization") String token) {
+        HttpHeaders responseHeaders = new HttpHeaders();
+        responseHeaders.set("Content-Type", "application/json");
+
+        try {
+            System.out.println(passwordDTO.getCurrentPassword() + " " + passwordDTO.getNewPassword());
+            System.out.println(passwordEncoder.encode(passwordDTO.getCurrentPassword()) + " " + passwordEncoder.encode(passwordDTO.getNewPassword()));
+
+            UUID id = UUID.fromString(jwtService.extractUserName(token.split(" ")[1]));
+
+            if (userService.findUserById(id).isPresent()) {
+                authenticationManager.authenticate(
+                        new UsernamePasswordAuthenticationToken(id, passwordDTO.getCurrentPassword()));
+                userService.updatePassword(id, passwordEncoder.encode(passwordDTO.getNewPassword()));
+            } else {
+                throw new IllegalArgumentException("The user doesn't exist");
+            }
+
+            return ResponseEntity.status(204).headers(responseHeaders).build();
+        } catch (AuthenticationException e) {
+            return ResponseEntity.status(403).headers(responseHeaders).body(new ExceptionDTO("Password is incorrect"));
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(404).headers(responseHeaders).body(new ExceptionDTO(e.getMessage()));
+        } /*catch (Exception e) {
+            return ResponseEntity.status(500).headers(responseHeaders).body(new ExceptionDTO("Internal server error"));
+        }*/
+    }
+
+    @CrossOrigin(origins="http://localhost:3000")
+    @DeleteMapping("/user")
+    public ResponseEntity<JsonResponse> deleteAccount(@RequestHeader("Authorization") String token) {
+        HttpHeaders responseHeaders = new HttpHeaders();
+        responseHeaders.set("Content-Type", "application/json");
+
+        try {
+            UUID id = UUID.fromString(jwtService.extractUserName(token.split(" ")[1]));
+            userService.deleteById(id);
+
+            return ResponseEntity.status(204).headers(responseHeaders).build();
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(404).headers(responseHeaders).body(new ExceptionDTO(e.getMessage()));
+        } catch (Exception e) {
+            return ResponseEntity.status(500).headers(responseHeaders).body(new ExceptionDTO("Internal server error"));
         }
     }
 }
