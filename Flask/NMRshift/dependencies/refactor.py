@@ -36,7 +36,7 @@ def addZeroToLine(line):
     c = ''.join(elements)
     if c.isdigit():
         if len(elements) == 3:
-            return line[:-1]+ '  0  0  0  0\n'
+            return line[:-1]+ '  0  0  0\n'
         elif len(elements) == 4:
             return line[:-1]+ '  0  0  0\n'
     return line
