@@ -4,13 +4,11 @@ import com.backend.mixonat.model.User;
 import com.backend.mixonat.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.rmi.AccessException;
+import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -23,15 +21,8 @@ public class UserService {
     @Autowired
     private final FileService fileService;
 
-//    @Autowired
-//    private final AuthenticationManager authenticationManager;
-
     public Optional<User> findUserById(UUID id) {
         return userRepository.findUserById(id);
-    }
-
-    public Optional<User> findUserByIdAndPassword(UUID id, String password) {
-        return userRepository.findUserByIdAndPassword(id, password);
     }
 
     public UserDetailsService userDetailsService() {
@@ -45,7 +36,7 @@ public class UserService {
 
     public void updateIdentity(UUID id, String firstName, String lastName) {
         if (userRepository.findUserById(id).isPresent()) {
-            userRepository.updateIdentity(id, firstName, lastName);
+            userRepository.updateIdentity(id, firstName, lastName, LocalDateTime.now());
         } else {
             throw new IllegalArgumentException("The user doesn't exist");
         }
@@ -53,14 +44,14 @@ public class UserService {
 
     public void updateEmail(UUID id, String email) {
         if (userRepository.findUserById(id).isPresent()) {
-            userRepository.updateEmail(id, email);
+            userRepository.updateEmail(id, email, LocalDateTime.now());
         } else {
             throw new IllegalArgumentException("The user doesn't exist");
         }
     }
 
     public void updatePassword(UUID id, String password) {
-        userRepository.updatePassword(id, password);
+        userRepository.updatePassword(id, password, LocalDateTime.now());
     }
 
     public void deleteById(UUID id) {

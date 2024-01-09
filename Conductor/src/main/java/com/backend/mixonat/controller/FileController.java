@@ -149,7 +149,7 @@ public class FileController {
             UUID userId = UUID.fromString(jwtService.extractUserName(token.split(" ")[1]));
 
             var file = fileService.findFileById(id.getId())
-                    .orElseThrow(IllegalArgumentException::new);
+                    .orElseThrow(() -> new IllegalArgumentException("The file doesn't exist"));
 
             if (!file.getAddedBy().equals(userId)) {
                 return ResponseEntity.status(403).headers(responseHeaders).body(new ExceptionDTO("You don't have permission to delete this file"));
@@ -158,7 +158,7 @@ public class FileController {
                 return ResponseEntity.status(204).headers(responseHeaders).build();
             }
         } catch (IllegalArgumentException e) {
-            return ResponseEntity.status(404).headers(responseHeaders).body(new ExceptionDTO("The file doesn't exist"));
+            return ResponseEntity.status(404).headers(responseHeaders).body(new ExceptionDTO(e.getMessage()));
         } catch (Exception e) {
             return ResponseEntity.status(500).headers(responseHeaders).body(new ExceptionDTO("Internal server error"));
         }
