@@ -171,29 +171,34 @@ function SdfLotus() {
     }
 
     if (uploadValue) {
-      try {
-        setStatusMessage('is running...'); 
-        const response = await axios.post('http://localhost:5000/createSdf', {
-          array: filtreList,
-          fileName: fileName,
-          type: selectedOption,
-          isSave: isChecked,
-          author: author,
-          authorization: 'Bearer ' + cookies.get("authentication_token")
-        });  
-        const serverMessage = response.data;
-        if (!serverMessage.includes("No SDF created")) {
-          setUpload(true)
-        }
-        setStatusMessage(serverMessage);
-        
-      } catch (error) {
-        console.error('Erreur lors de l appel de la route createSdf :', error);
-        if (error.response) {
-          setStatusMessage('Erreurlors de la creation du SDF');
+      if(filtreList.length===0){
+        setStatusMessage("You must select at least one criterion"); 
+      }else{
+        try {
+          setStatusMessage('is running...'); 
+          const response = await axios.post('http://localhost:5000/createSdf', {
+            array: filtreList,
+            fileName: fileName,
+            type: selectedOption,
+            isSave: isChecked,
+            author: author,
+            authorization: 'Bearer ' + cookies.get("authentication_token")
+          });  
+          const serverMessage = response.data;
+          if (!serverMessage.includes("No SDF created")) {
+            setUpload(true)
+          }
+          setStatusMessage(serverMessage);
+          
+        } catch (error) {
+          console.error('Erreur lors de l appel de la route createSdf :', error);
+          if (error.response) {
+            setStatusMessage('Erreurlors de la creation du SDF');
+          }
         }
       }
     }
+    
   };
 
   useEffect(() => {
