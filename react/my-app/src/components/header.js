@@ -1,23 +1,65 @@
 import { Logo } from "./logo"
-import { Link } from "react-router-dom"
 import "../styles/header.scss"
+import Cookies from 'universal-cookie';
 
 export function Header()
 {
+    const cookies = new Cookies();
+
     return (
         <>
             <Logo/>
-            <div className="header-container">
+            <div className={cookies.get("authentication_token")
+                ? "header-container-signed-in"
+                : "header-container-signed-out"}
+            >
                 <ul>
                     <li>
-                        <Link to={"/"} className="header-link">
+                        <a href={"/"} className="header-link">
                             <span>RMN Motor</span>
-                        </Link>
+                        </a>
+                    </li>
+                    {cookies.get("authentication_token")
+                        ? <li>
+                            <a href={"/file"} className="header-link">
+                                <span>File Database</span>
+                            </a>
+                        </li>
+                        : null}
+                    {cookies.get("authentication_token")
+                        ? <li>
+                            <a href={"/sdfLotus"} className="header-link">
+                                <span>Lotus Database</span>
+                            </a>
+                        </li>
+                        : null}
+                    {cookies.get("authentication_token")
+                        ? <li>
+                            <a href={"/profile"} className="header-link">
+                                <span>Profile</span>
+                            </a>
+                        </li>
+                        : null}
+                    <li>
+                        <a href={"/legal"} className="header-link">
+                            <span>Legal Notice</span>
+                        </a>
                     </li>
                     <li>
-                    <Link to={"/sdf"} className="header-link">
-                            <span>SDF Database</span>
-                        </Link>
+                    {cookies.get("authentication_token")
+                        ? (
+                        <a href={"/"} className="header-link">
+                            <span onClick={() => {
+                                cookies.remove("authentication_token");
+                                window.location.href = "/"
+                            }}
+                            >Sign Out</span>
+                        </a>
+                        ) : (
+                        <a href={"/sign-in"} className="header-link">
+                            <span>Sign In</span>
+                        </a>
+                    )}
                     </li>
                 </ul>
             </div>

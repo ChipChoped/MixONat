@@ -9,5 +9,4 @@ public class MixonatApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(MixonatApplication.class, args);
 	}
-
 }

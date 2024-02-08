@@ -1,0 +1,50 @@
+version: '3'
+services:
+  flask:
+    container_name: flask
+    build:
+      context: ./Flask
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./Flask:/usr/src/app/flask
+  conductor-mixonat:
+    container_name: conductor-mixonat
+    build:
+      context: ./Conductor
+      dockerfile: Dockerfile
+    ports:
+      - "9000:9000"
+    depends_on:
+      - postgres
+    volumes:
+       - ./Conductor:/usr/src/app/conductor-mixonat
+  react-mixonat:
+    container_name: react-mixonat
+    build:
+      context: ./react/my-app
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    depends_on:
+      - conductor-mixonat
+    volumes:
+       - ./react/my-app:/usr/src/app/react-mixonat
+       - /usr/src/app/react-mixonat/node_modules
+  postgres:
+    container_name: postgres
+    build:
+      context: ./database
+      dockerfile: Dockerfile
+    ports:
+      - "54320:5432"
+    environment:
+      - POSTGRES_USER=mixo
+      - POSTGRES_PASSWORD=mixo
+      - PGDATA=/tmp
+    volumes:
+      - postgres-db:/var/lib/postgres/data
+volumes:
+  postgres-db:
+    driver: local

@@ -1,0 +1,43 @@
+.column {
+    //display: grid;
+    //grid-template-rows: repeat(3, 1fr);
+    //gap: 1px;
+    width: 20%;
+  }
+
+  .allColumn {
+    display: flex;
+    justify-content: space-around;
+  }
+
+
+  .list-container {
+    width: 300px;
+    height: 200px;
+    border: 1px solid #ccc;
+    background-color: #041f26;
+    overflow-y: scroll;
+    margin-bottom: 5%;
+  }
+
+  .delete-filtre {
+    margin-bottom: 5%;
+    margin-right: 10%;
+  }
+  
+  .saveDatabaseButton{
+
+    margin-bottom: 5%;
+  }
+  .list-item {
+    cursor: pointer;
+  }
+  
+  .list-item.selected {
+    background-color: lightblue;
+  }
+
+  .radio-btn {
+    display: flex;
+    flex-direction: column;
+  }

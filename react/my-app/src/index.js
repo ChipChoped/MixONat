@@ -8,9 +8,16 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import ErrorPage from './components/errorPage';
-import RmnMotor from './components/rmnMotor';
-import Sdf from './components/sdf';
-import { getSdfFilesNames } from './components/sdf';
+import Motor from './components/motor';
+import File from './components/file';
+import { getFilesInfo } from './components/file';
+import SignIn, {checkToken} from "./components/signIn";
+import SignUp from "./components/signUp";
+import Profile, {getUserInfoAndFiles} from "./components/profile";
+import Preview, {getFile} from "./components/preview";
+import Settings, {getUserInfo} from "./components/settings";
+import SdfLotus from "./components/sdfLotus";
+import LegalNotice from "./components/legalNotice";
 
 const router = createBrowserRouter([
   {
@@ -20,13 +27,50 @@ const router = createBrowserRouter([
     children: [
       {
         path:"/",
-        element:<RmnMotor/>,
-        loader: getSdfFilesNames
+        element:<Motor/>,
+        loader: async () => {
+          const fileList = await getFilesInfo();
+          return { fileList: fileList.fileList.fileList };
+        }
       },
       {
-        path:"/sdf",
-        element:<Sdf/>,
-        loader: getSdfFilesNames
+        path:"/file",
+        element:<File/>,
+        loader: getFilesInfo
+      },
+      {
+        path:"/sdfLotus",
+        element:<SdfLotus/>,
+        loader: getFilesInfo
+      },
+      {
+        path:"/sign-in",
+        element:<SignIn/>,
+        loader: checkToken
+      },
+      {
+        path:"/sign-up",
+        element:<SignUp/>,
+        loader: checkToken
+      },
+      {
+        path:"/profile",
+        element:<Profile/>,
+        loader: getUserInfoAndFiles
+      },
+      {
+        path:"/profile/settings",
+        element:<Settings/>,
+        loader: getUserInfo
+      },
+      {
+        path:"/preview",
+        element:<Preview/>,
+        loader: getFile
+      },
+      {
+        path:"/legal",
+        element:<LegalNotice/>
       }
     ]
   },
